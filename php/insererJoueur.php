@@ -85,6 +85,10 @@
                         echo("<h4>Probleme lors de la creation de compte.</h4>");
                     }
                 }
+                else{
+                    header('Location: ../creaCompte.html');
+                    echo("<h4>Un compte utilise déjà ce pseudonyme</h4>");
+                }
               
                 
             }
