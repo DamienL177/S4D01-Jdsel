@@ -1,4 +1,8 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     if(isset($_POST['pseudo']) && isset($_POST['mail']) && isset($_POST['anneeNaiss']) && isset($_POST['mdp']) && isset($_POST['mdpVerif'])){
         if($_POST['mdp'] == $_POST['mdpVerif']){
             try{
@@ -37,8 +41,8 @@
                     }
                 }
 
-                $query = "INSERT INTO $nomtable VALUES('$identifiant', '$pseudonyme', $anneeNaiss, '$mail', '$motDePasse')";
-                $result= mysqli_query($link, $query);
+                $query = "INSERT INTO $nomtable VALUES('$identifiant', '$pseudonyme', $anneeNaiss, '$mail', '$motDePasse', NULL)";
+                $result = mysqli_query($link, $query);
         
                 if (mysqli_connect_errno()){
                     echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";

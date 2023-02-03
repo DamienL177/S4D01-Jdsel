@@ -16,7 +16,7 @@
                 throw new Exception();
             }
     
-            $query = "SELECT COUNT(*) FROM $nomtable WHERE pseudonyme = $pseudonyme AND mdp = $motDePasse";
+            $query = "SELECT COUNT(*) FROM $nomtable WHERE pseudonyme = '$pseudonyme' AND mdp = '$motDePasse'";
             $result= mysqli_query($link, $query);
     
             if (mysqli_connect_errno()){
