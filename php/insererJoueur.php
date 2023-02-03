@@ -32,49 +32,60 @@
                     throw new Exception();
                 }
         
-                // On définit l'identifiant
-                // Tant que nous n'avons pas un identifiant OK
-                while(!$idOK){
-                    // On définit l'identifiant
-                    $identifiant = '';
-                    // On le remplit avec 16 caractères aléatoires parmi les caractères possibles
-                    for($i = 0; $i < 16; $i++){
-                        $index = array_rand($tabCharsId);
-                        $identifiant .= $tabCharsId[$index];
-                    }
-                    // On compte le nombre d'identifiants similaires
-                    $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
-                    $result = mysqli_query($link, $query);
-                    $row = mysqli_fetch_array($result);
-
-                    // S'il n'y en a pas on sort de la boucle
-                    if($row['nbId'] == 0){
-                        $idOK = true;
-                    }
-                }
-
-                // On créé la requête et on lance l'insertion d'un Joueur dans la base
-                $query = "INSERT INTO $nomtable VALUES('$identifiant', '$pseudonyme', $anneeNaiss, '$mail', '$motDePasse', NULL)";
+                // On compte le nombre de pseudonymes similaires
+                $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
                 $result = mysqli_query($link, $query);
-        
-                if (mysqli_connect_errno()){
-                    echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
-                    throw new Exception();
+                $row = mysqli_fetch_array($result);
+
+                if($row['nbId'] == 0){
+                    // On définit l'identifiant
+                    // Tant que nous n'avons pas un identifiant OK
+                    while(!$idOK){
+                        // On définit l'identifiant
+                        $identifiant = '';
+                        // On le remplit avec 16 caractères aléatoires parmi les caractères possibles
+                        for($i = 0; $i < 16; $i++){
+                            $index = array_rand($tabCharsId);
+                            $identifiant .= $tabCharsId[$index];
+                        }
+                        // On compte le nombre d'identifiants similaires
+                        $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
+                        $result = mysqli_query($link, $query);
+                        $row = mysqli_fetch_array($result);
+
+                        // S'il n'y en a pas on sort de la boucle
+                        if($row['nbId'] == 0){
+                            $idOK = true;
+                        }
+                    }
+
+                    // On créé la requête et on lance l'insertion d'un Joueur dans la base
+                    $query = "INSERT INTO $nomtable VALUES('$identifiant', '$pseudonyme', $anneeNaiss, '$mail', '$motDePasse', NULL)";
+                    $result = mysqli_query($link, $query);
+            
+                    if (mysqli_connect_errno()){
+                        echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
+                        throw new Exception();
+                    }
+            
+                    // On ferme le lien avec la BD
+                    mysqli_close($link);
+                    
+                    // Si l'insertion est réussie on continue
+                    if($result == true){
+                        header("Location: ../main.html");
+                        // On lance l'envoi d'un mail
+                        $_POST['leMail'] = $mail;
+                        $_POST['pseudo'] = $pseudonyme;
+                        require("mailCreaCompte.php");
+                    }
+                    // Sinon on marque qu'il y a eu un problème
+                    else{
+                        header('Location: ../creaCompte.html');
+                        echo("<h4>Probleme lors de la creation de compte.</h4>");
+                    }
                 }
-        
-                // On ferme le lien avec la BD
-                mysqli_close($link);
-                
-                // Si l'insertion est réussie on continue
-                if($result == true){
-                    header("Location: ../main.html");
-                }
-                // Sinon on marque qu'il y a eu un problème
-                else{
-                    header('Location: ../creaCompte.html');
-                    echo("<h4>Probleme lors de la creation de compte.</h4>");
-                }
-                
+              
                 
             }
             catch(Exception $e) {
