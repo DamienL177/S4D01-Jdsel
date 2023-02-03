@@ -43,11 +43,12 @@
                         $identifiant .= $tabCharsId[$index];
                     }
                     // On compte le nombre d'identifiants similaires
-                    $query = "SELECT COUNT(*) FROM $nomtable WHERE identifiant = '$identifiant'";
-                    $result= mysqli_query($link, $query);
+                    $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
+                    $result = mysqli_query($link, $query);
+                    $row = mysqli_fetch_array($result);
 
                     // S'il n'y en a pas on sort de la boucle
-                    if($result == 0){
+                    if($row['nbId'] == 0){
                         $idOK = true;
                     }
                 }
