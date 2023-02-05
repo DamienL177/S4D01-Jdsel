@@ -22,8 +22,9 @@
             }
     
             // On créé et on exécute la commande
-            $query = "SELECT COUNT(*) FROM $nomtable WHERE pseudonyme = '$pseudonyme' AND mdp = '$motDePasse'";
+            $query = "SELECT COUNT(*) AS nbId FROM $nomtable WHERE pseudonyme = '$pseudonyme' AND mdp = '$motDePasse'";
             $result= mysqli_query($link, $query);
+            $row = mysqli_fetch_array($result);
     
             if (mysqli_connect_errno()){
                 echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
@@ -34,7 +35,7 @@
             mysqli_close($link);
             
             // Si on obtient le résultat souhaité
-            if($result == 1){
+            if($row['nbId'] == 1){
                 // On continue dans le site
                 header("Location: ../main.html");
             }
