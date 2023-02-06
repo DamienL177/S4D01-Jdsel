@@ -43,7 +43,7 @@
             else{
                 // On retourne au formulaire
                 header('Location: ../index.html');
-                echo("<h4>Le pseudonyme/mot de passe ne correspond pas</h4>");
+                echo "<h4>Le pseudonyme/mot de passe ne correspond pas</h4>";
             }
             
             
@@ -55,7 +55,7 @@
     // Sinon on le signale
     else {
         header('Location: ../index.html');
-        echo("<h4>Merci de remplir tous les champs</h4>");
+        echo "<h4>Merci de remplir tous les champs</h4>";
     }
 
 

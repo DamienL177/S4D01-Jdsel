@@ -82,12 +82,12 @@
                     // Sinon on marque qu'il y a eu un problème
                     else{
                         header('Location: ../creaCompte.html');
-                        echo("<h4>Probleme lors de la creation de compte.</h4>");
+                        echo "<h4>Probleme lors de la creation de compte.</h4>";
                     }
                 }
                 else{
                     header('Location: ../creaCompte.html');
-                    echo("<h4>Un compte utilise déjà ce pseudonyme</h4>");
+                    echo "<h4>Un compte utilise déjà ce pseudonyme</h4>";
                 }
               
                 
@@ -98,12 +98,12 @@
         }
         else {
             header('Location: ../creaCompte.html');
-            echo("<h4>Vous n'avez pas saisi deux fois le même mot de passe</h4>");
+            echo "<h4>Vous n'avez pas saisi deux fois le même mot de passe</h4>";
         }
     }
     else {
         header('Location: ../creaCompte.html');
-        echo("<h4>Merci de remplir tous les champs</h4>");
+        echo "<h4>Merci de remplir tous les champs</h4>";
     }
 
 
