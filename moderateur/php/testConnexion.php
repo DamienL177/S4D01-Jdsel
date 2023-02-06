@@ -1,6 +1,6 @@
 <?php
     // On vérifie si toutes les variables demandées ont été saisies
-    if(isset($_POST['pseudo']) && isset($_POST['mdp'])){
+    if(isset($_POST['id']) && isset($_POST['mdp'])){
         try{
             // On définit les variables nécessaires au lien avec la BD
             $bdd = "u562708442_Jdsel";
@@ -38,6 +38,8 @@
             if($row['nbId'] == 1){
                 // On continue dans le site
                 header("Location: ../main.html");
+                session_start();
+                $_SESSION['idMod'] = $identifiant;
             }
             // Sinon
             else{
