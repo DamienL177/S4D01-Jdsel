@@ -1,10 +1,82 @@
 <?php
+
+    function Delete($path)
+    {
+        if (is_dir($path) === true)
+        {
+            $files = array_diff(scandir($path), array('.', '..'));
+
+            foreach ($files as $file)
+            {
+                Delete(realpath($path) . '/' . $file);
+            }
+
+            return rmdir($path);
+        }
+
+        else if (is_file($path) === true)
+        {
+            return unlink($path);
+        }
+
+        return false;
+    }
+
+    function copierDoc($strDir, $chemin){
+        $count = 0;
+
+
+        $JSONDir = json_decode($strDir, true);
+        $fichierCible = $chemin;
+
+        foreach($JSONDir['fichiers'] as $nomFichier){
+            $trouve = false;
+            foreach($_FILES['fichiers']['name'] as $i => $name) {
+                if ($name == $nomFichier) {
+                    if (move_uploaded_file($_FILES['fichiers']['tmp_name'][$i], $fichierCible.$name)) {
+                        $count++;
+                        $trouve = true;
+                    }
+                    else {
+                        echo "Sorry, there was an error uploading your file.";
+                    }
+                }
+            }
+            if($trouve == false){
+                return -1;
+            }
+        }
+
+        foreach($JSONDir["dossiers"] as $sousDossier){
+            $cheminDossier = $chemin.$sousDossier['name']."/";
+            if(file_exists($cheminDossier)){
+                Delete($cheminDossier);
+            }
+    
+            mkdir($cheminDossier, 0755, true);
+
+            $retour = copierDoc(json_encode($sousDossier), $cheminDossier);
+            if($retour == -1){
+                return -1;
+            }
+            else{
+                $count += $retour;
+            }
+        }
+
+        return $count;
+    }
+
     header('Location: ../ajouterUnJeu.html');
 
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
 
-    if(isset($_POST['titre']) && isset($_POST['fichier']) && isset($_POST['description'])){
+    //echo $_POST['titre'];
+    //echo $_POST['description'];
+
+    if(isset($_POST['titre']) && isset($_FILES['fichiers']) && isset($_POST['description']) && isset($_FILES['JSONArbre'])){
+        session_start();
         $titre = $_POST['titre'];
         $description = $_POST['description'];
         $idModo = $_SESSION['idMod'];
@@ -12,10 +84,10 @@
         $titreBien = str_replace(" ", "_", $titre);
 
         
-        $chemin = "../../../../Jeux/" . $titreBien . "/";
+        $chemin = "../../../Jeux/" . $titreBien . "/";
 
         if(file_exists($chemin)){
-            rmdir($chemin);
+            Delete($chemin);
         }
 
         mkdir($chemin, 0755, true);
@@ -54,7 +126,8 @@
             } 
             else {
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $lienMiniature)) {
-                    //echo "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
+                    echo "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.\n";
+                    $lienMiniature = $titreBien . "/" . $_FILES["image"]["name"];
                 } 
                 else {
                     echo "Sorry, there was an error uploading your file.";
@@ -65,16 +138,30 @@
             $lienMiniature = null;
         }
 
-        $fichierCible = $chemin . $titreBien;
+        $lienArbre = $chemin . basename($_FILES["JSONArbre"]["name"]);
 
-        if (move_uploaded_file($_FILES["fichier"]["tmp_name"], $fichierCible)) {
-            echo "The file ". htmlspecialchars( basename( $_FILES["fichier"]["name"])). " has been uploaded.";
+        if (move_uploaded_file($_FILES["JSONArbre"]["tmp_name"], $lienArbre)) {
+            echo "The file ". htmlspecialchars( basename( $_FILES["JSONArbre"]["name"])). " has been uploaded.\n";
         } 
         else {
             echo "Sorry, there was an error uploading your file.";
         }
 
-        $lienJeu = $fichierCible . "/src/main.html";
+        $fichierJSON = file_get_contents($lienArbre);
+
+        //$objetJSON = json_decode($fichierJSON);
+
+    
+        $count = copierDoc($fichierJSON, $chemin);
+
+        if($count != -1){
+            echo "$count files have been uploaded.\n";
+        }
+        else{
+            echo "A problem appeared during upload\n";
+        }
+
+        $lienJeu = $titreBien. "/src/main.html";
 
         // ON PLACE TOUT DANS LA BD
 
@@ -100,6 +187,7 @@
         }
 
         // On définit la requête
+        $identifiant = '';
         $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
         // Tant que nous n'avons pas un identifiant OK on continue à en créer
         while(!$idOK){
@@ -120,6 +208,11 @@
             }
         }
 
+        $titre = str_replace("'", "''", $titre);
+        $description = str_replace("'", "''", $description);
+
+        //echo "\nINSERT INTO $nomtable VALUES ('$identifiant', '$titre', '$lienMiniature', '$lienJeu', '$description', '$idModo')";
+
         // On créé et on exécute la commande
         $query = "INSERT INTO $nomtable VALUES ('$identifiant', '$titre', '$lienMiniature', '$lienJeu', '$description', '$idModo')";
         $result= mysqli_query($link, $query);
@@ -130,6 +223,9 @@
 
         if(!$result){
             echo "<p>Problème dans l'insertion : ", mysqli_connect_errno(), " </p>";
+        }
+        else {
+            echo "<p>The database has been updated</p>";
         }
 
         // On ferme le lien avec la BD
