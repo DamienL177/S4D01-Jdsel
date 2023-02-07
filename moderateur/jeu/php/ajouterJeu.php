@@ -29,40 +29,45 @@
         $JSONDir = json_decode($strDir, true);
         $fichierCible = $chemin;
 
-        foreach($JSONDir['fichiers'] as $nomFichier){
-            $trouve = false;
-            foreach($_FILES['fichiers']['name'] as $i => $name) {
-                if ($name == $nomFichier) {
-                    if (move_uploaded_file($_FILES['fichiers']['tmp_name'][$i], $fichierCible.$name)) {
-                        $count++;
-                        $trouve = true;
-                    }
-                    else {
-                        echo "Sorry, there was an error uploading your file.";
+        if(isset($JSONDir['fichiers'])){
+            foreach($JSONDir['fichiers'] as $nomFichier){
+                $trouve = false;
+                foreach($_FILES['fichiers']['name'] as $i => $name) {
+                    if ($name == $nomFichier) {
+                        if (move_uploaded_file($_FILES['fichiers']['tmp_name'][$i], $fichierCible.$name)) {
+                            $count++;
+                            $trouve = true;
+                        }
+                        else {
+                            echo "Sorry, there was an error uploading your file.";
+                        }
                     }
                 }
-            }
-            if($trouve == false){
-                return -1;
+                if($trouve == false){
+                    return -1;
+                }
             }
         }
 
-        foreach($JSONDir["dossiers"] as $sousDossier){
-            $cheminDossier = $chemin.$sousDossier['name']."/";
-            if(file_exists($cheminDossier)){
-                Delete($cheminDossier);
-            }
+        if(isset($JSONDir['dossiers'])){
+            foreach($JSONDir["dossiers"] as $sousDossier){
+                $cheminDossier = $chemin.$sousDossier['name']."/";
+                if(file_exists($cheminDossier)){
+                    Delete($cheminDossier);
+                }
+        
+                mkdir($cheminDossier, 0755, true);
     
-            mkdir($cheminDossier, 0755, true);
-
-            $retour = copierDoc(json_encode($sousDossier), $cheminDossier);
-            if($retour == -1){
-                return -1;
-            }
-            else{
-                $count += $retour;
+                $retour = copierDoc(json_encode($sousDossier), $cheminDossier);
+                if($retour == -1){
+                    return -1;
+                }
+                else{
+                    $count += $retour;
+                }
             }
         }
+        
 
         return $count;
     }
