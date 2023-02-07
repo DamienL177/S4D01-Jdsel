@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/defaut.css">
+    <link rel="stylesheet" href="css/creaCompte.css">
     <title>Jdsel - Créer Compte</title>
 </head>
 <body>
@@ -11,18 +13,20 @@
         <h3>Pseudonyme </h3><input type="text" name="pseudo"><br>
         <h3>E-mail </h3><input type="text" name="mail"><br>
         <h3>Année de naissance </h3>
-        <select name="anneeNaiss">
-            <option value="2000">2000</option>
-            <option value="2001">2001</option>
-            <option value="2002">2002</option>
-            <option value="2003">2003</option>
-            <option value="2004">2004</option>
-            <option value="2005">2005</option>
-            <option value="2000">2006</option>
-            <option value="2000">2007</option>
-            <option value="2000">2008</option>
-            <option value="2000">2009</option>
-            <option value="2000">2010</option>
+        <select name="anneeNaiss" id="choixAnnee">
+            <script type="text/javascript">
+                let anneeChoix = document.getElementById("choixAnnee"); 
+                let cetteAnnee = new Date().getFullYear();
+                cetteAnnee = cetteAnnee - 12;    
+                let ancienneAnnee = 1970;     
+                while (cetteAnnee >= ancienneAnnee) {      
+                    let anneeOption = document.createElement('option');          
+                    anneeOption.text = cetteAnnee;      
+                    anneeOption.value = cetteAnnee;        
+                    choixAnnee.add(anneeOption);      
+                    cetteAnnee -= 1;    
+                }
+              </script>
         </select><br>
         <h3>Mot de passe </h3><input type="password" name="mdp"><br>
         <h3>Vérification du mot de passe</h3><input type="password" name="mdpVerif">
