@@ -1,0 +1,6 @@
+* {
+    /* Formatage par défaut de toutes les pages du site avec ces trois attributs */
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+}
