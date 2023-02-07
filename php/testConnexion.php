@@ -38,6 +38,20 @@
             if($row['nbId'] == 1){
                 // On continue dans le site
                 header("Location: ../main.html");
+
+                $query = "SELECT identifiant AS Id FROM $nomtable WHERE pseudonyme = '$pseudonyme' AND mdp = '$motDePasse'";
+                $result= mysqli_query($link, $query);
+                $row = mysqli_fetch_array($result);
+
+                if (mysqli_connect_errno()){
+                    echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
+                    throw new Exception();
+                }
+
+                $id = $row['Id'];
+
+                session_start();
+                $_SESSION['idPlayer'] = $id;
             }
             // Sinon
             else{
