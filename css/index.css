@@ -4,35 +4,52 @@ h3 {
 
 h1 {
     text-align: center;
-    align-items: unset;
 }
 
 form {
-    width: 30%;
+    width: 40%;
     display: grid;
     grid-gap: 0.5rem 1rem;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
     margin: auto;
     text-align: end;
 }
 
 form > h3 {
     grid-column: 1;
+    vertical-align: middle;
 }
 
 form > input {
     grid-column: 2;
+    width: 70%;
 }
 
-form > input[type=submit] {
+form > button {
     grid-column: span 2;
     margin: auto;
     width: 25%;
+    height: 200%;
 }
 
-
-a {
+span {
     text-align: center;
-    width: 99%;
+}
+
+@media screen and (max-width: 960px)  {
+
+    form {
+        width: 80%;
+    }
+
+    form > * {
+        margin-bottom: 1rem;
+    }
+
+    form > button {
+        grid-column: span 2;
+        margin: auto;
+        height: 60px;
+        width: 50%;
+    }
+
 }

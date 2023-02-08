@@ -1,5 +1,55 @@
-/* Feuille de style pour la feuille de création de compte*/ 
-
 h3 {
     color: rgb(128,48,128);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    width: 40%;
+    display: grid;
+    grid-gap: 0.5rem 1rem;
+    margin: auto;
+    text-align: end;
+}
+
+form > h3 {
+    grid-column: 1;
+    vertical-align: middle;
+}
+
+form > input {
+    grid-column: 2;
+    width: 70%;
+}
+
+form > button {
+    grid-column: span 2;
+    margin: auto;
+    width: 25%;
+    height: 200%;
+}
+
+span {
+    text-align: center;
+}
+
+@media screen and (max-width: 960px)  {
+
+    form {
+        width: 80%;
+    }
+
+    form > * {
+        margin-bottom: 1rem;
+    }
+
+    form > button {
+        grid-column: span 2;
+        margin: auto;
+        height: 60px;
+        width: 50%;
+    }
+
 }

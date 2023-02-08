@@ -16,3 +16,20 @@ h3 {
 input {
     height: 22px;
 }
+
+
+@media screen and (max-width: 960px)  {
+    h1 {
+        font-size: 60px;
+    }
+    
+    h3 {
+        font-size: 32px;
+    }
+    
+    input {
+        height: 26px;
+    }
+
+
+}
