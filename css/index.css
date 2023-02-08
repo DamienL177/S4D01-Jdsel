@@ -1,0 +1,38 @@
+h3 {
+    color: rgb(128,48,128);
+}
+
+h1 {
+    text-align: center;
+    align-items: unset;
+}
+
+form {
+    width: 30%;
+    display: grid;
+    grid-gap: 0.5rem 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    margin: auto;
+    text-align: end;
+}
+
+form > h3 {
+    grid-column: 1;
+}
+
+form > input {
+    grid-column: 2;
+}
+
+form > input[type=submit] {
+    grid-column: span 2;
+    margin: auto;
+    width: 25%;
+}
+
+
+a {
+    text-align: center;
+    width: 99%;
+}

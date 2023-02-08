@@ -4,3 +4,15 @@
     margin: 0;
     font-family: monospace;
 }
+
+h1 {
+    font-size: 48px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+input {
+    height: 22px;
+}
