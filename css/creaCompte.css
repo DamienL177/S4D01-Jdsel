@@ -1,9 +1,15 @@
 h3 {
     color: rgb(128,48,128);
+    text-align: center;
 }
 
 h1 {
     text-align: center;
+}
+
+header {
+    display: inline;
+    height: 50%;
 }
 
 form {
@@ -21,7 +27,11 @@ form > h3 {
 
 form > input {
     grid-column: 2;
-    width: 70%;
+    width: 60%;
+}
+
+select {
+    width: 60%;
 }
 
 form > button {
@@ -50,6 +60,14 @@ span {
         margin: auto;
         height: 60px;
         width: 50%;
+    }
+
+    form > input {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
     }
 
 }

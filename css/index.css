@@ -7,6 +7,7 @@ h1 {
 }
 
 form {
+    position: static;
     width: 40%;
     display: grid;
     grid-gap: 0.5rem 1rem;
@@ -21,7 +22,7 @@ form > h3 {
 
 form > input {
     grid-column: 2;
-    width: 70%;
+    width: 50%;
 }
 
 form > button {
@@ -31,9 +32,11 @@ form > button {
     height: 200%;
 }
 
-span {
-    text-align: center;
+footer {
+    display: grid;
+    margin: auto;
 }
+
 
 @media screen and (max-width: 960px)  {
 
