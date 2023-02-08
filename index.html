@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/defaut.css">
+    <link rel="stylesheet" href="css/defaut.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <title>Jdsel - Connexion</title>
 </head>
 <body>
-    <form action="php/testConnexion.php" method="POST">
+    <header>
         <h1>Veuillez vous connecter</h1><br>
-        <h3>Pseudonyme </h3><input type="text" name="pseudo"><br>
-        <h3>Mot de passe</h3><input type="password" name="mdp"><br>
-        <input type="submit" value="Valider">
-    </form><br>
-    <a href="creaCompte.html">Créer un compte</a>
+    </header>
+    <main>
+        <form action="php/testConnexion.php" method="POST">
+            <h3>Pseudonyme </h3><input type="text" name="pseudo"><br>
+            <h3>Mot de passe</h3><input type="password" name="mdp"><br>
+            <button type="submit">Se Connecter</button>
+        </form><br>
+    </main>
+    <footer>
+        <a href="creaCompte.html">Créer un compte</a>
+    </footer>
 </body>
 </html>
