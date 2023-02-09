@@ -3,9 +3,9 @@
     if(isset($_POST['pseudo']) && isset($_POST['mdp'])){
         try{
             // On définit les variables nécessaires au lien avec la BD
-            $bdd = "u562708442_Jdsel";
+            $bdd = "Jdsel";
             $host = "localhost";
-            $user= "u562708442_Grp4";
+            $user= "Grp4";
             $pass = "u=5#5^xvcGEoKdq0>E";
 
             // On définit les variables nécessaires à la commande
