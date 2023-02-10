@@ -11,7 +11,7 @@
             // On définit les variables nécessaires à la commande
             $nomtable = "Moderateur";
             $identifiant = $_POST['id'];
-            $motDePasse = $_POST['mdp'];
+            $motDePasse = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
     
             // On fait le lien avec la BD
             $link = mysqli_connect($host,$user,$pass,$bdd);
