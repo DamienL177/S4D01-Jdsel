@@ -11,7 +11,7 @@
             // On définit les variables nécessaires à la commande
             $nomtable = "Joueur";
             $pseudonyme = $_POST['pseudo'];
-            $motDePasse = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
+            $motDePasse = $_POST['mdp'];
     
             // On fait le lien avec la BD
             $link = mysqli_connect($host,$user,$pass,$bdd);
@@ -22,7 +22,7 @@
             }
     
             // On créé et on exécute la commande
-            $query = "SELECT COUNT(*) AS nbId FROM $nomtable WHERE pseudonyme = '$pseudonyme' AND mdp = '$motDePasse'";
+            $query = "SELECT mdp FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
             $result= mysqli_query($link, $query);
             $row = mysqli_fetch_array($result);
     
@@ -35,7 +35,7 @@
             mysqli_close($link);
             
             // Si on obtient le résultat souhaité
-            if($row['nbId'] == 1){
+            if(password_verify($motDePasse, $row['mdp'])){
                 // On continue dans le site
                 header("Location: ../main.html");
 
