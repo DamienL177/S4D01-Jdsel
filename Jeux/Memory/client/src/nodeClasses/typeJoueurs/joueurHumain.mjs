@@ -7,7 +7,7 @@
 */
 
 // On importe la classe Joueur
-//const Joueur = require('../Joueur.mjs')
+import { Joueur } from "../Joueur.mjs";
 
 // On crée la classe JoueurHumain qui étend la classe abstraite Joueur
 module.export = class JoueurHumain extends Joueur{
