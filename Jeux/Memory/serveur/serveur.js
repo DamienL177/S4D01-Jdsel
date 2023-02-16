@@ -1,9 +1,6 @@
-import { JoueurHumain } from '../client/src/Classes/typeJoueurs/joueurHumain';
-import { Carte } from '../client/src/Classes/Carte';
-import { Joueur } from '../client/src/Classes/Joueur';
-import { emit } from 'process';
-import { Socket } from 'socket.io';
-import { randomInt } from 'crypto';
+
+const JHumain = require('../client/src/Classes/typeJoueurs/joueurHumain');
+const tCarte = require('../client/src/Classes/Carte');
 
 const http = require('http');
 const express = require('express');
@@ -22,8 +19,8 @@ const io = socketio(server);
 var sockJ1 = null;
 var sockJ2 = null;
 
-var Joueur1 = new JoueurHumain('Joueur1');
-var Joueur2 = new JoueurHumain('Joueur2');
+var Joueur1 = new JHumain('Joueur1');
+var Joueur2 = new JHumain('Joueur2');
 
 let lesJoueurs = [Joueur1, Joueur2];
 let lesCartes = initCartes();
@@ -196,7 +193,7 @@ function initCartes(){
         listeValeurs.splice(index, 1)
 
         // On créé une carte avec sa position et sa valeur
-        let uneCarte = new Carte(position, valeurCarte)
+        let uneCarte = new tCarte(position, valeurCarte)
         //window.alert(listeValeurs)
 
         // On ajoute la carte à la liste
