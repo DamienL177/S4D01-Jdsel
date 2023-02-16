@@ -33,10 +33,13 @@ io.on('connection', (sock) => {
     if(sockJ1 == null){
         sockJ1 = sock;
         sockJ1.emit("attendre");
+        console.log("Premier utilisateur connecté");
     }
     else if(sockJ2 == null){
         sockJ2 = sock;
         sockJ2.emit("attendre");
+
+        console.log("Deuxieme utilisateur connecté");
         
         sockJ1.emit("afficher", lesJoueurs, lesCartes);
         sockJ2.emit("afficher", lesJoueurs, lesCartes);

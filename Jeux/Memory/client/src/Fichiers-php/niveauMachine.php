@@ -107,13 +107,13 @@
 
         // Si l'insertion est réussie on continue
         if($result == true){
-            header("Location: http://153.92.211.90:8080");
+            header("Location: http://153.92.211.90:8080/");
             session_start();
             $_SESSION['idPartie'] = $identifiant;
         }
         // Sinon on marque qu'il y a eu un problème
         else{
-            header('Location: ../formulaireDifficulteBot.html');
+            //header('Location: ../formulaireDifficulteBot.html');
             echo "<h4>Probleme lors de l'insertion de la partie dans la base.'</h4>";
         }
 
