@@ -27,32 +27,32 @@ module.export = class Joueur {
     // ENCAPSULATION
     //        >> getPseudo() >> pseudo
     getPseudo(){
-        return this.#pseudo
+        return this.pseudo
     }
     // pseudonyme >> setPseudo() >>
     setPseudo(pseudonyme){
-        this.#pseudo = pseudonyme
+        this.pseudo = pseudonyme
     }
 
     //        >> getScore() >> score
     getScore(){
-        return this.#score
+        return this.score
     }
     // newScore >> setScore() >>
     setScore(newScore){
-        this.#score = newScore
+        this.score = newScore
     }
 
     //        >> getMonMemory() >> monMemory
     getMonMemory(){
-        return this.#monMemory
+        return this.monMemory
     }
 
     // METHODES USUELLES
     // On transforme l'élément Joueur en une chaîne de caractères compréhensible par l'homme
     toString(){
         // On créé le message puis on le retourne
-        let message = "Le joueur " + this.#pseudo + " a un score de " + this.#score + "."
+        let message = "Le joueur " + this.pseudo + " a un score de " + this.score + "."
         return message
     }
 
@@ -60,7 +60,7 @@ module.export = class Joueur {
     // On lie unMemory au joueur
     lierMonMemory(unMemory){
         // monMemory devient unMemory
-        this.#monMemory = unMemory
+        this.monMemory = unMemory
         // Si le joueur n'existe pas dans la liste de joueurs du nouveau Memory on l'y ajoute
         if(!(unMemory.existeJoueur(this))){
             unMemory.ajouterJoueur(this)
@@ -70,16 +70,16 @@ module.export = class Joueur {
     // On délie unMemory du joueur
     delierMonMemory(){
         // On retire le Joueur de la liste des joueurs de monMemory
-        this.#monMemory.retirerJoueur(this)
+        this.monMemory.retirerJoueur(this)
         // On passe monMemory a null
-        this.#monMemory = null;
+        this.monMemory = null;
     }
 
     // METHODES MÉTIER
     // Le joueur signale au Memory qu'il a joué son coup
     async notifierCoup(){
         // On attend que le Memory ait fini son traitement
-        await this.#monMemory.unJoueurAJoue(this.#pseudo)
+        await this.monMemory.unJoueurAJoue(this.pseudo)
         // On indique a Javascript qu'il peut reprendre son fonctionnement normal
         return Promise.resolve()
     }
@@ -88,7 +88,7 @@ module.export = class Joueur {
     afficherScoreJoueur(){
         // On créé un élément texte 
         let leJoueur = document.createElement("p")
-        leJoueur.textContent = this.#pseudo + " : " + this.#score + " points."
+        leJoueur.textContent = this.pseudo + " : " + this.score + " points."
         return leJoueur
     }
 
