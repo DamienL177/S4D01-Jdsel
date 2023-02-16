@@ -10,11 +10,6 @@
 // On créé la classe Joueur
 module.export = class Joueur {
 
-    // ATTRIBUTS
-    pseudo     // Le pseudonyme du joueur
-    score     // Le score du joueur
-    monMemory  // La partie de Memory à laquelle joue le Joueur
-
     // CONSTRUCTEUR
     constructor(pseudonyme){
         // Si le constructeur appelé est celui de la classe abstraite Joueur on renvoie une Erreur
@@ -26,6 +21,7 @@ module.export = class Joueur {
         // On définit le pseudo et le score
         this.#pseudo = pseudonyme
         this.#score = 0
+        this.monMemory = null
     }
 
     // ENCAPSULATION
