@@ -19,8 +19,8 @@ module.export = class Joueur {
         // Sinon on continue
 
         // On définit le pseudo et le score
-        this.#pseudo = pseudonyme
-        this.#score = 0
+        this.pseudo = pseudonyme
+        this.score = 0
         this.monMemory = null
     }
 
