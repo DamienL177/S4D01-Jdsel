@@ -7,7 +7,7 @@
 */
 
 // On créé la classe Carte
-export class Carte{
+class Carte{
 
     // ATTRIBUTS
     #positionCarte      // La position de la carte (entre AA et FF)
@@ -132,3 +132,5 @@ export class Carte{
     }
 
 }
+
+module.exports.Carte = Carte;

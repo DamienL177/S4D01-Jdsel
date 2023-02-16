@@ -8,7 +8,7 @@
 
 
 // On créé la classe Joueur
-export class Joueur {
+class Joueur {
 
     // ATTRIBUTS
     #pseudo     // Le pseudonyme du joueur
@@ -109,3 +109,5 @@ export class Joueur {
     }
 
 }
+
+module.exports.Joueur = Joueur;
