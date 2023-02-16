@@ -7,10 +7,10 @@
 */
 
 // On importe la classe Joueur
-const Joueur = require("../Joueur.js")
+import { Joueur } from "../Joueur.js"
 
 // On crée la classe JoueurHumain qui étend la classe abstraite Joueur
-class JoueurHumain extends Joueur{
+export class JoueurHumain extends Joueur{
 
     // ATTRIBUTS 
 
@@ -148,5 +148,3 @@ class JoueurHumain extends Joueur{
 
 
 }
-
-module.exports.JoueurHumain = JoueurHumain;

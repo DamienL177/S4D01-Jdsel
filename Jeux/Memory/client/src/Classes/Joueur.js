@@ -6,14 +6,16 @@
  Remarques : Code conforme aux spécification internes données en cours
 */
 
+// On inclue la classe Memory
+import {Memory} from "./Memory.js"
 
 // On créé la classe Joueur
-class Joueur {
+export class Joueur {
 
     // ATTRIBUTS
-    pseudo     // Le pseudonyme du joueur
-    score      // Le score du joueur
-    monMemory  // La partie de Memory à laquelle joue le Joueur
+    #pseudo     // Le pseudonyme du joueur
+    #score      // Le score du joueur
+    #monMemory  // La partie de Memory à laquelle joue le Joueur
 
     // CONSTRUCTEUR
     constructor(pseudonyme){
@@ -109,5 +111,3 @@ class Joueur {
     }
 
 }
-
-module.exports.Joueur = Joueur;
