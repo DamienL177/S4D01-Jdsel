@@ -7,7 +7,7 @@
 */
 
 // On créé la classe Carte
-module.export = class Carte{
+module.exports = class Carte{
 
     // ATTRIBUTS
     //positionCarte      // La position de la carte (entre AA et FF)
