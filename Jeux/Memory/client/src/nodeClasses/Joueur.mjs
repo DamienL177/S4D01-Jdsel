@@ -8,7 +8,7 @@
 
 
 // On créé la classe Joueur
-export class Joueur {
+module.export = class Joueur {
 
     // ATTRIBUTS
     #pseudo     // Le pseudonyme du joueur
