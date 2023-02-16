@@ -12,7 +12,7 @@ import {Joueur} from "./Joueur.js"
 
 
 // On créé la classe Memory
-class Memory {
+module.export = class Memory {
     
     // ATTRIBUTS
     //mesJoueurs     // La liste contenant les Joueurs
@@ -380,4 +380,3 @@ class Memory {
 
 }
 
-module.export.Memory = Memory;

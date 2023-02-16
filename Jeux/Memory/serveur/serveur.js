@@ -1,4 +1,4 @@
-
+const Joueur = require('../client/src/nodeClasses/Joueur.mjs');
 const JHumain = require('../client/src/nodeClasses/typeJoueurs/joueurHumain.mjs');
 const tCarte = require('../client/src/nodeClasses/Carte.mjs');
 
