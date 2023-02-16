@@ -11,9 +11,9 @@
 module.export = class Joueur {
 
     // ATTRIBUTS
-    #pseudo     // Le pseudonyme du joueur
-    #score      // Le score du joueur
-    #monMemory  // La partie de Memory à laquelle joue le Joueur
+    pseudo;     // Le pseudonyme du joueur
+    score;     // Le score du joueur
+    monMemory;  // La partie de Memory à laquelle joue le Joueur
 
     // CONSTRUCTEUR
     constructor(pseudonyme){
