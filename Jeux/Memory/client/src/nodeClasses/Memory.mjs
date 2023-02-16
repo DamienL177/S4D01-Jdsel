@@ -12,58 +12,58 @@ import {Joueur} from "./Joueur.js"
 
 
 // On créé la classe Memory
-module.export = class Memory {
+module.export.Memory = class Memory {
     
     // ATTRIBUTS
-    #mesJoueurs     // La liste contenant les Joueurs
-    #mesCartes      // La liste contenant les Cartes
-    #nbCartes       // Le nombre de cartes dans le jeu
+    //mesJoueurs     // La liste contenant les Joueurs
+    //mesCartes      // La liste contenant les Cartes
+    //nbCartes       // Le nombre de cartes dans le jeu
 
     // CONSTRUCTEUR
     //        >> constructor >> (un jeu de Memory)
     constructor(){
         this.nbCartes = 36      // On place le nombre de cartes à 36
-        this.#mesJoueurs = []   // On indique que mesJoueurs est une liste vide
-        this.#mesCartes = []    // On indique que mesCartes est une liste vide
+        this.mesJoueurs = []   // On indique que mesJoueurs est une liste vide
+        this.mesCartes = []    // On indique que mesCartes est une liste vide
         this.initCartes();      // On lance la fonction d'initialisation des cartes
     }
 
     // ENCAPSULATION
     //        >> getMesJoueurs() >> mesJoueurs
     getMesJoueurs(){
-        return this.#mesJoueurs
+        return this.mesJoueurs
     }
     // listeJoueurs >> setMesJoueurs() >>
     setMesJoueurs(listeJoueurs){
-        this.#mesJoueurs = listeJoueurs
+        this.mesJoueurs = listeJoueurs
     }
 
     //        >> getMesCartes() >> mesCartes
     getMesCartes(){
-        return this.#mesCartes
+        return this.mesCartes
     }
     // listeCartes >> setMesCartes() >>
     setMesCartes(listeCartes){
-        this.#mesCartes = listeCartes
+        this.mesCartes = listeCartes
     }
 
     //   >> getNbCartes() >> nbCartes
     getNbCartes(){
-        return this.#nbCartes
+        return this.nbCartes
     }
     // unEntier >> setNbCartes() >> 
     setNbCartes(unEntier){
         if((unEntier % 2) != 0){
             throw new Error("Le nombre de cartes doit être pair")
         } 
-        this.#nbCartes = unEntier
+        this.nbCartes = unEntier
     }
 
     // MÉTHODES SPÉCIFIQUES
     // On ajoute un joueur à la liste mesJoueurs
     ajouterJoueur(unJoueur){
         // On place le joueur dans la liste
-        this.#mesJoueurs.push(unJoueur)
+        this.mesJoueurs.push(unJoueur)
         // Si le Memory que le joueur connait n'est pas celui-ci alors on change son Memory
         if(unJoueur.getMonMemory() != this){
             unJoueur.lierMonMemory(this)
@@ -73,10 +73,10 @@ module.export = class Memory {
     // On retire un joueur de la liste mesJoueurs
     retirerJoueur(unJoueur){
         // On parcourt la liste des joueurs
-        for(let i = 0; i < this.#mesJoueurs.length; i ++){
+        for(let i = 0; i < this.mesJoueurs.length; i ++){
             // Si le Joueur est présent dans la liste à l'indice i, on le retire et on retourne vrai
-            if(this.#mesJoueurs[i] == unJoueur){
-                this.#mesJoueurs.slice(i, 1)
+            if(this.mesJoueurs[i] == unJoueur){
+                this.mesJoueurs.slice(i, 1)
                 return true
             }
         }
@@ -86,22 +86,22 @@ module.export = class Memory {
 
     // On vérifie l'existence d'un Joueur dans la liste
     existeJoueur(unJoueur){
-        return this.#mesJoueurs.includes(unJoueur)
+        return this.mesJoueurs.includes(unJoueur)
     }
 
     // On ajoute une carte à la liste mesCartes
     ajouterCarte(uneCarte){
-        this.#mesCartes.push(uneCarte)
+        this.mesCartes.push(uneCarte)
     }
 
     // On retire une carte de la liste mesCartes
     retirerCarte(uneCarte){
         // On parcourt la liste des cartes
-        for(let i = 0; i < this.#mesCartes.length; i ++){
+        for(let i = 0; i < this.mesCartes.length; i ++){
             // Si la Carte est présente dans la liste à l'indice i
-            if(this.#mesCartes[i].getPosition() == uneCarte){
+            if(this.mesCartes[i].getPosition() == uneCarte){
                 // On retire la carte
-                this.#mesCartes.splice(i, 1)
+                this.mesCartes.splice(i, 1)
                 // On récupère la liste des positions valables du stockage local
                 let listePositions = localStorage.getItem('lesPositions')
                 // On enlève la position de la carte
@@ -118,7 +118,7 @@ module.export = class Memory {
 
     // On vérifie l'existence d'une carte dans la liste mesCartes
     existeCarte(uneCarte){
-        return this.#mesCartes.includes(uneCarte)
+        return this.mesCartes.includes(uneCarte)
     }
 
     // METHODE USUELLE
@@ -190,8 +190,8 @@ module.export = class Memory {
     // On cherche l'index d'une carte par sa position
     retournerIndexParPosition(position){
         // On fait une recherche de première occurrence
-        for(let i = 0; i < this.#mesCartes.length; i++){
-            if(this.#mesCartes[i].getPosition() == position){
+        for(let i = 0; i < this.mesCartes.length; i++){
+            if(this.mesCartes[i].getPosition() == position){
                 return i
             }
         }
@@ -202,8 +202,8 @@ module.export = class Memory {
     // On cherche l'index d'un joueur par son pseudonyme
     retournerIndexParPseudonyme(pseudo){
         // On fait une recherche de première occurrence
-        for(let i = 0; i < this.#mesJoueurs.length; i++){
-            if(this.#mesJoueurs[i].getPseudo() == pseudo){
+        for(let i = 0; i < this.mesJoueurs.length; i++){
+            if(this.mesJoueurs[i].getPseudo() == pseudo){
                 return i
             }
         }
@@ -242,9 +242,9 @@ module.export = class Memory {
         await this.afficherJeu();
 
         // On continue à joueur tant qu'il y a des cartes
-        while(this.#mesCartes.length != 0){
+        while(this.mesCartes.length != 0){
             // On créé le message déclarant qui joue
-            let message = this.#mesJoueurs[indice].getPseudo() + " joue."
+            let message = this.mesJoueurs[indice].getPseudo() + " joue."
 
             // On récupère l'élément d'affichage des messages et on y place notre message
             let affichage = document.getElementById('affichage')
@@ -254,9 +254,9 @@ module.export = class Memory {
             while(localStorage.getItem('paireTrouvee') == 'yes'){
 
                 // Le programme attend que le joueur ait fini de joueur
-                await this.#mesJoueurs[indice].methodeDeJeu()
+                await this.mesJoueurs[indice].methodeDeJeu()
 
-                if(this.#mesCartes.length == 0){
+                if(this.mesCartes.length == 0){
                     break;
                 }
                 // Si le joueur a fini de jouer alors il a joué une paire, pour que le prochain puisse jouer on remodifie le stockage local
@@ -264,7 +264,7 @@ module.export = class Memory {
             }
 
             // On ajoute un à l'indice tout en le gardant dans la taille de la liste des joueurs pour que les joueurs puissent passer plusieurs fois
-            indice = (indice + 1) % this.#mesJoueurs.length
+            indice = (indice + 1) % this.mesJoueurs.length
 
             // On modifie cela pour que les joueurs suivants puissent jouer
             localStorage.setItem('paireTrouvee', 'yes')
@@ -281,20 +281,20 @@ module.export = class Memory {
         let score = 0       // Le score le plus grand 
 
         // On fait un parcours complet avec traitement conditionnel
-        for(let i = 0; i < this.#mesJoueurs.length; i++){
+        for(let i = 0; i < this.mesJoueurs.length; i++){
             // Pour chaque joueur si le score est égal au plus grand score
-            if(this.#mesJoueurs[i].getScore() == score){
+            if(this.mesJoueurs[i].getScore() == score){
                 // L'égalité est vraie
                 egalite = true
             }
             // Si le score est supérieur au plus grand score
-            else if(this.#mesJoueurs[i].getScore() > score){
+            else if(this.mesJoueurs[i].getScore() > score){
                 // L'égalité est fausse
                 egalite = false
                 // On récupère le pseudonyme du joueur dont le score est le plus grand
-                pseudo = this.#mesJoueurs[i].getPseudo()
+                pseudo = this.mesJoueurs[i].getPseudo()
                 // Le score le plus grand devient le score du joueur
-                score = this.#mesJoueurs[i].getScore()
+                score = this.mesJoueurs[i].getScore()
             }
         }
 
@@ -336,13 +336,13 @@ module.export = class Memory {
         let coup1 = localStorage.getItem("Coup1")
         let coup2 = localStorage.getItem("Coup2")
         // On dit à tous les joueurs sauf celui qui vient de jouer que l'un d'entre eux à joué
-        for(let i = 0; i < this.#mesJoueurs.length; i++){
-            if(this.#mesJoueurs[i].getPseudo() != pseudonyme){
-                this.#mesJoueurs[i].retenirCartesHumains(coup1, coup2)
+        for(let i = 0; i < this.mesJoueurs.length; i++){
+            if(this.mesJoueurs[i].getPseudo() != pseudonyme){
+                this.mesJoueurs[i].retenirCartesHumains(coup1, coup2)
             }
         }
         // Si les cartes ont les mêmes valeurs
-        if(this.#mesCartes[this.retournerIndexParPosition(coup1)].equals(this.#mesCartes[this.retournerIndexParPosition(coup2)])){
+        if(this.mesCartes[this.retournerIndexParPosition(coup1)].equals(this.mesCartes[this.retournerIndexParPosition(coup2)])){
             // On attend d'avoir retirer les deux cartes du jeu
             await this.retirerCarte(coup1)
             await this.retirerCarte(coup2)
@@ -351,7 +351,7 @@ module.export = class Memory {
             let indice = this.retournerIndexParPseudonyme(pseudonyme)
 
             // On ajoute un au score du joueur
-            this.#mesJoueurs[indice].setScore(this.#mesJoueurs[indice].getScore() + 1)
+            this.mesJoueurs[indice].setScore(this.mesJoueurs[indice].getScore() + 1)
 
             // On indique que le joueur a trouvé une paire et qu'il peut donc continuer à jouer
             localStorage.setItem('paireTrouvee', 'yes')
@@ -360,8 +360,8 @@ module.export = class Memory {
         // Sinon
         else{
             // On retourne les deux cartes
-            this.#mesCartes[this.retournerIndexParPosition(coup1)].retournerCarte()
-            this.#mesCartes[this.retournerIndexParPosition(coup2)].retournerCarte()
+            this.mesCartes[this.retournerIndexParPosition(coup1)].retournerCarte()
+            this.mesCartes[this.retournerIndexParPosition(coup2)].retournerCarte()
 
             // On indique que le joueur n'a pas trouvé de paire et qu'il ne peut pas continuer à jouer
             localStorage.setItem('paireTrouvee', 'no')

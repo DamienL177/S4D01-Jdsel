@@ -7,64 +7,64 @@
 */
 
 // On créé la classe Carte
-module.export = class Carte{
+module.export.Carte = class Carte{
 
     // ATTRIBUTS
-    #positionCarte      // La position de la carte (entre AA et FF)
-    #valeur             // La valeur de la carte (entre 1 et 18)
-    #estRetournee       // Booléen indiquant si la carte est retournée ou non (true = face de la carte ; false = dos de la carte)
+    //positionCarte      // La position de la carte (entre AA et FF)
+    //valeur             // La valeur de la carte (entre 1 et 18)
+    //estRetournee       // Booléen indiquant si la carte est retournée ou non (true = face de la carte ; false = dos de la carte)
 
     // CONSTRUCTEUR
     constructor(position, val){
-        this.#positionCarte = position  // On donne sa position à la carte
-        this.#valeur = val              // On donne sa valeur à la carte
-        this.#estRetournee = false      // On indique à la carte qu'elle n'est pas retournée
+        this.positionCarte = position  // On donne sa position à la carte
+        this.valeur = val              // On donne sa valeur à la carte
+        this.estRetournee = false      // On indique à la carte qu'elle n'est pas retournée
     }
 
     // ENCAPSULATION
     //        >> getPosition() >> positionCarte
     getPosition(){
-        return this.#positionCarte
+        return this.positionCarte
     }
     // position >> setPosition() >>
     setPosition(position){
-        this.#positionCarte = position
+        this.positionCarte = position
     }
 
     //        >> getValeur() >> valeur
     getValeur(){
-        return this.#valeur
+        return this.valeur
     }
     // val >> setValeur() >>
     setValeur(val){
-        this.#valeur = val
+        this.valeur = val
     }
 
     //        >> getEstRetournee() >> estRetournee
     getEstRetournee(){
-        return this.#estRetournee
+        return this.estRetournee
     }
     // unBool >> setEstRetournee() >>
     setEstRetournee(unBool){
-        this.#estRetournee = unBool
+        this.estRetournee = unBool
     }
 
     // METHODES USUELLES
     // On transcrit la carte en une chaîne de caractères compréhensibles par l'homme
     toString(){
         // Si la carte est retournée ou non on annonce ce qui est visible
-        if(this.#estRetournee){
-            return "Cette carte a pour position " + this.#positionCarte + " et pour valeur " + this.#valeur + ". On voit la face de la carte."
+        if(this.estRetournee){
+            return "Cette carte a pour position " + this.positionCarte + " et pour valeur " + this.valeur + ". On voit la face de la carte."
         }
         else {
-            return "Cette carte a pour position " + this.#positionCarte + " et pour valeur " + this.#valeur + ". On voit le dos de la carte."
+            return "Cette carte a pour position " + this.positionCarte + " et pour valeur " + this.valeur + ". On voit le dos de la carte."
         }
     }
 
     // On vérifie si cette carte a la même valeur que uneCarte
     equals(uneCarte){
         // Si elles ont la même valeur on renvoie true, sinon false
-        if(this.#valeur == uneCarte.getValeur()){
+        if(this.valeur == uneCarte.getValeur()){
             return true
         }
         else{
@@ -78,14 +78,14 @@ module.export = class Carte{
     // On affiche cette Carte
     afficherCarte(){
         // On créé une liste contenant les deux lettres de positionnement de la carte
-        let liste = this.#positionCarte.split('')
+        let liste = this.positionCarte.split('')
         // On créé un élément appelé laCarte
         let laCarte = document.createElement("p")
         // L'élément laCarte a trois classes, la première correspond à sa ligne, la deuxième sa colonne, et la troisième indique qu'il s'agit d'une carte
         laCarte.className = "un" + liste[0] + " deux" + liste[1] + " carte"
 
         // Si la carte est retournée
-        if(this.#estRetournee){
+        if(this.estRetournee){
             //localStorage.setItem('Valeur', this.getValeur())
             // On affiche la valeur de la carte
             laCarte.textContent = this.getValeur()
@@ -103,19 +103,19 @@ module.export = class Carte{
     // On retourne notre carte
     retournerCarte(){
         // Si la variable estRetournee est vrai, il devient faux
-        if(this.#estRetournee){
-            this.#estRetournee = false
+        if(this.estRetournee){
+            this.estRetournee = false
         }
         // Sinon il devient vrai
         else{
-            this.#estRetournee = true
+            this.estRetournee = true
         }
     }
 
     // On affiche cette Carte dans la mémoire du robot
     afficherPosition(){
         // On créé une liste contenant les deux lettres de positionnement de la carte
-        let liste = this.#positionCarte.split('')
+        let liste = this.positionCarte.split('')
         // On créé un élément appelé laCarte
         let laCarte = document.createElement("p")
         // L'élément laCarte a trois classes, la première correspond à sa ligne, la deuxième sa colonne, et la troisième indique qu'il s'agit d'une carte

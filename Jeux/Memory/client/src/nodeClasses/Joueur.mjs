@@ -8,7 +8,7 @@
 
 
 // On créé la classe Joueur
-module.export = class Joueur {
+module.export.Joueur = class Joueur {
 
     // CONSTRUCTEUR
     constructor(pseudonyme){
