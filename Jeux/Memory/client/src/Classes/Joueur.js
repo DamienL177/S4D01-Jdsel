@@ -6,8 +6,6 @@
  Remarques : Code conforme aux spécification internes données en cours
 */
 
-// On inclue la classe Memory
-import {Memory} from "./Memory.js"
 
 // On créé la classe Joueur
 export class Joueur {
