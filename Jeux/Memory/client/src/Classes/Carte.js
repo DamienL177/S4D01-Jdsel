@@ -10,9 +10,9 @@
 class Carte{
 
     // ATTRIBUTS
-    #positionCarte      // La position de la carte (entre AA et FF)
-    #valeur             // La valeur de la carte (entre 1 et 18)
-    #estRetournee       // Booléen indiquant si la carte est retournée ou non (true = face de la carte ; false = dos de la carte)
+    positionCarte      // La position de la carte (entre AA et FF)
+    valeur             // La valeur de la carte (entre 1 et 18)
+    estRetournee       // Booléen indiquant si la carte est retournée ou non (true = face de la carte ; false = dos de la carte)
 
     // CONSTRUCTEUR
     constructor(position, val){
