@@ -1,6 +1,6 @@
 
-const JHumain = require('../client/src/Classes/typeJoueurs/joueurHumain.mjs');
-const tCarte = require('../client/src/Classes/Carte.mjs');
+const JHumain = require('../client/src/nodeClasses/typeJoueurs/joueurHumain.mjs');
+const tCarte = require('../client/src/nodeClasses/Carte.mjs');
 
 const http = require('http');
 const express = require('express');
