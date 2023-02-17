@@ -68,10 +68,11 @@ io.on('connection', (sock) => {
     })
 
     sock.on("UnCoupJoue", (coup) => {
-        console.log(coup)
+        //console.log(coup)
         let i;
 
         for(i = 0; i < lesCartes.length; i++){
+            console.log(i)
             if(lesCartes[i].getPosition() == coup){
                 lesCartes[i].retournerCarte();
                 sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));

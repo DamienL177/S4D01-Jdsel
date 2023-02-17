@@ -103,8 +103,8 @@ async function choixUn(socket){
 
         // On place dans le stockage local quelle carte a été jouée
         localStorage.setItem("Coup1", leChoix)
-        window.alert(typeof(leChoix))
-        window.alert(sock);
+        //window.alert(typeof(leChoix))
+        //window.alert(sock);
         socket.emit("UnCoupJoue", leChoix);
 
         leChoixUn = leChoix;
