@@ -57,6 +57,10 @@ io.on('connection', (sock) => {
 
     }
 
+    sock.on("error", (err) => {
+        console.log("Une erreur s'est produite :" + err)
+    })
+
     sock.on("UnCoupJoue", (coup) => {
         let i;
 
