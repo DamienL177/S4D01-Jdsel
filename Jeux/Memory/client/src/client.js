@@ -84,7 +84,7 @@ function desactiverBouton(){
     bouton.disabled = true;
 }
 
-function choixUn(){
+async function choixUn(){
     let i;
     //window.alert("Le Choix Un");
     // On récupère la liste des positions valables
@@ -110,6 +110,7 @@ function choixUn(){
 
         const bouton = document.querySelector("#leBoutonValider");
         bouton.replaceWith(bouton.cloneNode(true))
+        await new Promise(r => setTimeout(r, 250))
         bouton.addEventListener("click", () => {
             choixDeux();
         })
