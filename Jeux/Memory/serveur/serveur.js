@@ -49,9 +49,9 @@ io.on('connection', (sock) => {
             indice = Math.random() * 2;
     
             let unJoueur = lesJoueurs[indice];
-
+            console.log(indice);
             //console.log(lesJoueurs);
-            joueurJouant = unJoueur['pseudo'];
+            //joueurJouant = unJoueur['pseudo'];
     
             if(indice == 0){
                 sockJ1.emit("jouer");
