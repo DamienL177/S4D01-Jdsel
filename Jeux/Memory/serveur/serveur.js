@@ -68,6 +68,7 @@ io.on('connection', (sock) => {
     })
 
     sock.on("UnCoupJoue", (coup) => {
+        console.log(coup)
         let i;
 
         for(i = 0; i < lesCartes.length; i++){
