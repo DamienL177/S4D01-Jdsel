@@ -108,10 +108,20 @@ async function choixUn(){
 
         leChoixUn = leChoix;
 
+        let article = document.getElementById("interaction");
+        
         const bouton = document.querySelector("#leBoutonValider");
-        bouton.replaceWith(bouton.cloneNode(true))
-        await new Promise(r => setTimeout(r, 250))
-        bouton.addEventListener("click", () => {
+        bouton.remove();
+
+        let nouveauBouton = document.createElement("bouton")
+        nouveauBouton.setAttribute("type", "button");
+        nouveauBouton.setAttribute("id", "leBoutonValider");
+        nouveauBouton.setAttribute("class", "elementSaisie");
+        nouveauBouton.disabled = false;
+
+        article.appendChild(nouveauBouton);
+
+        nouveauBouton.addEventListener("click", () => {
             choixDeux();
         })
 
@@ -151,7 +161,22 @@ async function choixDeux(){
 
         sock.emit("TourFini");
 
-        desactiverBouton();
+        let article = document.getElementById("interaction");
+        
+        const bouton = document.querySelector("#leBoutonValider");
+        bouton.remove();
+
+        let nouveauBouton = document.createElement("bouton")
+        nouveauBouton.setAttribute("type", "button");
+        nouveauBouton.setAttribute("id", "leBoutonValider");
+        nouveauBouton.setAttribute("class", "elementSaisie");
+        nouveauBouton.disabled = true;
+
+        article.appendChild(nouveauBouton);
+
+        nouveauBouton.addEventListener("click", () => {
+            choixDeux();
+        })
 
     }
     // Sinon
