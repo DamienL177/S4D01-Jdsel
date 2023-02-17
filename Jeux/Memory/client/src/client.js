@@ -125,7 +125,7 @@ function choixUn(){
     }
 }
 
-function choixDeux(){
+async function choixDeux(){
     let i;
 
     // On récupère la liste des positions valables
@@ -137,6 +137,8 @@ function choixDeux(){
 
     // On récupère le choix du joueur quant à la position de la carte qu'il joue
     let leChoix = document.getElementById('leCoup').value
+    await new Promise(r => setTimeout(r, 250));
+
     window.alert(leChoix == leChoixUn);
 
     // Si la liste des positions valables contient le texte saisi (s'il n'y a pas de problème de saisi comme AK)
