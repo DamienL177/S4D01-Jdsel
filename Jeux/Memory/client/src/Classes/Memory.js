@@ -313,7 +313,7 @@ export class Memory{
         // On lance l'affichage du score de chaque joueur
         let lesJoueurs = this.getMesJoueurs()
         let i
-        window.alert(lesJoueurs)
+        //window.alert(lesJoueurs)
         //this.getMesJoueurs().forEach(this.afficherUnJoueur)
         for(i = 0; i < lesJoueurs.length; i++){
             this.afficherUnJoueur(lesJoueurs[i])
