@@ -86,7 +86,7 @@ function desactiverBouton(){
 
 function choixUn(){
     let i;
-    window.alert("Le Choix Un");
+    //window.alert("Le Choix Un");
     // On récupère la liste des positions valables
     let tableau = []
 
@@ -103,7 +103,7 @@ function choixUn(){
 
         // On place dans le stockage local quelle carte a été jouée
         localStorage.setItem("Coup1", leChoix)
-
+        window.alert(typeof(leChoix))
         sock.emit("UnCoupJoue", leChoix);
 
         leChoixUn = leChoix;
@@ -125,7 +125,7 @@ function choixUn(){
 
 async function choixDeux(){
     let i;
-    window.alert("Le Choix Deux");
+    //window.alert("Le Choix Deux");
 
     // On récupère la liste des positions valables
     let tableau = []
@@ -138,7 +138,7 @@ async function choixDeux(){
     let leChoix = document.getElementById('leCoup').value
     //await new Promise(r => setTimeout(r, 250));
 
-    window.alert(leChoix);
+    //window.alert(leChoix);
 
     // Si la liste des positions valables contient le texte saisi (s'il n'y a pas de problème de saisi comme AK)
     if(tableau.includes(leChoix) && leChoix != leChoixUn){
