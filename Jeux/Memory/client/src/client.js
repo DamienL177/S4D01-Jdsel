@@ -8,6 +8,10 @@ let leMemory = new Memory();
 let joueur = new JoueurHumain("Joueur2");
 let leChoixUn;
 
+sock.on("error", (err) => {
+    window.alert("Erreur "  + err)
+})
+
 sock.on("attendre", () => {
     desactiverBouton();
 })
