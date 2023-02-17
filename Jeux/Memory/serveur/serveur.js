@@ -20,6 +20,7 @@ var sockJ1 = null;
 var sockJ2 = null;
 
 let lesJoueurs = Array(new JHumain('Joueur1'), new JHumain('Joueur2'));
+console.log(lesJoueurs);
 let lesCartes = initCartes();
 
 let indice = null;
