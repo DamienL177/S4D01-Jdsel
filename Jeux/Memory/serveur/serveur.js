@@ -72,12 +72,14 @@ io.on('connection', (sock) => {
         let i;
 
         for(i = 0; i < lesCartes.length; i++){
-            console.log(lesCartes[i].getPosition())
+            //console.log(lesCartes[i].getPosition())
             if(lesCartes[i].getPosition() == coup){
+                console.log("OK");
                 lesCartes[i].retournerCarte();
                 sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
                 sockJ2.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
                 lesCoups.push(coup);
+                break;
             }
         }
 
@@ -88,6 +90,9 @@ io.on('connection', (sock) => {
         // On récupère les indexs des coups du joueur
         let coup1 = lesCoups[0];
         let coup2 = lesCoups[1];
+
+        lesCoups = [];
+
         // On dit à tous les joueurs sauf celui qui vient de jouer que l'un d'entre eux à joué
         for(let i = 0; i < lesJoueurs.length; i++){
             if(lesJoueurs[i].getPseudo() != joueurJouant){
