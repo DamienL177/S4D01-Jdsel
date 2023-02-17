@@ -25,8 +25,8 @@ var Joueur2 = new JHumain('Joueur2');
 let lesJoueurs = [Joueur1, Joueur2];
 let lesCartes = initCartes();
 
-let indice;
-let joueurJouant;
+let indice = null;
+let joueurJouant = null;
 let lesCoups = [];
 var nbConnectes = 0;
 
