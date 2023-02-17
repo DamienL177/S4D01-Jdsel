@@ -49,7 +49,8 @@ io.on('connection', (sock) => {
     
             let unJoueur = lesJoueurs[indice];
 
-            joueurJouant = unJoueur.getPseudo();
+            console.log(unJoueur);
+            //joueurJouant = unJoueur.getPseudo();
     
             if(indice == 0){
                 sockJ1.emit("jouer");
