@@ -90,10 +90,13 @@ export class Joueur {
     
     // On affiche le score et le pseudo d'un joueur
     afficherScoreJoueur(){
+        // On récupère l'élément d'affichage des scores et on le vide
+        let mesScores = document.getElementById('lesScores')
+
         // On créé un élément texte 
         let leJoueur = document.createElement("p")
         leJoueur.textContent = this.#pseudo + " : " + this.#score + " points."
-        return leJoueur
+        mesScores.appendChild(leJoueur);
     }
 
     // METHODES ABSTRAITES

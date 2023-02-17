@@ -213,16 +213,12 @@ export class Memory{
 
     // Une fonction pour lancer l'affichage d'une carte
     afficherUneCarte(laCarte){
-        // On récupère l'élément d'affichage des cartes et on le vide
-        let maGrille = document.getElementById('laGrilleDeJeu')
         maGrille.appendChild(laCarte.afficherCarte())
     }
 
     // Une fonction pour lancer l'affichage du score d'un joueur
     afficherUnJoueur(leJoueur){
-        // On récupère l'élément d'affichage des scores et on le vide
-        let mesScores = document.getElementById('lesScores')
-        mesScores.appendChild(leJoueur.afficherScoreJoueur())
+        leJoueur.afficherScoreJoueur()
     }
 
     // Les joueurs jouent la partie

@@ -96,7 +96,9 @@ export class Carte{
             laCarte.textContent = this.getPosition()
         }
 
-        return laCarte;
+        // On récupère l'élément d'affichage des cartes et on le vide
+        let maGrille = document.getElementById('laGrilleDeJeu')
+        maGrille.appendChild(laCarte)
         
     }
 
