@@ -19,7 +19,7 @@ const io = socketio(server);
 var sockJ1 = null;
 var sockJ2 = null;
 
-let lesJoueurs = [new JHumain('Joueur1'), new JHumain('Joueur2')];
+let lesJoueurs = Array(new JHumain('Joueur1'), new JHumain('Joueur2'));
 let lesCartes = initCartes();
 
 let indice = null;
