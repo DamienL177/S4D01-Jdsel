@@ -86,7 +86,7 @@ function desactiverBouton(){
 
 function choixUn(){
     let i;
-
+    window.alert("Le Choix Un");
     // On récupère la liste des positions valables
     let tableau = []
 
@@ -127,6 +127,7 @@ function choixUn(){
 
 async function choixDeux(){
     let i;
+    window.alert("Le Choix Deux");
 
     // On récupère la liste des positions valables
     let tableau = []
@@ -137,9 +138,9 @@ async function choixDeux(){
 
     // On récupère le choix du joueur quant à la position de la carte qu'il joue
     let leChoix = document.getElementById('leCoup').value
-    await new Promise(r => setTimeout(r, 250));
+    //await new Promise(r => setTimeout(r, 250));
 
-    window.alert(leChoix == leChoixUn);
+    window.alert(leChoix);
 
     // Si la liste des positions valables contient le texte saisi (s'il n'y a pas de problème de saisi comme AK)
     if(tableau.includes(leChoix) && leChoix != leChoixUn){
