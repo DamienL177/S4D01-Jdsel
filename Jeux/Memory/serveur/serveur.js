@@ -51,7 +51,7 @@ io.on('connection', (sock) => {
             let unJoueur = lesJoueurs[indice];
 
             //console.log(lesJoueurs);
-            joueurJouant = unJoueur.pseudo;
+            joueurJouant = unJoueur['pseudo'];
     
             if(indice == 0){
                 sockJ1.emit("jouer");
