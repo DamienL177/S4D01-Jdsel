@@ -4,6 +4,7 @@ import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js'
 
 
 const sock = io();
+window.alert(sock);
 
 let leMemory = new Memory();
 let joueur = new JoueurHumain("Joueur2");
@@ -104,6 +105,7 @@ async function choixUn(){
         // On place dans le stockage local quelle carte a été jouée
         localStorage.setItem("Coup1", leChoix)
         window.alert(typeof(leChoix))
+        window.alert(sock);
         sock.emit("UnCoupJoue", leChoix);
 
         leChoixUn = leChoix;

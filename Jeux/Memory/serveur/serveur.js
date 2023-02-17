@@ -110,19 +110,21 @@ io.on('connection', (sock) => {
             lesCartes[retournerIndexParPosition(coup1)].retournerCarte()
             lesCartes[retournerIndexParPosition(coup2)].retournerCarte()
 
+            indice = (indice + 1) % 2;
+
         }
 
         sockJ1.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
         sockJ2.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-
-        indice = (indice + 1) % 2;
         
         joueurJouant = lesJoueurs[indice].getPseudo();
 
         if(indice == 0){
             sockJ1.emit("jouer");
+            sockJ2.emit("attendre");
         }
         else{
+            sockJ1.emit("attendre");
             sockJ2.emit("jouer");
         }        
 
