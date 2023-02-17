@@ -48,7 +48,7 @@ io.on('connection', (sock) => {
             sockJ1.emit("afficher", lesJoueurs, lesCartes);
             sockJ2.emit("afficher", lesJoueurs, lesCartes);
     
-            indice = randomInt(2);
+            indice = Math.random() * 2;
     
             joueurJouant = lesJoueurs[indice].getPseudo();
     
