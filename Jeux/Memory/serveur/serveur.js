@@ -20,7 +20,7 @@ var sockJ1 = null;
 var sockJ2 = null;
 
 let lesJoueurs = Array(new JHumain('Joueur1'), new JHumain('Joueur2'));
-console.log(lesJoueurs);
+//console.log(lesJoueurs);
 let lesCartes = initCartes();
 
 let indice = null;
@@ -50,8 +50,8 @@ io.on('connection', (sock) => {
     
             let unJoueur = lesJoueurs[indice];
 
-            console.log(lesJoueurs);
-            //joueurJouant = unJoueur.getPseudo();
+            //console.log(lesJoueurs);
+            joueurJouant = unJoueur.getPseudo();
     
             if(indice == 0){
                 sockJ1.emit("jouer");
