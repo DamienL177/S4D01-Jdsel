@@ -41,6 +41,39 @@ sock.on("connect", () => {
     sock.emit("Jconnecte");
 })
 
+sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
+    finPartie(strListeJoueurs, strListeCartes);
+})
+
+function finPartie(strListeJoueurs, strListeCartes){
+    leMemory.setMesJoueurs([]);
+    let arrayJoueurs = JSON.parse(strListeJoueurs);
+    let leJoueur;
+    let arrayUnJoueur;
+    let i;
+
+    for(i = 0 ; i < arrayJoueurs.length ; i++){
+        arrayUnJoueur = JSON.parse(arrayJoueurs[i]);
+        leJoueur = new JoueurHumain(arrayUnJoueur[0]);
+        leJoueur.setScore(arrayUnJoueur[1]);
+        leMemory.ajouterJoueur(leJoueur);
+    }
+
+    leMemory.setMesCartes([]);
+    let arrayCartes = JSON.parse(strListeCartes);
+    let laCarte;
+    let arrayUneCarte;
+
+    for(i = 0 ; i < arrayCartes.length ; i++){
+        arrayUneCarte = JSON.parse(arrayCartes[i]);
+        laCarte = new Carte(arrayUneCarte[0], arrayUneCarte[1])
+        laCarte.setEstRetournee(arrayUneCarte[2]);
+        leMemory.ajouterCarte(laCarte);
+    }
+
+    leMemory.finirJeu();
+}
+
 async function finDeTour(strListeJoueurs, strListeCartes){
     await new Promise(r => setTimeout(r, 3000));
     afficher(strListeJoueurs, strListeCartes);

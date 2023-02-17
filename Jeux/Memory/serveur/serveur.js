@@ -120,19 +120,27 @@ io.on('connection', (sock) => {
 
         }
 
-        sockJ1.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-        sockJ2.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-        
-        joueurJouant = lesJoueurs[indice].getPseudo();
+        if(lesCartes.length > 0){
+            sockJ1.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+            sockJ2.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+            
+            joueurJouant = lesJoueurs[indice].getPseudo();
 
-        if(indice == 0){
-            sockJ1.emit("jouer");
-            sockJ2.emit("attendre");
+            if(indice == 0){
+                sockJ1.emit("jouer");
+                sockJ2.emit("attendre");
+            }
+            else{
+                sockJ1.emit("attendre");
+                sockJ2.emit("jouer");
+            }  
         }
         else{
-            sockJ1.emit("attendre");
-            sockJ2.emit("jouer");
-        }        
+            sockJ1.emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+            sockJ2.emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+        }
+
+              
 
     })
 
