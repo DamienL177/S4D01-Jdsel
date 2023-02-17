@@ -5,6 +5,7 @@ const tCarte = require('../client/src/nodeClasses/Carte.mjs');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const Carte = require('../client/src/nodeClasses/Carte.mjs');
 
 const app = express();
 
@@ -43,8 +44,8 @@ io.on('connection', (sock) => {
     
             console.log("Deuxieme utilisateur connecté");
             
-            sockJ1.emit("afficher", lesJoueurs, lesCartes);
-            sockJ2.emit("afficher", lesJoueurs, lesCartes);
+            sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+            sockJ2.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
     
             indice = Math.floor(Math.random() * 2);
     
@@ -72,8 +73,8 @@ io.on('connection', (sock) => {
         for(i = 0; i < lesCartes.length; i++){
             if(lesCartes[i].getPosition() == coup){
                 lesCartes[i].retournerCarte();
-                sockJ1.emit("afficher", lesJoueurs, lesCartes);
-                sockJ2.emit("afficher", lesJoueurs, lesCartes);
+                sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+                sockJ2.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
                 lesCoups.push(coup);
             }
         }
@@ -110,8 +111,8 @@ io.on('connection', (sock) => {
 
         }
 
-        sockJ1.emit("afficher", lesJoueurs, lesCartes);
-        sockJ2.emit("afficher", lesJoueurs, lesCartes);
+        sockJ1.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+        sockJ2.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
 
         indice = (indice + 1) % 2;
         
@@ -170,7 +171,7 @@ function initCartes(){
     let tailleLettres = 6   // La taille de la liste lettres
     let listeValeurs = []   // La liste des valeurs qui pourront être prises par les cartes
     let listePosition = []  // Une liste qui contiendra toutes les positions des cartes
-    let listeCartes = []
+    let listeCartes = new Array();
 
     // TRAITEMENTS
     
@@ -219,3 +220,49 @@ function initCartes(){
     return listeCartes
 }
 
+function listeCartesEnString(listeCartes){
+    let retour = '';
+    let array = new Array();
+    let uneCarte;
+    let arrayCarte;
+    let strCarte;
+    let i;
+
+    for(i = 0 ; i < listeCartes.length ; i ++){
+        uneCarte = listeCartes[i];
+
+        arrayCarte = new Array(uneCarte.getPosition(), uneCarte.getValeur());
+
+        strCarte = JSON.stringify(arrayCarte);
+
+        array.push(strCarte);
+
+    }
+
+    retour = JSON.stringify(array);
+
+    return retour;
+}
+
+function listeJoueursEnString(listeJoueurs){
+    let retour = '';
+    let array = new Array()
+    let unJoueur;
+    let arrayJoueur;
+    let strJoueur;
+    let i;
+
+    for(i = 0; i < listeJoueurs.length ; i ++){
+        unJoueur = listeJoueurs[i];
+
+        arrayJoueur = new Array(unJoueur.getPseudo(), unJoueur.getScore());
+
+        strJoueur = JSON.stringify(arrayJoueur);
+
+        array.push(strJoueur);
+    }
+
+    retour = JSON.stringify(array);
+
+    return retour;
+}

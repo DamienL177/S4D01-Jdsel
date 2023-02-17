@@ -1,3 +1,4 @@
+import { Carte } from './Classes/Carte.js';
 import {Memory} from './Classes/Memory.js'
 import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js'
 
@@ -28,15 +29,50 @@ sock.on("jouer", () => {
     id.innerText = "C'est à votre tour.";
 })
 
-sock.on("afficher", (lesJoueurs, lesCartes) => {
-    leMemory.setMesJoueurs(lesJoueurs);
-    leMemory.setMesCartes(lesCartes);
-    leMemory.afficherJeu();
+sock.on("afficher", (strListeJoueurs, strListeCartes) => {
+    afficher(strListeJoueurs, strListeCartes);
+})
+
+sock.on("finTour", (strListeJoueurs, strListeCartes) => {
+    finDeTour(strListeJoueurs, strListeCartes);
 })
 
 sock.on("connect", () => {
     sock.emit("Jconnecte");
 })
+
+async function finDeTour(strListeJoueurs, strListeCartes){
+    await new Promise(r => setTimeout(r, 3000));
+    afficher(strListeJoueurs, strListeCartes);
+}
+
+function afficher(strListeJoueurs, strListeCartes){
+    leMemory.setMesJoueurs([]);
+    let arrayJoueurs = JSON.parse(strListeJoueurs);
+    let leJoueur;
+    let arrayUnJoueur;
+    let i;
+
+    for(i = 0 ; i < arrayJoueurs.length ; i++){
+        arrayUnJoueur = JSON.parse(arrayJoueurs[i]);
+        leJoueur = new JoueurHumain(arrayUnJoueur[0]);
+        leJoueur.setScore(arrayUnJoueur[1]);
+        leMemory.ajouterJoueur(leJoueur);
+    }
+
+    leMemory.setMesCartes([]);
+    let arrayCartes = JSON.parse(strListeCartes);
+    let laCarte;
+    let arrayUneCarte;
+
+    for(i = 0 ; i < arrayCartes.length ; i++){
+        arrayUneCarte = JSON.parse(arrayCartes[i]);
+        laCarte = new Carte(arrayUneCarte[0], arrayUneCarte[1])
+        leMemory.ajouterCarte(laCarte);
+    }
+
+    leMemory.afficherJeu();
+}
 
 function activerBouton(){
     const bouton = document.querySelector("#leBoutonValider");
