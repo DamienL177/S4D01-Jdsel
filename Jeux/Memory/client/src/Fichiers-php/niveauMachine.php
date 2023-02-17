@@ -107,7 +107,7 @@
 
         // Si l'insertion est réussie on continue
         if($result == true){
-            header("Refresh:0.1; Location: http://153.92.211.90:8080/");
+            header("Location: http://153.92.211.90:8080/");
             session_start();
             $_SESSION['idPartie'] = $identifiant;
         }
