@@ -218,6 +218,7 @@ export class Memory{
 
     // Une fonction pour lancer l'affichage du score d'un joueur
     afficherUnJoueur(leJoueur){
+        window.alert(leJoueur)
         leJoueur.afficherScoreJoueur()
     }
 
