@@ -137,6 +137,7 @@ function choixDeux(){
 
     // On récupère le choix du joueur quant à la position de la carte qu'il joue
     let leChoix = document.getElementById('leCoup').value
+    window.alert(tableau.includes(leChoix) && leChoix != leChoixUn);
 
     // Si la liste des positions valables contient le texte saisi (s'il n'y a pas de problème de saisi comme AK)
     if(tableau.includes(leChoix) && leChoix != leChoixUn){
