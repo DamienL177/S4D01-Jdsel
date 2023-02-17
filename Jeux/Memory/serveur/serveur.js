@@ -127,12 +127,16 @@ io.on('connection', (sock) => {
             joueurJouant = lesJoueurs[indice].getPseudo();
 
             if(indice == 0){
-                sockJ1.emit("jouer");
+                setTimeout(() => {
+                    sockJ1.emit("jouer");
+                }, 3000) 
                 sockJ2.emit("attendre");
             }
             else{
                 sockJ1.emit("attendre");
-                sockJ2.emit("jouer");
+                setTimeout(() => {
+                    sockJ2.emit("jouer");
+                }, 3000) 
             }  
         }
         else{

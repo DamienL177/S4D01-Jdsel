@@ -75,6 +75,7 @@ function finPartie(strListeJoueurs, strListeCartes){
 }
 
 async function finDeTour(strListeJoueurs, strListeCartes){
+    desactiverBouton();
     await new Promise(r => setTimeout(r, 3000));
     afficher(strListeJoueurs, strListeCartes);
 }
