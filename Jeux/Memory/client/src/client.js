@@ -118,6 +118,7 @@ async function choixUn(){
         nouveauBouton.setAttribute("id", "leBoutonValider");
         nouveauBouton.setAttribute("class", "elementSaisie");
         nouveauBouton.disabled = false;
+        nouveauBouton.innerText = "Valider";
 
         article.appendChild(nouveauBouton);
 
@@ -171,6 +172,7 @@ async function choixDeux(){
         nouveauBouton.setAttribute("id", "leBoutonValider");
         nouveauBouton.setAttribute("class", "elementSaisie");
         nouveauBouton.disabled = true;
+        nouveauBouton.innerText = "Valider";
 
         article.appendChild(nouveauBouton);
 
