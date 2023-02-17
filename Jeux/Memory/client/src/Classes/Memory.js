@@ -213,12 +213,11 @@ export class Memory{
 
     // Une fonction pour lancer l'affichage d'une carte
     afficherUneCarte(laCarte){
-        maGrille.appendChild(laCarte.afficherCarte())
+        laCarte.afficherCarte()
     }
 
     // Une fonction pour lancer l'affichage du score d'un joueur
     afficherUnJoueur(leJoueur){
-        window.alert(leJoueur)
         leJoueur.afficherScoreJoueur()
     }
 
@@ -312,7 +311,13 @@ export class Memory{
         mesScores.innerHTML = ""
 
         // On lance l'affichage du score de chaque joueur
-        this.getMesJoueurs().forEach(this.afficherUnJoueur)
+        let lesJoueurs = this.getMesJoueurs()
+        let i
+        window.alert(lesJoueurs)
+        //this.getMesJoueurs().forEach(this.afficherUnJoueur)
+        for(i = 0; i < lesJoueurs.length; i++){
+            this.afficherUnJoueur(lesJoueurs[i])
+        }
 
         // On récupère l'élément d'affichage des cartes et on le vide
         let maGrille = document.getElementById('laGrilleDeJeu')
