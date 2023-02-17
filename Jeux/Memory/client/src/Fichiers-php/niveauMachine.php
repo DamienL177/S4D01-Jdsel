@@ -117,9 +117,9 @@
             echo "<h4>Probleme lors de l'insertion de la partie dans la base.'</h4>";
         }
 
-        print "<script type='text/javascript'>localStorage.setItem('nivMachine', 'none')</script>";
-        print "<script src='/socket.io/socket.io.js'></script>";
-        print "<script src='./client.js' id='$identifiant'></script>";
+        echo "<script type='text/javascript'>localStorage.setItem('nivMachine', 'none')</script>";
+        echo "<script src='/socket.io/socket.io.js'></script>";
+        echo "<script src='./client.js' id='$identifiant'></script>";
     }
 
 

@@ -4,8 +4,8 @@
     session_start();
     $identifiant = $_SESSION['idPartie'];
 
-    print "<script src='/socket.io/socket.io.js'></script>";
-    print "<script src='./client.js' id='$identifiant'></script>";
+    echo "<script src='/socket.io/socket.io.js'></script>";
+    echo "<script src='./client.js' id='$identifiant'></script>";
 
 
 
