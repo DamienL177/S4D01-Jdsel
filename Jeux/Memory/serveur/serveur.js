@@ -72,7 +72,7 @@ io.on('connection', (sock) => {
         let i;
 
         for(i = 0; i < lesCartes.length; i++){
-            console.log(i)
+            console.log(lesCartes[i].getPosition())
             if(lesCartes[i].getPosition() == coup){
                 lesCartes[i].retournerCarte();
                 sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
