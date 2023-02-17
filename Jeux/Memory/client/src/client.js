@@ -1,5 +1,5 @@
-const Memory = require("./nodeClasses/Memory");
-const JoueurHumain = require("./nodeClasses/typeJoueurs/joueurHumain");
+import {Memory} from './Classes/Memory.js'
+import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js'
 
 
 const sock = io();
