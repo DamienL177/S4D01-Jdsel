@@ -68,6 +68,7 @@ function afficher(strListeJoueurs, strListeCartes){
     for(i = 0 ; i < arrayCartes.length ; i++){
         arrayUneCarte = JSON.parse(arrayCartes[i]);
         laCarte = new Carte(arrayUneCarte[0], arrayUneCarte[1])
+        laCarte.setEstRetournee(arrayUneCarte[2]);
         leMemory.ajouterCarte(laCarte);
     }
 

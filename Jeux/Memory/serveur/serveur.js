@@ -74,7 +74,7 @@ io.on('connection', (sock) => {
         for(i = 0; i < lesCartes.length; i++){
             //console.log(lesCartes[i].getPosition())
             if(lesCartes[i].getPosition() == coup){
-                console.log("OK");
+                //console.log("OK");
                 lesCartes[i].retournerCarte();
                 sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
                 sockJ2.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
@@ -240,7 +240,7 @@ function listeCartesEnString(listeCartes){
     for(i = 0 ; i < listeCartes.length ; i ++){
         uneCarte = listeCartes[i];
 
-        arrayCarte = new Array(uneCarte.getPosition(), uneCarte.getValeur());
+        arrayCarte = new Array(uneCarte.getPosition(), uneCarte.getValeur(), uneCarte.getEstRetournee());
 
         strCarte = JSON.stringify(arrayCarte);
 
