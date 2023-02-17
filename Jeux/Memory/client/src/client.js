@@ -14,6 +14,8 @@ sock.on("error", (err) => {
 
 sock.on("attendre", () => {
     desactiverBouton();
+    var id = document.getElementById('affichage');
+    id.innerText = "Ce n'est pas à votre tour.";
 })
 
 sock.on("jouer", () => {
@@ -22,6 +24,8 @@ sock.on("jouer", () => {
     bouton.addEventListener("click", () => {
         choixUn();
     })
+    var id = document.getElementById('affichage');
+    id.innerText = "C'est à votre tour.";
 })
 
 sock.on("afficher", (lesJoueurs, lesCartes) => {

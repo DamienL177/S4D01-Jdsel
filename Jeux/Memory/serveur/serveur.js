@@ -46,12 +46,12 @@ io.on('connection', (sock) => {
             sockJ1.emit("afficher", lesJoueurs, lesCartes);
             sockJ2.emit("afficher", lesJoueurs, lesCartes);
     
-            indice = Math.random() * 2;
+            indice = Math.floor(Math.random() * 2);
     
             let unJoueur = lesJoueurs[indice];
-            console.log(indice);
+            //console.log(indice);
             //console.log(lesJoueurs);
-            //joueurJouant = unJoueur['pseudo'];
+            joueurJouant = unJoueur['pseudo'];
     
             if(indice == 0){
                 sockJ1.emit("jouer");
