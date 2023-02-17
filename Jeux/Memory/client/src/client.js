@@ -4,7 +4,6 @@ import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js'
 
 
 const sock = io();
-window.alert(sock);
 
 let leMemory = new Memory();
 let joueur = new JoueurHumain("Joueur2");
@@ -24,7 +23,7 @@ sock.on("jouer", () => {
     activerBouton();
     const bouton = document.querySelector("#leBoutonValider");
     bouton.addEventListener("click", () => {
-        choixUn();
+        choixUn(sock);
     })
     var id = document.getElementById('affichage');
     id.innerText = "C'est à votre tour.";
@@ -85,7 +84,7 @@ function desactiverBouton(){
     bouton.disabled = true;
 }
 
-async function choixUn(){
+async function choixUn(socket){
     let i;
     //window.alert("Le Choix Un");
     // On récupère la liste des positions valables
@@ -106,7 +105,7 @@ async function choixUn(){
         localStorage.setItem("Coup1", leChoix)
         window.alert(typeof(leChoix))
         window.alert(sock);
-        sock.emit("UnCoupJoue", leChoix);
+        socket.emit("UnCoupJoue", leChoix);
 
         leChoixUn = leChoix;
 
@@ -125,7 +124,7 @@ async function choixUn(){
         article.appendChild(nouveauBouton);
 
         nouveauBouton.addEventListener("click", () => {
-            choixDeux();
+            choixDeux(socket);
         })
 
     }
@@ -137,7 +136,7 @@ async function choixUn(){
     }
 }
 
-async function choixDeux(){
+async function choixDeux(socket){
     let i;
     //window.alert("Le Choix Deux");
 
@@ -160,9 +159,9 @@ async function choixDeux(){
         // On place dans le stockage local quelle carte a été jouée
         localStorage.setItem("Coup2", leChoix)
 
-        sock.emit("UnCoupJoue", leChoix);
+        socket.emit("UnCoupJoue", leChoix);
 
-        sock.emit("TourFini");
+        socket.emit("TourFini");
 
         let article = document.getElementById("interaction");
         
