@@ -30,6 +30,10 @@ sock.on("afficher", (lesJoueurs, lesCartes) => {
     leMemory.afficherJeu();
 })
 
+sock.on("connect", () => {
+    sock.emit("Jconnecte");
+})
+
 function activerBouton(){
     const bouton = document.querySelector("#leBoutonValider");
     bouton.disabled = false;

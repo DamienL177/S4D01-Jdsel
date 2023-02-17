@@ -28,34 +28,38 @@ let lesCartes = initCartes();
 let indice;
 let joueurJouant;
 let lesCoups = [];
+var nbConnectes = 0;
 
 io.on('connection', (sock) => {
-    if(sockJ1 == null){
-        sockJ1 = sock;
-        sockJ1.emit("attendre");
-        console.log("Premier utilisateur connecté");
-    }
-    else if(sockJ2 == null){
-        sockJ2 = sock;
-        sockJ2.emit("attendre");
-
-        console.log("Deuxieme utilisateur connecté");
-        
-        sockJ1.emit("afficher", lesJoueurs, lesCartes);
-        sockJ2.emit("afficher", lesJoueurs, lesCartes);
-
-        indice = randomInt(2);
-
-        joueurJouant = lesJoueurs[indice].getPseudo();
-
-        if(indice == 0){
-            sockJ1.emit("jouer");
+    
+    sock.on("Jconnecte", () => {
+        nbConnectes += 1;
+        if(nbConnectes == 1){
+            sockJ1 = sock;
+            sockJ1.emit("attendre");
+            console.log("Premier utilisateur connecté");
         }
-        else{
-            sockJ2.emit("jouer");
+        else if(nbConnectes == 2){
+            sockJ2 = sock;
+            sockJ2.emit("attendre");
+    
+            console.log("Deuxieme utilisateur connecté");
+            
+            sockJ1.emit("afficher", lesJoueurs, lesCartes);
+            sockJ2.emit("afficher", lesJoueurs, lesCartes);
+    
+            indice = randomInt(2);
+    
+            joueurJouant = lesJoueurs[indice].getPseudo();
+    
+            if(indice == 0){
+                sockJ1.emit("jouer");
+            }
+            else{
+                sockJ2.emit("jouer");
+            }
         }
-
-    }
+    })
 
     sock.on("error", (err) => {
         console.log("Une erreur s'est produite :" + err)
