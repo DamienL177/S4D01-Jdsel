@@ -109,9 +109,7 @@ function choixUn(){
         leChoixUn = leChoix;
 
         const bouton = document.querySelector("#leBoutonValider");
-        bouton.removeEventListener("click", () => {
-            choixUn();
-        })
+        bouton.replaceWith(bouton.cloneNode(true))
         bouton.addEventListener("click", () => {
             choixDeux();
         })
