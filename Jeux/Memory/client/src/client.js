@@ -149,7 +149,7 @@ async function choixUn(socket){
         const bouton = document.querySelector("#leBoutonValider");
         bouton.remove();
 
-        let nouveauBouton = document.createElement("bouton")
+        let nouveauBouton = document.createElement("button")
         nouveauBouton.setAttribute("type", "button");
         nouveauBouton.setAttribute("id", "leBoutonValider");
         nouveauBouton.setAttribute("class", "elementSaisie");
