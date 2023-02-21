@@ -211,11 +211,7 @@ async function choixDeux(socket){
         nouveauBouton.innerText = "Valider";
 
         article.appendChild(nouveauBouton);
-
-        nouveauBouton.addEventListener("click", () => {
-            choixDeux();
-        })
-
+        
     }
     // Sinon
     else{
