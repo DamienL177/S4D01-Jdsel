@@ -1,12 +1,11 @@
 const Joueur = require('../client/src/nodeClasses/Joueur.mjs');
-const JHumain = require('../client/src/nodeClasses/typeJoueurs/joueurHumain.mjs');
+const JHumain = require('../client/src/nodeClasses/typeJoueurs/JHumain.mjs');
 const tCarte = require('../client/src/nodeClasses/Carte.mjs');
 
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const Carte = require('../client/src/nodeClasses/Carte.mjs');
-const { JoueurHumain } = require('../client/src/Classes/typeJoueurs/joueurHumain.js');
 
 const app = express();
 
@@ -48,7 +47,7 @@ io.on('connection', (sock) => {
         
                 console.log("Deuxieme utilisateur connecté");
 
-                let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+                let lesJoueurs = Array(new JHumain(listeRoom[room]["joueursDansRoom"][0]), new JHumain(listeRoom[room][joueursDansRoom][1]));
                 listeRoom[room]["joueursDansRoom"][0].setScore(0);
                 listeRoom[room]["joueursDansRoom"][1].setScore(0);
 
@@ -74,7 +73,7 @@ io.on('connection', (sock) => {
             if(listeRoom[room]['cartes'][i].getPosition() == coup){
                 //console.log("OK");
                 lesCartes[i].retournerCarte();
-                let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+                let lesJoueurs = Array(new JHumain(listeRoom[room]["joueursDansRoom"][0]), new JHumain(listeRoom[room][joueursDansRoom][1]));
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 listeRoom[room]["coupsTour"].push(coup);
                 break;
@@ -120,7 +119,7 @@ io.on('connection', (sock) => {
         }
 
         if(listeRoom[room]["cartes"].length > 0){
-            let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+            let lesJoueurs = Array(new JHumain(listeRoom[room]["joueursDansRoom"][0]), new JHumain(listeRoom[room][joueursDansRoom][1]));
             io.to(room).emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             
             joueurJouant = listeRoom[room]["joueursDansRoom"][indice].getPseudo();
@@ -139,7 +138,7 @@ io.on('connection', (sock) => {
             }  
         }
         else{
-            let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+            let lesJoueurs = Array(new JHumain(listeRoom[room]["joueursDansRoom"][0]), new JHumain(listeRoom[room][joueursDansRoom][1]));
             io.to(room).emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
         }
 
