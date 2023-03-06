@@ -25,11 +25,11 @@ io.on('connection', (sock) => {
     sock.on("Jconnecte", (room, pseudoJoueur) => {
         if(!(room in listeRoom)){
             let nomRoom = room;
-            let joueursDansRoom = [ pseudoJoueur];
+            let joueursDansRoom = [pseudoJoueur];
             let socksDansRoom = [sock];
             let scoresJoueurs = [0, 0];
             let lesCartes = initCartes();
-            let coupsTours = new Array();
+            let coupsTours = [];
             let uneRoom = [];
             uneRoom["nom"] = room;
             uneRoom["listeJoueurs"] = joueursDansRoom;
@@ -54,8 +54,8 @@ io.on('connection', (sock) => {
                 console.log("Deuxieme utilisateur connecté");
 
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
-                listeRoom[room]["scoreJoueurs"][0] = 0;
-                listeRoom[room]["scoreJoueurs"][1] = 0;
+                listeRoom[room]["scoresJoueurs"][0] = 0;
+                listeRoom[room]["scoresJoueurs"][1] = 0;
 
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 
@@ -94,15 +94,9 @@ io.on('connection', (sock) => {
         let coup1 = listeRoom[room]["coupsTour"][0];
         let coup2 = listeRoom[room]["coupsTour"][1];
 
-        let coupsTours = new Array();
+        let coupsTours = [];
         listeRoom[room]["coupsTour"] = coupsTours;
 
-        // On dit à tous les joueurs sauf celui qui vient de jouer que l'un d'entre eux à joué
-        for(let i = 0; i < listeRoom[room]["listeJoueurs"].length; i++){
-            if(listeRoom[room]["listeJoueurs"][i].getPseudo() != joueurJouant){
-                listeRoom[room]["listeJoueurs"][i].retenirCartesHumains(coup1, coup2)
-            }
-        }
         // Si les cartes ont les mêmes valeurs
         if(lesCartes[retournerIndexParPosition(coup1)].equals(lesCartes[retournerIndexParPosition(coup2)])){
             // On attend d'avoir retirer les deux cartes du jeu
