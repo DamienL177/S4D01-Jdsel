@@ -44,7 +44,6 @@ io.on('connection', (sock) => {
             console.log("Premier utilisateur connecté");
         }
         else{
-            console.log(typeof(listeRoom[room]["listeSocks"]))
             if(listeRoom[room]["listeSocks"].length < 2){
                 listeRoom[room]["listeJoueurs"][1] = pseudoJoueur;
                 listeRoom[room]["listeSocks"][1] = sock;
@@ -55,8 +54,8 @@ io.on('connection', (sock) => {
                 console.log("Deuxieme utilisateur connecté");
 
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
-                listeRoom[room]["listeJoueurs"][0].setScore(0);
-                listeRoom[room]["listeJoueurs"][1].setScore(0);
+                listeRoom[room]["scoreJoueurs"][0] = 0;
+                listeRoom[room]["scoreJoueurs"][1] = 0;
 
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 
