@@ -103,7 +103,7 @@ io.on('connection', (sock) => {
             retirerCarte(room, coup2)
 
             // On ajoute un au score du joueur
-            listeRoom[room]["listeJoueurs"][indice].setScore(listeRoom[room]["listeJoueurs"][indice].getScore() + 1)
+            listeRoom[room]["scoreJoueurs"][indice] = listeRoom[room]["scoreJoueurs"][indice] + 1
 
 
         }
@@ -121,7 +121,7 @@ io.on('connection', (sock) => {
             let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
             io.to(room).emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             
-            joueurJouant = listeRoom[room]["listeJoueurs"][indice].getPseudo();
+            joueurJouant = listeRoom[room]["listeJoueurs"][indice];
 
             if(indice == 0){
                 setTimeout(() => {
