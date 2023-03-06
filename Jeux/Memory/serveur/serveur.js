@@ -97,10 +97,10 @@ io.on('connection', (sock) => {
         listeRoom[room]["coupsTour"] = coupsTours;
 
         // Si les cartes ont les mêmes valeurs
-        if(listeRoom[room]["cartes"][retournerIndexParPosition(coup1)].equals(listeRoom[room]["cartes"][retournerIndexParPosition(coup2)])){
+        if(listeRoom[room]["cartes"][retournerIndexParPosition(room, coup1)].equals(listeRoom[room]["cartes"][retournerIndexParPosition(room, coup2)])){
             // On attend d'avoir retirer les deux cartes du jeu
-            retirerCarte(coup1)
-            retirerCarte(coup2)
+            retirerCarte(room, coup1)
+            retirerCarte(room, coup2)
 
             // On ajoute un au score du joueur
             listeRoom[room]["listeJoueurs"][indice].setScore(listeRoom[room]["listeJoueurs"][indice].getScore() + 1)
@@ -110,8 +110,8 @@ io.on('connection', (sock) => {
         // Sinon
         else{
             // On retourne les deux cartes
-            listeRoom[room]["cartes"][retournerIndexParPosition(coup1)].retournerCarte()
-            listeRoom[room]["cartes"][retournerIndexParPosition(coup2)].retournerCarte()
+            listeRoom[room]["cartes"][retournerIndexParPosition(room, coup1)].retournerCarte()
+            listeRoom[room]["cartes"][retournerIndexParPosition(room, coup2)].retournerCarte()
 
             indice = (indice + 1) % 2;
 
@@ -156,7 +156,7 @@ server.listen(8080, () => {
 })
 
 // On retire une carte de la liste mesCartes
-function retirerCarte(uneCarte){
+function retirerCarte(room, uneCarte){
     // On parcourt la liste des cartes
     for(let i = 0; i < listeRoom[room]["cartes"].length; i ++){
         // Si la Carte est présente dans la liste à l'indice i
@@ -172,7 +172,7 @@ function retirerCarte(uneCarte){
 }
 
 // On cherche l'index d'une carte par sa position
-function retournerIndexParPosition(position){
+function retournerIndexParPosition(room, position){
     // On fait une recherche de première occurrence
     for(let i = 0; i < listeRoom[room]["cartes"].length; i++){
         if(listeRoom[room]["cartes"][i].getPosition() == position){
