@@ -60,6 +60,7 @@
                 var liste = '<ul>';
                 for (i=0;i<items.length;i++) {
                     unLien = '<a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + items.item(i).firstChild.data + '">Joindre cette partie</a>';
+                    alert(unLien);
                     liste += '<li><a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + unLien.replace("%20", '') + '</li>';
                 }
                 liste += '</ul>';
