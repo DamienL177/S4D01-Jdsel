@@ -38,18 +38,16 @@ io.on('connection', (sock) => {
             uneRoom["cartes"] = lesCartes;
             uneRoom["coupsTour"] = coupsTours;
             listeRoom[room] = uneRoom;
-            let sockJ1 = listeRoom[room]["listeSocks"][0];
-            sockJ1.join(room);
-            sockJ1.emit("attendre");
+            sock.join(room);
+            sock.emit("attendre");
             console.log("Premier utilisateur connecté");
         }
         else{
             if(listeRoom[room]["listeSocks"].length < 2){
                 listeRoom[room]["listeJoueurs"][1] = pseudoJoueur;
                 listeRoom[room]["listeSocks"][1] = sock;
-                let sockJ2 = listeRoom[room]["listeSocks"][1];
-                sockJ2.join(room);
-                sockJ2.emit("attendre");
+                sock.join(room);
+                sock.emit("attendre");
         
                 console.log("Deuxieme utilisateur connecté");
 
@@ -90,7 +88,7 @@ io.on('connection', (sock) => {
         
     })
 
-    sock.on("TourFini", () => {
+    sock.on("TourFini", (room) => {
         // On récupère les indexs des coups du joueur
         let coup1 = listeRoom[room]["coupsTour"][0];
         let coup2 = listeRoom[room]["coupsTour"][1];
