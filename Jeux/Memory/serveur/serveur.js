@@ -25,12 +25,12 @@ io.on('connection', (sock) => {
     sock.on("Jconnecte", (room, pseudoJoueur) => {
         if(!(room in listeRoom)){
             let nomRoom = room;
-            let joueursDansRoom = {0: pseudoJoueur};
-            let socksDansRoom = {0: sock};
-            let scoresJoueurs = {0: 0, 1: 0};
+            let joueursDansRoom = [ pseudoJoueur];
+            let socksDansRoom = [sock];
+            let scoresJoueurs = [0, 0];
             let lesCartes = initCartes();
             let coupsTours = new Array();
-            let uneRoom = {"nom": room, "listeJoueurs": joueursDansRoom, "listeSocks": socksDansRoom, "scoresJoueurs": scoresJoueurs, "cartes": lesCartes, "coupsTour" : coupsTours};
+            let uneRoom = new Map(["nom", room], ["listeJoueurs", joueursDansRoom], ["listeSocks", socksDansRoom], ["scoresJoueurs", scoresJoueurs], ["cartes", lesCartes], ["coupsTour" , coupsTours]);
             listeRoom[room] = uneRoom;
             let sockJ1 = listeRoom[room]["listeSocks"][0];
             sockJ1.join(room);
