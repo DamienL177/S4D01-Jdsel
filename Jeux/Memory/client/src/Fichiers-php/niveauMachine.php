@@ -61,8 +61,8 @@
         // On définit les variables nécessaires à la commande
         $nomtable = "Partie";
         $laDate = date("Y-m-d H:i:s");
-        $estCommencee = FALSE;
-        $estFinie = FALSE;
+        //$estCommencee = FALSE;
+        //$estFinie = FALSE;
 
         // On définit les variables nécessaires au calcul de l'identifiant
         $charsId = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';    // Les caractères pouvant être utilisés
@@ -106,9 +106,9 @@
                 $idOK = true;
             }
         }
-        echo "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', $estCommencee, $estFinie, NULL, NULL)\n";
+        echo "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', FALSE, FALSE, NULL, NULL)\n";
         // On créé la requête et on lance l'insertion d'un Joueur dans la base
-        $query = "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', $estCommencee, $estFinie, NULL, NULL)";
+        $query = "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', FALSE, FALSE, NULL, NULL)";
         $result = mysqli_query($link, $query);
 
         if (mysqli_connect_errno()){
