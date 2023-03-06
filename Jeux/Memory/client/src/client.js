@@ -5,8 +5,12 @@ import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js'
 
 const sock = io();
 
+let currentScript = document.currentScript();
+
+var room = currentScript.attr('idpartie');
+var pseudoJoueur = currentScript.attr('pseudojoueur');
+
 let leMemory = new Memory();
-let joueur = new JoueurHumain("Joueur2");
 let leChoixUn;
 
 sock.on("error", (err) => {
@@ -38,7 +42,7 @@ sock.on("finTour", (strListeJoueurs, strListeCartes) => {
 })
 
 sock.on("connect", () => {
-    sock.emit("Jconnecte");
+    sock.emit("Jconnecte", room, pseudoJoueur);
 })
 
 sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
@@ -140,7 +144,7 @@ async function choixUn(socket){
         localStorage.setItem("Coup1", leChoix)
         //window.alert(typeof(leChoix))
         //window.alert(sock);
-        socket.emit("UnCoupJoue", leChoix);
+        socket.emit("UnCoupJoue", room, leChoix);
 
         leChoixUn = leChoix;
 
@@ -194,9 +198,9 @@ async function choixDeux(socket){
         // On place dans le stockage local quelle carte a été jouée
         localStorage.setItem("Coup2", leChoix)
 
-        socket.emit("UnCoupJoue", leChoix);
+        socket.emit("UnCoupJoue", room, leChoix);
 
-        socket.emit("TourFini");
+        socket.emit("TourFini", room);
 
         let article = document.getElementById("interaction");
         

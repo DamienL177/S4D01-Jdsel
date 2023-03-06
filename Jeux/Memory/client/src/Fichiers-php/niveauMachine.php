@@ -73,6 +73,16 @@
             throw new Exception();
         }
 
+        
+        if(isset($_SESSION['idPlayer'])){
+            $idJoueur = $_SESSION['idPlayer'];
+            $tableJoueur = "Joueur";
+            $query = "SELECT pseudonyme FROM $tableJoueur WHERE identifiant = '$idJoueur'";
+            $result = mysqli_query($link, $query);
+            $row = mysqli_fetch_array($result);
+            $pseudoJoueur = $row['pseudonyme'];
+        }
+
         // Tant que nous n'avons pas un identifiant OK
         while(!$idOK){
             // On définit l'identifiant
@@ -107,7 +117,11 @@
 
         // Si l'insertion est réussie on continue
         if($result == true){
-            header("Location: http://153.92.211.90:8080/");
+            $url = "http://153.92.211.90:8080/?idpartie=" . $identifiant;
+            if(isset($pseudoJoueur)){
+                $url = $url . "&pseudojoueur=" . $pseudoJoueur ;
+            }
+            header("Location: $url");
             session_start();
             $_SESSION['idPartie'] = $identifiant;
         }
@@ -117,9 +131,7 @@
             echo "<h4>Probleme lors de l'insertion de la partie dans la base.'</h4>";
         }
 
-        //echo "<script type='text/javascript'>localStorage.setItem('nivMachine', 'none')</script>";
-        //echo "<script src='/socket.io/socket.io.js'></script>";
-        //echo "<script src='./client.js' id='$identifiant'></script>";
+        
     }
 
 

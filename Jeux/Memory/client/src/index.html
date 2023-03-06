@@ -4,6 +4,28 @@
         <meta charset="utf-8">
         <title>Memory</title>
         <link rel="stylesheet" href="VisuelsPage/Css/jeu.css">
+        <script type="text/javascript">
+            const valeursURL =  window.location.search;
+            const paramsURL = new URLSearchParams(valeursURL);
+            var idJoueur;
+            if(paramsURL.has('idpartie')){
+                const idPartie = paramsURL.get('idpartie');
+            }
+            if(paramsURL.has('idjoueur')){
+                idJoueur = paramsURL.get('idjoueur');
+            }
+            else{
+                idJoueur = "Anonyme"
+            }
+
+            var elementScript = document.createElement("script");
+            elementScript.setAttribute("idpartie", idPartie);
+            elementScript.setAttribute("idjoueur", idJoueur);
+            elementScript.setAttribute("type", "module");
+            elementScript.setAttribute("src", './client.js');
+            document.body.appendChild(elementScript);
+            
+        </script>
     </head>
     <body>
         <article id="lesScores">
@@ -40,9 +62,8 @@
             <br>
             <button type="button" id="leBoutonValider" disabled class="elementSaisie">Valider</button>
         </article>
-        <a href="formulaireDifficulteBot.html"><button type="button">Retour au formulaire</button></a>
+        <a href="optionsPartie.html"><button type="button">Retour au formulaire</button></a>
         
         <script src='/socket.io/socket.io.js'></script>
-        <script src='./client.js' id='$identifiant' type="module"></script>
     </body>
 </html>

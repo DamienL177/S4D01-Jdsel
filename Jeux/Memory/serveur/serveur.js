@@ -6,6 +6,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const Carte = require('../client/src/nodeClasses/Carte.mjs');
+const { JoueurHumain } = require('../client/src/Classes/typeJoueurs/joueurHumain.js');
 
 const app = express();
 
@@ -17,49 +18,47 @@ const server = http.createServer(app);
 
 const io = socketio(server);
 
-var sockJ1 = null;
-var sockJ2 = null;
 
-let lesJoueurs = Array(new JHumain('Joueur1'), new JHumain('Joueur2'));
-//console.log(lesJoueurs);
-let lesCartes = initCartes();
-
-let indice = null;
-let joueurJouant = null;
-let lesCoups = [];
-var nbConnectes = 0;
+let listeRoom = {};
 
 io.on('connection', (sock) => {
     
-    sock.on("Jconnecte", () => {
-        nbConnectes += 1;
-        if(nbConnectes == 1){
-            sockJ1 = sock;
+    sock.on("Jconnecte", (room, pseudoJoueur) => {
+        if(!(room in listeRoom)){
+            let nomRoom = room;
+            let joueursDansRoom = {0: pseudoJoueur};
+            let socksDansRoom = {0: sock};
+            let scoresJoueurs = {0: 0, 1: 0};
+            let lesCartes = initCartes();
+            let coupsTours = new Array();
+            let uneRoom = {"nom": room, "listeJoueurs": joueursDansRoom, "listeSocks": socksDansRoom, "scoresJoueurs": scoresJoueurs, "cartes": lesCartes, "coupsTour" : coupsTours};
+            listeRoom[room] = uneRoom;
+            let sockJ1 = listeRoom[room]["listeSocks"][0];
+            sockJ1.join(room);
             sockJ1.emit("attendre");
             console.log("Premier utilisateur connecté");
         }
-        else if(nbConnectes == 2){
-            sockJ2 = sock;
-            sockJ2.emit("attendre");
-    
-            console.log("Deuxieme utilisateur connecté");
+        else{
+            if(listeRoom[room][socksDansRoom].length >= 2){
+                listeRoom[room][joueursDansRoom][1] = pseudoJoueur;
+                listeRoom[room][socksDansRoom][1] = sock;
+                let sockJ2 = listeRoom[room]["listeSocks"][1];
+                sockJ2.join(room);
+                sockJ2.emit("attendre");
+        
+                console.log("Deuxieme utilisateur connecté");
+
+                let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+                listeRoom[room]["joueursDansRoom"][0].setScore(0);
+                listeRoom[room]["joueursDansRoom"][1].setScore(0);
+
+                io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
+                
+                indice = Math.floor(Math.random() * 2);
+        
+                listeRoom[room]["listeSocks"][indice];
+            }
             
-            sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-            sockJ2.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-    
-            indice = Math.floor(Math.random() * 2);
-    
-            let unJoueur = lesJoueurs[indice];
-            //console.log(indice);
-            //console.log(lesJoueurs);
-            joueurJouant = unJoueur['pseudo'];
-    
-            if(indice == 0){
-                sockJ1.emit("jouer");
-            }
-            else{
-                sockJ2.emit("jouer");
-            }
         }
     })
 
@@ -67,18 +66,17 @@ io.on('connection', (sock) => {
         console.log("Une erreur s'est produite :" + err)
     })
 
-    sock.on("UnCoupJoue", (coup) => {
+    sock.on("UnCoupJoue", (room, coup) => {
         //console.log(coup)
         let i;
-
-        for(i = 0; i < lesCartes.length; i++){
+        for(i = 0; i < listeRoom[room]['cartes']; i++){
             //console.log(lesCartes[i].getPosition())
-            if(lesCartes[i].getPosition() == coup){
+            if(listeRoom[room]['cartes'][i].getPosition() == coup){
                 //console.log("OK");
                 lesCartes[i].retournerCarte();
-                sockJ1.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-                sockJ2.emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-                lesCoups.push(coup);
+                let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+                io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
+                listeRoom[room]["coupsTour"].push(coup);
                 break;
             }
         }
@@ -88,15 +86,16 @@ io.on('connection', (sock) => {
 
     sock.on("TourFini", () => {
         // On récupère les indexs des coups du joueur
-        let coup1 = lesCoups[0];
-        let coup2 = lesCoups[1];
+        let coup1 = listeRoom[room]["coupsTour"][0];
+        let coup2 = listeRoom[room]["coupsTour"][1];
 
-        lesCoups = [];
+        let coupsTours = new Array();
+        listeRoom[room]["coupsTour"] = coupsTours;
 
         // On dit à tous les joueurs sauf celui qui vient de jouer que l'un d'entre eux à joué
-        for(let i = 0; i < lesJoueurs.length; i++){
-            if(lesJoueurs[i].getPseudo() != joueurJouant){
-                lesJoueurs[i].retenirCartesHumains(coup1, coup2)
+        for(let i = 0; i < listeRoom[room]["joueursDansRoom"].length; i++){
+            if(listeRoom[room]["joueursDansRoom"][i].getPseudo() != joueurJouant){
+                listeRoom[room]["joueursDansRoom"][i].retenirCartesHumains(coup1, coup2)
             }
         }
         // Si les cartes ont les mêmes valeurs
@@ -106,42 +105,42 @@ io.on('connection', (sock) => {
             retirerCarte(coup2)
 
             // On ajoute un au score du joueur
-            lesJoueurs[indice].setScore(lesJoueurs[indice].getScore() + 1)
+            listeRoom[room]["joueursDansRoom"][indice].setScore(listeRoom[room]["joueursDansRoom"][indice].getScore() + 1)
 
 
         }
         // Sinon
         else{
             // On retourne les deux cartes
-            lesCartes[retournerIndexParPosition(coup1)].retournerCarte()
-            lesCartes[retournerIndexParPosition(coup2)].retournerCarte()
+            listeRoom[room]["cartes"][retournerIndexParPosition(coup1)].retournerCarte()
+            listeRoom[room]["cartes"][retournerIndexParPosition(coup2)].retournerCarte()
 
             indice = (indice + 1) % 2;
 
         }
 
-        if(lesCartes.length > 0){
-            sockJ1.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-            sockJ2.emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+        if(listeRoom[room]["cartes"].length > 0){
+            let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+            io.to(room).emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             
-            joueurJouant = lesJoueurs[indice].getPseudo();
+            joueurJouant = listeRoom[room]["joueursDansRoom"][indice].getPseudo();
 
             if(indice == 0){
                 setTimeout(() => {
-                    sockJ1.emit("jouer");
+                    listeRoom[room]["joueursDansRoom"][0].emit("jouer");
                 }, 3000) 
-                sockJ2.emit("attendre");
+                listeRoom[room]["joueursDansRoom"][1].emit("attendre");
             }
             else{
-                sockJ1.emit("attendre");
+                listeRoom[room]["joueursDansRoom"][0].emit("attendre");
                 setTimeout(() => {
-                    sockJ2.emit("jouer");
+                    listeRoom[room]["joueursDansRoom"][1].emit("jouer");
                 }, 3000) 
             }  
         }
         else{
-            sockJ1.emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
-            sockJ2.emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(lesCartes));
+            let lesJoueurs = Array(new JoueurHumain(listeRoom[room]["joueursDansRoom"][0]), new JoueurHumain(listeRoom[room][joueursDansRoom][1]));
+            io.to(room).emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
         }
 
               
@@ -161,11 +160,11 @@ server.listen(8080, () => {
 // On retire une carte de la liste mesCartes
 function retirerCarte(uneCarte){
     // On parcourt la liste des cartes
-    for(let i = 0; i < lesCartes.length; i ++){
+    for(let i = 0; i < listeRoom[room]["cartes"].length; i ++){
         // Si la Carte est présente dans la liste à l'indice i
-        if(lesCartes[i].getPosition() == uneCarte){
+        if(listeRoom[room]["cartes"][i].getPosition() == uneCarte){
             // On retire la carte
-            lesCartes.splice(i, 1)
+            listeRoom[room]["cartes"].splice(i, 1)
             // On retourne vrai tout en disant à Javascript qu'il peut reprendre son cours normal
             return true
         }
@@ -177,8 +176,8 @@ function retirerCarte(uneCarte){
 // On cherche l'index d'une carte par sa position
 function retournerIndexParPosition(position){
     // On fait une recherche de première occurrence
-    for(let i = 0; i < lesCartes.length; i++){
-        if(lesCartes[i].getPosition() == position){
+    for(let i = 0; i < listeRoom[room]["cartes"].length; i++){
+        if(listeRoom[room]["cartes"][i].getPosition() == position){
             return i
         }
     }
