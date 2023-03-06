@@ -96,7 +96,6 @@
                 $index = array_rand($tabCharsId);
                 $identifiant .= $tabCharsId[$index];
             }
-            echo "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'\n";
             // On compte le nombre d'identifiants similaires
             $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
             $result = mysqli_query($link, $query);
@@ -107,7 +106,7 @@
                 $idOK = true;
             }
         }
-
+        echo "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', $estCommencee, $estFinie, NULL, NULL)\n";
         // On créé la requête et on lance l'insertion d'un Joueur dans la base
         $query = "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', $estCommencee, $estFinie, NULL, NULL)";
         $result = mysqli_query($link, $query);
