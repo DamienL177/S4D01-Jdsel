@@ -7,15 +7,15 @@
         <script type="text/javascript">
             const valeursURL =  window.location.search;
             const paramsURL = new URLSearchParams(valeursURL);
-            var idJoueur;
+            var pseudoJoueur;
             if(paramsURL.has('idpartie')){
                 var idPartie = paramsURL.get('idpartie');
             }
-            if(paramsURL.has('idjoueur')){
-                idJoueur = paramsURL.get('idjoueur');
+            if(paramsURL.has('pseudojoueur')){
+                pseudoJoueur = paramsURL.get('pseudojoueur');
             }
             else{
-                idJoueur = "Anonyme"
+                pseudoJoueur = "Anonyme"
             }
             
         </script>
@@ -61,7 +61,7 @@
         <script type="text/javascript">
             var elementScript = document.createElement("script");
             elementScript.setAttribute("idpartie", idPartie);
-            elementScript.setAttribute("idjoueur", idJoueur);
+            elementScript.setAttribute("pseudojoueur", pseudoJoueur);
             elementScript.setAttribute("type", "module");
             elementScript.setAttribute("src", './client.js');
             document.body.appendChild(elementScript);

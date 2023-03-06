@@ -5,9 +5,9 @@ import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js'
 
 const sock = io();
 
-let currentScript = document.currentScript;
+//let currentScript = document.currentScript;
 
-var room = currentScript.attr('idpartie');
+var room = idPartie;
 var pseudoJoueur = currentScript.attr('pseudojoueur');
 
 let leMemory = new Memory();
