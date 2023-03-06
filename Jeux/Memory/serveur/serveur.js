@@ -71,12 +71,12 @@ io.on('connection', (sock) => {
     })
 
     sock.on("UnCoupJoue", (room, coup) => {
-        console.log(coup)
+        //console.log(coup)
         let i;
         for(i = 0; i < listeRoom[room]['cartes']; i++){
-            //console.log(lesCartes[i].getPosition())
+            console.log(lesCartes[i].getPosition())
             if(listeRoom[room]['cartes'][i].getPosition() == coup){
-                console.log("OK");
+                //console.log("OK");
                 listeRoom[room]["cartes"][i].retournerCarte();
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
