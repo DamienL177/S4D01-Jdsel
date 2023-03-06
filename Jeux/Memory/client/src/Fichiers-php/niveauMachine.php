@@ -57,8 +57,8 @@
         // On définit les variables nécessaires à la commande
         $nomtable = "Partie";
         $laDate = date("Y-m-d H:i:s");
-        $estCommencee = false;
-        $estFinie = false;
+        $estCommencee = FALSE;
+        $estFinie = FALSE;
 
         // On définit les variables nécessaires au calcul de l'identifiant
         $charsId = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';    // Les caractères pouvant être utilisés
