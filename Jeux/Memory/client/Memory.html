@@ -60,7 +60,7 @@
                 for (i=0;i<items.length;i++) {
                     liste += '<li><a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + items.item(i).firstChild.data + '">Joindre cette partie</a></li>';
                 }
-                Table += '</ul>';
+                liste += '</ul>';
                 document.getElementById("affichageParties").innerHTML=liste;
             }
         }
