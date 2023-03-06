@@ -1,5 +1,9 @@
 <?php
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     // Si on connait le niveau de la machine
     if(isset($_POST['lvlMachine'])){
         // On récupère le niveau de la machine
