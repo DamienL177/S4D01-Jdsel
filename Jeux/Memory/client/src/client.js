@@ -20,7 +20,7 @@ sock.on("attendre", () => {
     desactiverBouton();
     var id = document.getElementById('affichage');
     id.innerText = "Ce n'est pas à votre tour.";
-    alert("TEST");
+    //alert("TEST");
 })
 
 sock.on("jouer", () => {

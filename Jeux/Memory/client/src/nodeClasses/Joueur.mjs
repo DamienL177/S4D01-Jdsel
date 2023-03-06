@@ -88,7 +88,7 @@ module.exports = class Joueur {
     afficherScoreJoueur(){
         // On créé un élément texte 
         let leJoueur = document.createElement("p")
-        leJoueur.textContent = this.pseudo + " : " + this.score + " points."
+        leJoueur.textContent = this.pseudo + " : " + this.score + " paires."
         return leJoueur
     }
 
