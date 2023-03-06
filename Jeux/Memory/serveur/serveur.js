@@ -73,8 +73,8 @@ io.on('connection', (sock) => {
     sock.on("UnCoupJoue", (room, coup) => {
         //console.log(coup)
         let i;
-        for(i = 0; i < listeRoom[room]['cartes']; i++){
-            console.log(lesCartes[i].getPosition())
+        for(i = 0; i < listeRoom[room]['cartes'].length; i++){
+            //console.log(lesCartes[i].getPosition())
             if(listeRoom[room]['cartes'][i].getPosition() == coup){
                 //console.log("OK");
                 listeRoom[room]["cartes"][i].retournerCarte();
