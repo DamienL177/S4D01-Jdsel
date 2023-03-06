@@ -96,6 +96,7 @@
                 $index = array_rand($tabCharsId);
                 $identifiant .= $tabCharsId[$index];
             }
+            echo "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'\n";
             // On compte le nombre d'identifiants similaires
             $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
             $result = mysqli_query($link, $query);
