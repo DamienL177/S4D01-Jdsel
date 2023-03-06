@@ -31,6 +31,7 @@ io.on('connection', (sock) => {
             let lesCartes = initCartes();
             let coupsTours = [];
             let uneRoom = [];
+            let indice = 0;
             uneRoom["nom"] = room;
             uneRoom["listeJoueurs"] = joueursDansRoom;
             uneRoom["listeSocks"] = socksDansRoom;
@@ -58,6 +59,7 @@ io.on('connection', (sock) => {
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 
                 indice = Math.floor(Math.random() * 2);
+                listeRoom[room]["indice"] = indice;
         
                 let joueur = listeRoom[room]["listeSocks"][indice];
                 joueur.emit("jouer");
@@ -103,7 +105,7 @@ io.on('connection', (sock) => {
             retirerCarte(room, coup2)
 
             // On ajoute un au score du joueur
-            listeRoom[room]["scoreJoueurs"][indice] = listeRoom[room]["scoreJoueurs"][indice] + 1
+            listeRoom[room]["scoresJoueurs"][listeRoom[room]["indice"]] = listeRoom[room]["scoresJoueurs"][listeRoom[room]["indice"]] + 1
 
 
         }
@@ -113,7 +115,7 @@ io.on('connection', (sock) => {
             listeRoom[room]["cartes"][retournerIndexParPosition(room, coup1)].retournerCarte()
             listeRoom[room]["cartes"][retournerIndexParPosition(room, coup2)].retournerCarte()
 
-            indice = (indice + 1) % 2;
+            listeRoom[room]["indice"] = (listeRoom[room]["indice"] + 1) % 2;
 
         }
 
@@ -121,20 +123,20 @@ io.on('connection', (sock) => {
             let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
             io.to(room).emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             
-            joueurJouant = listeRoom[room]["listeJoueurs"][indice];
+            joueurJouant = listeRoom[room]["listeJoueurs"][listeRoom[room]["indice"]];
 
-            if(indice == 0){
-                let joueur1 = listeRoom[room]["listeSocks"][indice];
+            if(listeRoom[room]["indice"] == 0){
+                let joueur1 = listeRoom[room]["listeSocks"][listeRoom[room]["indice"]];
                 setTimeout(() => {
                     joueur1.emit("jouer");
                 }, 3000) 
-                let joueur2 = listeRoom[room]["listeSocks"][indice];
+                let joueur2 = listeRoom[room]["listeSocks"][listeRoom[room]["indice"]];
                 joueur2.emit("attendre");
             }
             else{
-                let joueur1 = listeRoom[room]["listeSocks"][indice];
+                let joueur1 = listeRoom[room]["listeSocks"][listeRoom[room]["indice"]];
                 joueur1.emit("attendre");
-                let joueur2 = listeRoom[room]["listeSocks"][indice];
+                let joueur2 = listeRoom[room]["listeSocks"][listeRoom[room]["indice"]];
                 setTimeout(() => {
                     joueur2.emit("jouer");
                 }, 3000) 
