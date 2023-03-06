@@ -106,9 +106,9 @@
                 $idOK = true;
             }
         }
-        echo "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', FALSE, FALSE, NULL, NULL)\n";
+        //echo "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', FALSE, FALSE, NULL, NULL)\n";
         // On créé la requête et on lance l'insertion d'un Joueur dans la base
-        $query = "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', FALSE, FALSE, NULL, NULL)";
+        $query = "INSERT INTO $nomtable VALUES('$identifiant', '$laDate', FALSE, FALSE, 'A01', NULL, NULL)";
         $result = mysqli_query($link, $query);
 
         if (mysqli_connect_errno()){
