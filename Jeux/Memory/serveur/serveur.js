@@ -30,7 +30,13 @@ io.on('connection', (sock) => {
             let scoresJoueurs = [0, 0];
             let lesCartes = initCartes();
             let coupsTours = new Array();
-            let uneRoom = new Map(["nom", room], ["listeJoueurs", joueursDansRoom], ["listeSocks", socksDansRoom], ["scoresJoueurs", scoresJoueurs], ["cartes", lesCartes], ["coupsTour" , coupsTours]);
+            let uneRoom = [];
+            uneRoom["nom"] = room;
+            uneRoom["listeJoueurs"] = joueursDansRoom;
+            uneRoom["listeSocks"] = socksDansRoom;
+            uneRoom["scoresJoueurs"] = scoresJoueurs;
+            uneRoom["cartes"] = lesCartes;
+            uneRoom["coupsTour"] = coupsTours;
             listeRoom[room] = uneRoom;
             let sockJ1 = listeRoom[room]["listeSocks"][0];
             sockJ1.join(room);
