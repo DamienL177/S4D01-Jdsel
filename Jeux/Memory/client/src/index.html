@@ -9,7 +9,7 @@
             const paramsURL = new URLSearchParams(valeursURL);
             var idJoueur;
             if(paramsURL.has('idpartie')){
-                const idPartie = paramsURL.get('idpartie');
+                var idPartie = paramsURL.get('idpartie');
             }
             if(paramsURL.has('idjoueur')){
                 idJoueur = paramsURL.get('idjoueur');
