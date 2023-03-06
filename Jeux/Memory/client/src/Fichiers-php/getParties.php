@@ -29,7 +29,7 @@
     echo "<exemple>\n";
     while ($row = mysqli_fetch_array($result))
     {
-        echo "<donnee> $row[0] </donnee>\n";
+        echo "<donnee>$row[0]</donnee>\n";
     }
     echo "</exemple>\n";
 ?>
