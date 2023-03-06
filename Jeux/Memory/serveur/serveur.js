@@ -38,7 +38,7 @@ io.on('connection', (sock) => {
             console.log("Premier utilisateur connecté");
         }
         else{
-            console.log(room);
+            console.log(listeRoom[room]);
             if(listeRoom[room]["socksDansRoom"].length < 2){
                 listeRoom[room]["joueursDansRoom"][1] = pseudoJoueur;
                 listeRoom[room]["socksDansRoom"][1] = sock;

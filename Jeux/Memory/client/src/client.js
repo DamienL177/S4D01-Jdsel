@@ -9,7 +9,6 @@ const sock = io();
 
 var room = idPartie;
 //var pseudoJoueur = currentScript.attr('pseudojoueur');
-window.alert(room);
 let leMemory = new Memory();
 let leChoixUn;
 
