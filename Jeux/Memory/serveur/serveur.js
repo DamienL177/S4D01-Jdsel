@@ -71,13 +71,13 @@ io.on('connection', (sock) => {
     })
 
     sock.on("UnCoupJoue", (room, coup) => {
-        //console.log(coup)
+        console.log(coup)
         let i;
         for(i = 0; i < listeRoom[room]['cartes']; i++){
             //console.log(lesCartes[i].getPosition())
             if(listeRoom[room]['cartes'][i].getPosition() == coup){
-                //console.log("OK");
-                lesCartes[i].retournerCarte();
+                console.log("OK");
+                listeRoom[room]["cartes"][i].retournerCarte();
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 listeRoom[room]["coupsTour"].push(coup);
@@ -97,7 +97,7 @@ io.on('connection', (sock) => {
         listeRoom[room]["coupsTour"] = coupsTours;
 
         // Si les cartes ont les mêmes valeurs
-        if(lesCartes[retournerIndexParPosition(coup1)].equals(lesCartes[retournerIndexParPosition(coup2)])){
+        if(listeRoom[room]["cartes"][retournerIndexParPosition(coup1)].equals(listeRoom[room]["cartes"][retournerIndexParPosition(coup2)])){
             // On attend d'avoir retirer les deux cartes du jeu
             retirerCarte(coup1)
             retirerCarte(coup2)
