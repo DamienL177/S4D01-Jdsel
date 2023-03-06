@@ -124,15 +124,19 @@ io.on('connection', (sock) => {
             joueurJouant = listeRoom[room]["listeJoueurs"][indice];
 
             if(indice == 0){
+                let joueur1 = listeRoom[room]["listeSocks"][indice];
                 setTimeout(() => {
-                    listeRoom[room]["listeJoueurs"][0].emit("jouer");
+                    joueur1.emit("jouer");
                 }, 3000) 
-                listeRoom[room]["listeJoueurs"][1].emit("attendre");
+                let joueur2 = listeRoom[room]["listeSocks"][indice];
+                joueur2.emit("attendre");
             }
             else{
-                listeRoom[room]["listeJoueurs"][0].emit("attendre");
+                let joueur1 = listeRoom[room]["listeSocks"][indice];
+                joueur1.emit("attendre");
+                let joueur2 = listeRoom[room]["listeSocks"][indice];
                 setTimeout(() => {
-                    listeRoom[room]["listeJoueurs"][1].emit("jouer");
+                    joueur2.emit("jouer");
                 }, 3000) 
             }  
         }
