@@ -61,7 +61,8 @@ io.on('connection', (sock) => {
                 
                 indice = Math.floor(Math.random() * 2);
         
-                listeRoom[room]["listeSocks"][indice];
+                let joueur = listeRoom[room]["listeSocks"][indice];
+                joueur.emit("jouer");
             }
             
         }
