@@ -8,7 +8,7 @@ const sock = io();
 //let currentScript = document.currentScript;
 
 var room = idPartie;
-var pseudoJoueur = currentScript.attr('pseudojoueur');
+//var pseudoJoueur = currentScript.attr('pseudojoueur');
 
 let leMemory = new Memory();
 let leChoixUn;
