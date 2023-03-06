@@ -58,7 +58,8 @@
                 //une boucle sur chaque element "donnee" trouvé
                 var liste = '<ul>';
                 for (i=0;i<items.length;i++) {
-                    liste += '<li><a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + items.item(i).firstChild.data + '">Joindre cette partie</a></li>';
+                    var strIdPartie = items.item(i).firstChild.data.substr(1);
+                    liste += '<li><a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + strIdPartie + '">Joindre cette partie</a></li>';
                 }
                 liste += '</ul>';
                 document.getElementById("affichageParties").innerHTML=liste;
