@@ -1,11 +1,11 @@
 const Joueur = require('../client/src/nodeClasses/Joueur.mjs');
 const JHumain = require('../client/src/nodeClasses/typeJoueurs/joueurHumain.mjs');
 const tCarte = require('../client/src/nodeClasses/Carte.mjs');
-
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const Carte = require('../client/src/nodeClasses/Carte.mjs');
+const mysql = require('mysql');
 
 const app = express();
 
@@ -45,6 +45,15 @@ io.on('connection', (sock) => {
         }
         else{
             if(listeRoom[room]["listeSocks"].length < 2){
+                let connection = connectionBD();
+                let requete = "UPDATE TABLE Partie SET estCommencee = TRUE WHERE identifiant = '" + room + "';";
+                connection.query(requete, (error, results, fields) => {
+                    if(error){
+                        console.log(console.error(error.message));
+                    }
+                })
+                fermerConnection(connection);
+
                 listeRoom[room]["listeJoueurs"][1] = pseudoJoueur;
                 listeRoom[room]["listeSocks"][1] = sock;
                 sock.join(room);
@@ -145,6 +154,14 @@ io.on('connection', (sock) => {
         else{
             let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
             io.to(room).emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
+            let connection = connectionBD();
+                let requete = "UPDATE TABLE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
+                connection.query(requete, (error, results, fields) => {
+                    if(error){
+                        console.log(console.error(error.message));
+                    }
+                })
+                fermerConnection(connection);
         }
 
               
@@ -289,4 +306,29 @@ function listeJoueursEnString(listeJoueurs){
     retour = JSON.stringify(array);
 
     return retour;
+}
+
+function connectionBD(){
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+      });
+}
+
+function fermerConnection(connection){
+    if (err) {
+        return console.log('error:' + err.message);
+    }
+    //console.log('Close the database connection.');
 }
