@@ -43,11 +43,26 @@ sock.on("finTour", (strListeJoueurs, strListeCartes) => {
 
 sock.on("connect", () => {
     sock.emit("Jconnecte", room, pseudoJoueur);
+    var boutonMessage = document.getElementById("messageButton");
+    boutonMessage.addEventListener("click", () => envoiMessage());
 })
 
 sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
     finPartie(strListeJoueurs, strListeCartes);
 })
+
+sock.on("RetourMessage", (message) =>{
+    var unMessage = document.createElement("p");
+    unMessage.innerText = message;
+    var zoneAffichage = document.getElementById("messageAffichage");
+    zoneAffichage.appendChild(unMessage);
+})
+
+function envoiMessage(){
+    var entree = document.getElementById("messageText").value;
+    sock.emit("EnvoiMessage", room, entree);
+    document.getElementById('messageText').innerText = "";
+}
 
 function finPartie(strListeJoueurs, strListeCartes){
     leMemory.setMesJoueurs([]);

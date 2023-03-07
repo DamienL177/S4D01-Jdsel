@@ -148,10 +148,12 @@ io.on('connection', (sock) => {
             let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
             io.to(room).emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             finPartieBD(room)
-        }
+        }   
 
-              
+    })
 
+    sock.on("EnvoiMessage", (room, message) => {
+        io.to(room).emit("RetourMessage", (message));
     })
 
 })
