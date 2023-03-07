@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Memory</title>
+        <link rel="stylesheet" href="VisuelsPage/Css/jeu.css">
+        <script type="text/javascript">
+            const valeursURL =  window.location.search;
+            const paramsURL = new URLSearchParams(valeursURL);
+            var pseudoJoueur;
+            if(paramsURL.has('idpartie')){
+                var idPartie = paramsURL.get('idpartie');
+            }
+            if(paramsURL.has('pseudojoueur')){
+                pseudoJoueur = paramsURL.get('pseudojoueur');
+            }
+            else{
+                pseudoJoueur = "Anonyme"
+            }
+            
+        </script>
+    </head>
+    <body>
+        <article id="lesScores">
+
+        </article>
+        <section class="partieJeu">
+            <div class="laGrilleJeu">
+                <h4>Les cartes en Jeu</h4>
+                <article class="grilleJeu" id="laGrilleDeJeu">
+
+                </article>
+            </div>
+            <div class="Conversation">
+                <div class="Messages" id="messageAffichage">
+
+                </div>
+                <form>
+                    <input type="text" id="messageText">
+                    <button type="button" id="messageButton">Envoyer</button>
+                </form>
+            </div>
+
+            <!--<section class="afficherCoups">
+                <article>
+                    <h4>Coup 1 :</h4>
+                    <p id="affichageCoup1"></p>
+                </article>
+                <article></article>
+                    <h4>Coup 2 :</h4>
+                    <p id="affichageCoup2"></p>
+                </article>
+            </section>
+            <div class="laGrilleMemoire">
+                <h4>La valeur des cartes connues par la machine</h4>
+                <article class="grilleMemoire" id="grilleMemoire">
+                    
+                </article>
+            </div>-->
+        </section>
+        <article class="partieSaisie" id="interaction">
+            <p class="elementSaisie">Saisissez les coordonnées (AA) de la carte que vous souhaitez jouer</p>
+            <h4 id="affichage" class="elementSaisie"></h4>
+            <input type="text" id="leCoup" class="elementSaisie">
+            <br>
+            <button type="button" id="leBoutonValider" disabled class="elementSaisie">Valider</button>
+        </article>
+        <a href="optionsPartie.html"><button type="button">Retour au formulaire</button></a>
+        
+        <script src='/socket.io/socket.io.js'></script>
+        <script type="text/javascript">
+            var elementScript = document.createElement("script");
+            elementScript.setAttribute("idpartie", idPartie);
+            elementScript.setAttribute("pseudojoueur", pseudoJoueur);
+            elementScript.setAttribute("type", "module");
+            elementScript.setAttribute("src", './client.js');
+            document.body.appendChild(elementScript);
+        </script>
+    </body>
+</html>

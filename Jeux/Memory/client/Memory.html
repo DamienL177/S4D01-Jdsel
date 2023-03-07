@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory</title>
+    <script type="text/javascript">
+        function GetXmlHttpObject() {
+
+            var objXMLHttp = null ;
+            if (window.XMLHttpRequest) { // pour non-IE
+                objXMLHttp = new XMLHttpRequest() ;
+            }
+            else {
+                if (window.ActiveXObject) {
+                    try { // pour IE
+                        objXMLHttp =
+                        new ActiveXObject("Msxml2.XMLHTTP") ;
+                    }
+                    catch (e) {
+                        try { // pour une autre version de IE
+                            objXMLHttp =
+                            new ActiveXObject("Microsoft.XMLHTTP") ;
+                        }
+                        catch (e) {
+                            window.alert("Votre navigateur ne prend pas en charge l'objet XMLHTTPRequest.") ;
+                        }
+                    }
+                }
+            }
+            return objXMLHttp ;
+        }
+
+        function ajax()
+        {
+            var xhr=null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject)
+            {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //on définit l'appel de la fonction au retour serveur
+            xhr.onreadystatechange = function() { alert_ajax(xhr); };
+            //on appelle le fichier php
+            xhr.open("GET", "./src/Fichiers-php/getParties.php", true);
+            xhr.send(null);
+        }
+
+        function alert_ajax(xhr)
+        {
+            if (xhr.readyState==4)
+            {
+                var docXML= xhr.responseXML;
+                var items = docXML.getElementsByTagName("donnee")
+                let unLien;
+                //une boucle sur chaque element "donnee" trouvé
+                var liste = '<ul>';
+                for (i=0;i<items.length;i++) {
+                    unLien = '<a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + items.item(i).firstChild.data + '">Joindre cette partie</a>';
+                    liste += '<li>' + unLien + '</li>';
+                }
+                liste += '</ul>';
+                document.getElementById("affichageParties").innerHTML=liste;
+            }
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <a href="./src/optionsPartie.html"><button>Créer une partie</button></a>
+    <!--<a href="./src/Fichiers-php/joindrePartie.php">Joindre Partie</a>-->
+    <article id="affichageParties"></article>
+    <script type="text/javascript">
+        setInterval(ajax, 500);
+    </script>
+</body>
+</html>
