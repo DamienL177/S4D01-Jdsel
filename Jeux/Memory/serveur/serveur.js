@@ -45,14 +45,7 @@ io.on('connection', (sock) => {
         }
         else{
             if(listeRoom[room]["listeSocks"].length < 2){
-                let connection = connectionBD();
-                let requete = "UPDATE TABLE Partie SET estCommencee = TRUE WHERE identifiant = '" + room + "';";
-                connection.query(requete, (error, results, fields) => {
-                    if(error){
-                        console.log(console.error(error.message));
-                    }
-                })
-                fermerConnection(connection);
+                debutPartieBD(room);
 
                 listeRoom[room]["listeJoueurs"][1] = pseudoJoueur;
                 listeRoom[room]["listeSocks"][1] = sock;
@@ -154,14 +147,7 @@ io.on('connection', (sock) => {
         else{
             let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
             io.to(room).emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
-            let connection = connectionBD();
-                let requete = "UPDATE TABLE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
-                connection.query(requete, (error, results, fields) => {
-                    if(error){
-                        console.log(console.error(error.message));
-                    }
-                })
-                fermerConnection(connection);
+            finPartieBD(room)
         }
 
               
@@ -308,7 +294,7 @@ function listeJoueursEnString(listeJoueurs){
     return retour;
 }
 
-function connectionBD(){
+function debutPartieBD(room){
     let connection = mysql.createConnection({
         host: 'localhost',
         user: 'Grp4',
@@ -323,12 +309,54 @@ function connectionBD(){
         }
       
         return connection;
-      });
+    });
+
+    let requete = "UPDATE TABLE Partie SET estCommencee = TRUE WHERE identifiant = '" + room + "';";
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
 }
 
-function fermerConnection(connection){
-    if (err) {
-        return console.log('error:' + err.message);
-    }
-    //console.log('Close the database connection.');
+function finPartieBD(room){
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+
+    let requete = "UPDATE TABLE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
 }
+
