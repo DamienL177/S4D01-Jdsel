@@ -311,7 +311,7 @@ function debutPartieBD(room){
         return connection;
     });
 
-    let requete = "UPDATE TABLE Partie SET estCommencee = TRUE WHERE identifiant = '" + room + "';";
+    let requete = "UPDATE Partie SET estCommencee = TRUE WHERE identifiant = '" + room + "';";
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
@@ -344,7 +344,7 @@ function finPartieBD(room){
         return connection;
     });
 
-    let requete = "UPDATE TABLE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
+    let requete = "UPDATE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
