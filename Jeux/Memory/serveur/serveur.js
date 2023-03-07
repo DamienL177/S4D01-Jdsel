@@ -123,6 +123,8 @@ io.on('connection', (sock) => {
 
         if(listeRoom[room]["cartes"].length > 0){
             let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
+            lesJoueurs[0].setScore(listeRoom[room]["scoresJoueurs"][0])
+            lesJoueurs[1].setScore(listeRoom[room]["scoresJoueurs"][1])
             io.to(room).emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             
             joueurJouant = listeRoom[room]["listeJoueurs"][listeRoom[room]["indice"]];
