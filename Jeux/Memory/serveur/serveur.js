@@ -449,11 +449,28 @@ function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
 async function creerIdentifiantMessage(){
     let alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     let tableau = alphabet.split('');
-    var idOk = false;
+    var idOk;
     let identifiant;
     let index;
     let enCours = false;
-    let requete;
+
+    while(!idOk){
+        enCours = true;
+        identifiant = '';
+        for(var i = 0; i < 6; i++){
+            index = Math.floor(Math.random() * tableau.length);
+            identifiant += tableau[index];
+        }
+        
+        idOk = await verifierIdentifiant(identifiant);
+        
+    }
+
+    return identifiant;
+}
+
+async function verifierIdentifiant(identifiant){
+    let idOk = false;
 
     let connection = mysql.createConnection({
         host: 'localhost',
@@ -471,30 +488,16 @@ async function creerIdentifiantMessage(){
         return connection;
     });
 
-    while(!idOk){
-        if(!enCours){
-            enCours = true;
-            identifiant = '';
-            for(var i = 0; i < 6; i++){
-                index = Math.floor(Math.random() * tableau.length);
-                identifiant += tableau[index];
-            }
-            requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
+    requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
         }
-        connection.query(requete, (error, results, fields) => {
-            if(error){
-                console.log(console.error(error.message));
-            }
-            if(results[0]['COUNT(*)'] == 0){
-                idOk = true;
-            }
-            else{
-                enCours = false;
-            }
-        })
-    }
+        if(results[0]['COUNT(*)'] == 0){
+            idOk = true;
+        }
+    })
 
-    
     connection.end(function(err) {
         if (err) {
             return console.log('error:' + err.message);
@@ -502,5 +505,6 @@ async function creerIdentifiantMessage(){
         //console.log('Close the database connection.');
     });
 
-    return identifiant;
+    return Promise.resolve(idOk);
+
 }
