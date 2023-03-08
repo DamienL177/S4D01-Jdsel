@@ -395,6 +395,7 @@ function getIdFromPseudo(pseudo){
         }
 
         identifiant = results;
+        console.log(identifiant);
     })
 
     
@@ -430,7 +431,7 @@ function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
         return connection;
     });
     contenu = contenu.replace("'", "''");
-    let requete = "INSERT INTO Message VALUES('" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "');";
+    let requete = "INSERT INTO Message VALUES(NULL, '" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "');";
     //console.log(requete);
     connection.query(requete, (error, results, fields) => {
         if(error){
