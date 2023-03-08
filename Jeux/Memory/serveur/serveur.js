@@ -489,10 +489,15 @@ async function verifierIdentifiant(identifiant){
     });
 
     requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
-    results = connection.promise().query(requete);
-    if(results[0] == 0){
-        idOk = true;
-    }
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+        if(results == 0){
+            idOk = true;
+            
+        }
+    })
 
     connection.end(function(err) {
         if (err) {
