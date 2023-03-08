@@ -430,8 +430,8 @@ function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
         return connection;
     });
     contenu = contenu.replace("'", "''");
-    let requete = "INSERT INTO Message VALUES('" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "';";
-    console.log(requete);
+    let requete = "INSERT INTO Message VALUES('" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "');";
+    //console.log(requete);
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
