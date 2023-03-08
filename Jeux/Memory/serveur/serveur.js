@@ -354,7 +354,7 @@ function finPartieBD(room){
         return connection;
     });
 
-    let requete = "UPDATE Message SET estFini = TRUE WHERE identifiant = '" + room + "';";
+    let requete = "UPDATE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
@@ -389,12 +389,13 @@ function getIdFromPseudo(pseudo){
     });
 
     let requete = "SELECT identifiant FROM Joueur WHERE pseudonyme = '" + pseudo + "';";
+    console.log(requete);
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
         }
 
-        identifiant = results;
+        identifiant = results[0].identifiant;
         console.log(identifiant);
     })
 
