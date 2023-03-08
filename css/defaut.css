@@ -5,6 +5,10 @@
     font-family: monospace;
 }
 
+html, body {
+    height: 100%;
+}
+
 h1 {
     font-size: 48px;
 }
