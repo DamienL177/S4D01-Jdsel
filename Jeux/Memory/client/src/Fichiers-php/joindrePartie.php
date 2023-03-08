@@ -24,7 +24,7 @@
             }
 
             //on lance la requete
-            $query = "SELECT pseudonyme FROM $nomtable WHERE identifiant = $idJoueur";
+            $query = "SELECT pseudonyme FROM $nomtable WHERE identifiant = '$idJoueur'";
             $result = mysqli_query($link,$query);
 
             mysqli_close($link);
