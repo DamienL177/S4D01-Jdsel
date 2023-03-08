@@ -154,8 +154,13 @@ io.on('connection', (sock) => {
 
     })
 
-    sock.on("EnvoiMessage", (room, message) => {
-        io.to(room).emit("RetourMessage", (message));
+    sock.on("EnvoiMessage", (room, message, pseudo) => {
+        io.to(room).emit("RetourMessage", (message, pseudo));
+        var idJEnvoi = getIdFromPseudo(pseudo);
+        var index = listeRoom[room]["listeJoueurs"].indexOf(pseudo);
+        index = (index + 1) % 2;
+        var idJRetour = getIdFromPseudo(listeRoom[room]["listeJoueurs"][index]);
+        messageDansBD(message, idJEnvoi, idJRetour, room);
     })
 
 })
@@ -348,7 +353,7 @@ function finPartieBD(room){
         return connection;
     });
 
-    let requete = "UPDATE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
+    let requete = "UPDATE Message SET estFini = TRUE WHERE identifiant = '" + room + "';";
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
@@ -364,3 +369,135 @@ function finPartieBD(room){
     });
 }
 
+function getIdFromPseudo(pseudo){
+    let identifiant;
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+
+    let requete = "SELECT identifiant FROM Joueur WHERE pseudonyme = '" + pseudo + "';";
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+
+        identifiant = results;
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
+}
+
+function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
+    let identifiant = creerIdentifiantMessage();
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+
+    let requete = "INSERT INTO Message VALUES('" + identifiant + "','" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "';";
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
+}
+
+async function creerIdentifiantMessage(){
+    let alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    let tableau = alphabet.split('');
+    var idOk = false;
+    let identifiant;
+    let index;
+    let enCours = false;
+
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+
+    while(!idOk){
+        if(!enCours){
+            enCours = true;
+            identifiant = '';
+            for(var i = 0; i < 6; i++){
+                index = Math.floor(Math.random() * tableau.length);
+                identifiant += tableau[index];
+            }
+            let requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
+        }
+        connection.query(requete, (error, results, fields) => {
+            if(error){
+                console.log(console.error(error.message));
+            }
+            if(results[0]['COUNT(*)'] == 0){
+                idOk = true;
+            }
+            else{
+                enCours = false;
+            }
+        })
+    }
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
+
+    return identifiant;
+}
