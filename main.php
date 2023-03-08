@@ -43,10 +43,13 @@
                     print "</article>";
                 }
                 mysqli_close($link);
-                session_start();
-                echo isset($_SESSION['idPlayer']);
             ?>
         </section>
+        <?php
+            
+            session_start();
+            print isset($_SESSION['idPlayer']);
+        ?>
     </main>
     <footer>
     </footer>
