@@ -155,6 +155,7 @@ io.on('connection', (sock) => {
     })
 
     sock.on("EnvoiMessage", (room, message, pseudo) => {
+        console.log(message);
         io.to(room).emit("RetourMessage", (message, pseudo));
         var idJEnvoi = getIdFromPseudo(pseudo);
         var index = listeRoom[room]["indice"];
@@ -408,7 +409,6 @@ function getIdFromPseudo(pseudo){
 }
 
 function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
-    let identifiant = creerIdentifiantMessage();
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -429,8 +429,8 @@ function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
       
         return connection;
     });
-
-    let requete = "INSERT INTO Message VALUES('" + identifiant + "','" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "';";
+    contenu = contenu.replace("'", "''");
+    let requete = "INSERT INTO Message VALUES('" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "';";
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
@@ -446,66 +446,3 @@ function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
     });
 }
 
-async function creerIdentifiantMessage(){
-    let alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    let tableau = alphabet.split('');
-    var idOk;
-    let identifiant;
-    let index;
-    let enCours = false;
-
-    while(!idOk){
-        enCours = true;
-        identifiant = '';
-        for(var i = 0; i < 6; i++){
-            index = Math.floor(Math.random() * tableau.length);
-            identifiant += tableau[index];
-        }
-        
-        idOk = await verifierIdentifiant(identifiant);
-        
-    }
-
-    return identifiant;
-}
-
-async function verifierIdentifiant(identifiant){
-    let idOk = false;
-
-    let connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'Grp4',
-        password: 'u=5#5^xvcGEoKdq0>E',
-        database: 'Jdsel'
-    });
-
-    connection.connect(function(err) {
-        if (err) {
-          window.alert("Problème de connection à la Base de Données");
-          throw(err);
-        }
-      
-        return connection;
-    });
-
-    requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
-    connection.query(requete, (error, results, fields) => {
-        if(error){
-            console.log(console.error(error.message));
-        }
-        if(results == 0){
-            idOk = true;
-            
-        }
-    })
-
-    connection.end(function(err) {
-        if (err) {
-            return console.log('error:' + err.message);
-        }
-        //console.log('Close the database connection.');
-    });
-
-    return Promise.resolve(idOk);
-
-}
