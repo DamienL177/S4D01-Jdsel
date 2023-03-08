@@ -35,8 +35,8 @@
             $url = $url . "&pseudojoueur=" . $pseudoJoueur;
         }
 
-
-        header("Location: $url");
+        echo $url;
+        //header("Location: $url");
     }
     else{
         header("Location: ../../Memory.html");
