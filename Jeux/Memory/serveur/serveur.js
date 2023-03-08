@@ -451,6 +451,7 @@ async function creerIdentifiantMessage(){
     let identifiant;
     let index;
     let enCours = false;
+    let requete;
 
     let connection = mysql.createConnection({
         host: 'localhost',
@@ -476,7 +477,7 @@ async function creerIdentifiantMessage(){
                 index = Math.floor(Math.random() * tableau.length);
                 identifiant += tableau[index];
             }
-            let requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
+            requete = "SELECT COUNT(*) FROM Message WHERE identifiant = '"+identifiant+"';";
         }
         connection.query(requete, (error, results, fields) => {
             if(error){
