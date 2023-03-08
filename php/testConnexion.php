@@ -30,14 +30,11 @@
                 echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
                 throw new Exception();
             }
-    
-            // On ferme le lien avec la BD
-            mysqli_close($link);
             
             // Si on obtient le résultat souhaité
             if(password_verify($motDePasse, $row['mdp'])){
 
-                $query = "SELECT identifiant AS Id FROM $nomtable WHERE pseudonyme = '$pseudonyme' AND mdp = '$motDePasse'";
+                $query = "SELECT identifiant AS Id FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
                 $result= mysqli_query($link, $query);
                 $row = mysqli_fetch_array($result);
 
