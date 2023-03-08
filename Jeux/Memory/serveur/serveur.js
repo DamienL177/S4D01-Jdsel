@@ -157,7 +157,7 @@ io.on('connection', (sock) => {
     sock.on("EnvoiMessage", (room, message, pseudo) => {
         io.to(room).emit("RetourMessage", (message, pseudo));
         var idJEnvoi = getIdFromPseudo(pseudo);
-        var index = listeRoom[room]["listeJoueurs"].indexOf(pseudo);
+        var index = listeRoom[room]["indice"];
         index = (index + 1) % 2;
         var idJRetour = getIdFromPseudo(listeRoom[room]["listeJoueurs"][index]);
         messageDansBD(message, idJEnvoi, idJRetour, room);
@@ -403,6 +403,8 @@ function getIdFromPseudo(pseudo){
         }
         //console.log('Close the database connection.');
     });
+
+    return identifiant;
 }
 
 function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
