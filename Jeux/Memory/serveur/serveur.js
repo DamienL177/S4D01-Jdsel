@@ -155,7 +155,7 @@ io.on('connection', (sock) => {
     })
 
     sock.on("EnvoiMessage", (room, message, pseudo) => {
-        console.log(message);
+        console.log(pseudo);
         io.to(room).emit("RetourMessage", (message, pseudo));
         var idJEnvoi = getIdFromPseudo(pseudo);
         var index = listeRoom[room]["indice"];
@@ -431,6 +431,7 @@ function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
     });
     contenu = contenu.replace("'", "''");
     let requete = "INSERT INTO Message VALUES('" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "';";
+    console.log(requete);
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));
