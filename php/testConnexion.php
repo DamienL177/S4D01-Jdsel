@@ -52,7 +52,7 @@
                 $_SESSION['idPlayer'] = $id;
 
                 // On continue dans le site
-                header("Location: ../main.html");
+                header("Location: ../main.php");
             }
             // Sinon
             else{

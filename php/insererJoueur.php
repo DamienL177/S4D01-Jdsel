@@ -74,11 +74,13 @@
                         
                         // Si l'insertion est réussie on continue
                         if($result == true){
-                            header("Location: ../main.html");
+                            header("Location: ../main.php");
                             // On lance l'envoi d'un mail
                             $_POST['leMail'] = $mail;
                             $_POST['pseudo'] = $pseudonyme;
                             require("mailCreaCompte.php");
+                            session_start();
+                            $_SESSION['idPlayer'] = $identifiant;
                         }
                         // Sinon on marque qu'il y a eu un problème
                         else{
