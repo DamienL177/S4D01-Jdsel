@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['idPlayer'])){
+        header('Location: ./index.html');
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -45,11 +53,6 @@
                 mysqli_close($link);
             ?>
         </section>
-        <?php
-            
-            session_start();
-            print isset($_SESSION['idPlayer']);
-        ?>
     </main>
     <footer>
     </footer>
