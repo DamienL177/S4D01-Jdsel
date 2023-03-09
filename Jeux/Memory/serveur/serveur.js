@@ -59,8 +59,8 @@ io.on('connection', (sock) => {
                 listeRoom[room]["scoresJoueurs"][1] = 0;
                 var idJ1;
                 var idJ2;
-                idJ1 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]);
-                idJ2 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][1]);
+                idJ1 = await getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]);
+                idJ2 = await getIdFromPseudo(listeRoom[room]["listeJoueurs"][1]);
                 await new Promise(resolve => {
                     var idInterval = setInterval(() => {
                         if(typeof(idJ1) != "undefined" && typeof(idJ2) != "undefined"){
