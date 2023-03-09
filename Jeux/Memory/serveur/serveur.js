@@ -62,7 +62,7 @@ io.on('connection', (sock) => {
                 idJ1 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]);
                 idJ2 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][1]);
                 var idInterval = setInterval(()=>{
-                    if(idJ1 != undefined && idJ2 != undefined){
+                    if(typeof(idJ1) != "undefined" && typeof(idJ2) != "undefined"){
                         
                         listeRoom[room]["idJoueurs"] = [idJ1, idJ2];
 
@@ -426,7 +426,7 @@ function getIdFromPseudo(pseudo){
     });
 
     var idInterval = setInterval(() => {
-        if(identifiant != undefined){
+        if(typeof(identifiant) != "undefined"){
             clearInterval(idInterval);
             console.log(identifiant);
             return identifiant;
