@@ -64,7 +64,7 @@ io.on('connection', (sock) => {
                 await new Promise(resolve => {
                     var idInterval = setInterval(() => {
                         if(typeof(idJ1) != "undefined" && typeof(idJ2) != "undefined"){
-                            Promise.resolve();
+                            resolve();
                             clearInterval(idInterval);
                         }
                     }, 250)
@@ -431,7 +431,7 @@ async function getIdFromPseudo(pseudo){
     await new Promise(resolve => {
         var idInterval = setInterval(() => {
             if(typeof(identifiant) != "undefined"){
-                Promise.resolve();
+                resolve();
                 clearInterval(idInterval);
             }
         }, 250)
