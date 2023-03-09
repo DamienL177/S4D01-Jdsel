@@ -427,13 +427,6 @@ async function getIdFromPseudo(pseudo){
         //console.log('Close the database connection.');
     });
 
-    var idInterval = setInterval(() => {
-        if(typeof(identifiant) != "undefined"){
-            clearInterval(idInterval);
-            console.log(identifiant);
-            return identifiant;
-        }
-    }, 500);
 
     await new Promise(resolve => {
         var idInterval = setInterval(() => {
