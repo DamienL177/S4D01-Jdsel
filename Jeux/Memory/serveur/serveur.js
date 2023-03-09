@@ -156,7 +156,7 @@ io.on('connection', (sock) => {
     })
 
     sock.on("EnvoiMessage", (room, message, pseudo) => {
-        console.log(pseudo);
+        //console.log(pseudo);
         io.to(room).emit("RetourMessage", (message, pseudo));
         var index;
         if(listeRoom[room]["listeJoueurs"][0] == pseudo){
@@ -415,7 +415,14 @@ function getIdFromPseudo(pseudo){
         //console.log('Close the database connection.');
     });
 
-    return identifiant;
+    var idInterval = setInterval(() => {
+        if(identifiant != undefined){
+            clearInterval(idInterval);
+            console.log(identifiant);
+            return identifiant;
+        }
+    }, 500)
+
 }
 
 function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
