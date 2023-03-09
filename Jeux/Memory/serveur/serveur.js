@@ -57,15 +57,25 @@ io.on('connection', (sock) => {
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
                 listeRoom[room]["scoresJoueurs"][0] = 0;
                 listeRoom[room]["scoresJoueurs"][1] = 0;
-                listeRoom[room]["idJoueurs"] = [getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]), getIdFromPseudo(listeRoom[room]["listeJoueurs"][1])];
+                var idJ1;
+                var idJ2;
+                idJ1 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]);
+                idJ2 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][1]);
+                var idInterval = setInterval(()=>{
+                    if(idJ1 != undefined && idJ2 != undefined){
+                        
+                        listeRoom[room]["idJoueurs"] = [idJ1, idJ2];
 
-                io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
+                        io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
+                        
+                        indice = Math.floor(Math.random() * 2);
+                        listeRoom[room]["indice"] = indice;
                 
-                indice = Math.floor(Math.random() * 2);
-                listeRoom[room]["indice"] = indice;
-        
-                let joueur = listeRoom[room]["listeSocks"][indice];
-                joueur.emit("jouer");
+                        let joueur = listeRoom[room]["listeSocks"][indice];
+                        joueur.emit("jouer");
+                        clearInterval(idInterval);
+                    }
+                }, 250);
             }
             
         }
