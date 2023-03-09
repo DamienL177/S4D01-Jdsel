@@ -22,7 +22,7 @@ let listeRoom = {};
 
 io.on('connection', (sock) => {
     
-    sock.on("Jconnecte", (room, pseudoJoueur) => {
+    sock.on("Jconnecte", async (room, pseudoJoueur) => {
         if(!(room in listeRoom)){
             let nomRoom = room;
             let joueursDansRoom = [pseudoJoueur];
@@ -61,21 +61,23 @@ io.on('connection', (sock) => {
                 var idJ2;
                 idJ1 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]);
                 idJ2 = getIdFromPseudo(listeRoom[room]["listeJoueurs"][1]);
-                var idInterval = setInterval(()=>{
-                    if(typeof(idJ1) != "undefined" && typeof(idJ2) != "undefined"){
-                        
-                        listeRoom[room]["idJoueurs"] = [idJ1, idJ2];
+                await new Promise(resolve => {
+                    var idInterval = setInterval(() => {
+                        if(typeof(idJ1) != "undefined" && typeof(idJ2) != "undefined"){
+                            Promise.resolve();
+                            clearInterval(idInterval);
+                        }
+                    })
+                })
+                listeRoom[room]["idJoueurs"] = [idJ1, idJ2];
 
-                        io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
-                        
-                        indice = Math.floor(Math.random() * 2);
-                        listeRoom[room]["indice"] = indice;
+                io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 
-                        let joueur = listeRoom[room]["listeSocks"][indice];
-                        joueur.emit("jouer");
-                        clearInterval(idInterval);
-                    }
-                }, 250);
+                indice = Math.floor(Math.random() * 2);
+                listeRoom[room]["indice"] = indice;
+        
+                let joueur = listeRoom[room]["listeSocks"][indice];
+                joueur.emit("jouer");
             }
             
         }
@@ -388,7 +390,7 @@ function finPartieBD(room){
 }
 
 
-function getIdFromPseudo(pseudo){
+async function getIdFromPseudo(pseudo){
     let identifiant;
     let connection = mysql.createConnection({
         host: 'localhost',
@@ -431,7 +433,18 @@ function getIdFromPseudo(pseudo){
             console.log(identifiant);
             return identifiant;
         }
-    }, 500)
+    }, 500);
+
+    await new Promise(resolve => {
+        var idInterval = setInterval(() => {
+            if(typeof(identifiant) != "undefined"){
+                Promise.resolve();
+                clearInterval(idInterval);
+            }
+        })
+    })
+
+    return identifiant;
 
 }
 
