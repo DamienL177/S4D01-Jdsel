@@ -49,6 +49,7 @@
                     print " <h3>$nom</h3>";
                     print " <a href='$jeu'><img src ='$minia'/></a>";
                     print "</article>";
+            }
                 }
                 mysqli_close($link);
             ?>

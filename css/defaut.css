@@ -5,8 +5,16 @@
     font-family: monospace;
 }
 
+html, body {
+    height: 100%;
+}
+
 h1 {
     font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
 }
 
 h3 {
@@ -15,6 +23,10 @@ h3 {
 
 input {
     height: 22px;
+}
+
+input, button {
+    font-family: 'Roboto';
 }
 
 
