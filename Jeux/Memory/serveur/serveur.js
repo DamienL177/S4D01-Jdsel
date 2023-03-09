@@ -67,7 +67,7 @@ io.on('connection', (sock) => {
                             Promise.resolve();
                             clearInterval(idInterval);
                         }
-                    })
+                    }, 250)
                 })
                 listeRoom[room]["idJoueurs"] = [idJ1, idJ2];
 
@@ -434,7 +434,7 @@ async function getIdFromPseudo(pseudo){
                 Promise.resolve();
                 clearInterval(idInterval);
             }
-        })
+        }, 250)
     })
 
     return identifiant;
