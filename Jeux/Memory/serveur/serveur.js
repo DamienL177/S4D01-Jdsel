@@ -169,7 +169,8 @@ io.on('connection', (sock) => {
 
     sock.on("EnvoiMessage", (room, message, pseudo) => {
         //console.log(pseudo);
-        io.to(room).emit("RetourMessage", (message, pseudo));
+        let contenu = message;
+        io.to(room).emit("RetourMessage", (contenu, pseudo));
         var index;
         if(listeRoom[room]["listeJoueurs"][0] == pseudo){
             index = 0;
