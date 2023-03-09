@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['idPlayer'])){
+        header('Location: ./index.html');
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -42,6 +50,8 @@
                     print " <a href='$jeu'><img src ='$minia'/></a>";
                     print "</article>";
             }
+                }
+                mysqli_close($link);
             ?>
         </section>
     </main>

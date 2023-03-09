@@ -74,7 +74,7 @@
                         
                         // Si l'insertion est réussie on continue
                         if($result == true){
-                            header("Location: ../main.html");
+                            header("Location: ../main.php");
                             // On lance l'envoi d'un mail
                             $_POST['leMail'] = $mail;
                             $_POST['pseudo'] = $pseudonyme;
