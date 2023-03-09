@@ -158,9 +158,15 @@ io.on('connection', (sock) => {
     sock.on("EnvoiMessage", (room, message, pseudo) => {
         console.log(pseudo);
         io.to(room).emit("RetourMessage", (message, pseudo));
-        var index = listeRoom[room]["listeJoueurs"].indexof(pseudo);
+        var index;
+        if(listeRoom[room]["listeJoueurs"][0] == pseudo){
+            index = 0;
+        }
+        else{
+            index = 1;
+        }
+        var indice = (0 + 1) % 2;
         var idJEnvoi = listeRoom[room]["idJoueurs"][index];
-        var indice = (index + 1) % 2;
         var idJRetour = listeRoom[room]["idJoueurs"][indice];
         messageDansBD(message, idJEnvoi, idJRetour, room);
     })
