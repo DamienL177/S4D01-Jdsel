@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -77,7 +77,6 @@
             throw new Exception();
         }
 
-        
         if(isset($_SESSION['idPlayer'])){
             $idJoueur = $_SESSION['idPlayer'];
             $tableJoueur = "Joueur";
@@ -126,12 +125,12 @@
                 $url = $url . "&pseudojoueur=" . $pseudoJoueur ;
             }
             header("Location: $url");
-            session_start();
+            
             $_SESSION['idPartie'] = $identifiant;
         }
         // Sinon on marque qu'il y a eu un problème
         else{
-            //header('Location: ../formulaireDifficulteBot.html');
+            header('Location: ../formulaireDifficulteBot.html');
             echo "<h4>Probleme lors de l'insertion de la partie dans la base.'</h4>";
         }
 
