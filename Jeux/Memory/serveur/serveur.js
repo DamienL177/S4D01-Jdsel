@@ -372,6 +372,46 @@ function finPartieBD(room){
 }
 
 
+function getIdFromPseudo(pseudo){
+    let identifiant;
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+
+    let requete = "SELECT identifiant FROM Joueur WHERE pseudonyme = '" + pseudo + "';";
+    //console.log(requete);
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+
+        identifiant = results[0].identifiant;
+        //console.log(identifiant);
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
+
+    return identifiant;
+}
+
 function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
