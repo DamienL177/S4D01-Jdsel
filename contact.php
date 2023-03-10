@@ -17,6 +17,7 @@
 </head>
 <body>
     <header>
+        <a href="main.php"  class="nav-a" ><img src="Images/Logojdsel.png"/></a>
         <a href="main.php" class="nav-a"><button><h3>Jeux</h3></button></a>
         <a href="contact.php" class="nav-a" ><button><h3>Contact</h3></button></a>
         <a href="profil.php" class="nav-a"><button><h3>Profil</h3></button></a>
