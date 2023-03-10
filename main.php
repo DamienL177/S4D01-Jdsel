@@ -1,8 +1,5 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['idPlayer'])){
-        header('Location: ./index.html');
-    }
+
 
 ?>
 
@@ -18,7 +15,7 @@
 </head>
 <body>
     <header>
-        <a href="main.php"  class="nav-a" ><img src="Images/Logojdsel"/></a>
+        <a href="main.php"  class="nav-a" ><img src="Images/Logojdsel.png"/></a>
         <a href="#" class="nav-a"><button><h3>Jeux</h3></button></a>
         <a href="#" class="nav-a" ><button><h3>Contact</h3></button></a>
         <a href="#" class="nav-a"><button><h3>Profil</h3></button></a>
