@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vos amis</title>
+</head>
+<body>
+    <header>
+        <a href="https://jdsel.fr/main.php" class="nav-a"><button><h3>Jeux</h3></button></a>
+        <a href="#" class="nav-a" ><button><h3>Contact</h3></button></a>
+        <a href="#" class="nav-a"><button><h3>Profil</h3></button></a>
+        <a href="https://jdsel.fr/php/deconnexion.php"><button><h3>Se déconnecter</h3></button></a>
+    </header>
+    <main>
+        <article>
+            <article id="recherche">
+                <label>Cherchez l'un de vos amis</label>
+                <input type="text" id="saisiePseudo">
+                <button type="button" id="boutonRecherche">Chercher</button>
+            </article>
+        </article>
+        <article><button type="button" id="demandesAmi">Voir mes demandes</button></article>
+        <article id="mesAmis"></article>
+        <article id="partiePrincipale"></article>
+    </main>
+    <script src='/socket.io/socket.io.js' defer></script>
+    <script src='client.js' type="module" defer></script>
+</body>
+</html>
