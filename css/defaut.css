@@ -33,7 +33,8 @@ input, button {
     font-family: 'Roboto';
 }
 
-@media screen and (max-width: 960px)  {
+@media screen and (max-width: 720px)  {
+
     h1 {
         font-size: 60px;
     }
