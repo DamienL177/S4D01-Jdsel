@@ -54,6 +54,7 @@ sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
 sock.on("RetourMessage", (message, pseudo) =>{
     var unDiv = document.createElement("div");
     var unPseudo = document.createElement("h5");
+    unPseudo.innerText = pseudo;
     var unMessage = document.createElement("p");
     unMessage.innerText = message;
     unDiv.appendChild(unPseudo);
