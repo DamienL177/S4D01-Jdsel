@@ -10,7 +10,7 @@
         $niveauMachine = $_POST['lvlMachine'];
 
         // On renvoit vers la page main.html
-        header("Refresh:0.1; url=../index.html");
+        header("Refresh:0.2; url=../index.html");
 
         // On place le niveau de la machine dans une variable locale javascript
         print "<script type='text/javascript'>localStorage.setItem('nivMachine', '$niveauMachine')</script>";
@@ -130,7 +130,7 @@
         }
         // Sinon on marque qu'il y a eu un problème
         else{
-            header('Location: ../formulaireDifficulteBot.html');
+            header('Refresh 0.1; url=../formulaireDifficulteBot.html');
             echo "<h4>Probleme lors de l'insertion de la partie dans la base.'</h4>";
         }
 
