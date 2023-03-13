@@ -1,9 +1,10 @@
 <?php
+    /*
     session_start();
     if(!isset($_SESSION['idPlayer'])){
         header('Location: ./index.html');
     }
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,12 +18,23 @@
 </head>
 <body>
     <header>
-        <a href="main.php"  class="nav-a" ><img src="Images/Logojdsel.png"/></a>
-        <a href="main.php" class="nav-a"><button><h3>Jeux</h3></button></a>
-        <a href="contact.php" class="nav-a" ><button><h3>Contact</h3></button></a>
-        <a href="profil.php" class="nav-a"><button><h3>Profil</h3></button></a>
-        <a href="php/deconnexion.php"><button><h3>Se déconnecter</h3></button></a>
-        <h1>Jeux disponibles</h1>
+        <nav>
+            <ul class="menu">
+                <a href="main.php"   ><img src="Images/Logojdsel.png" class="image"/></a>  
+                <li>
+                    <a href="main.php" class="bouton">Jeux</a>    
+                </li>
+                <li>
+                    <a href="contact.php" class="actif bouton">Contact</a>
+                </li>
+                <li>
+                    <a href="profil.php" class="bouton">Profil</a>
+                </li>
+                <li>
+                    <a href="php/deconnexion.php" class="bouton">Se déconnecter</a>
+                </li>
+            </ul>
+        </nav>
     </header>
 </body>
 </html>
