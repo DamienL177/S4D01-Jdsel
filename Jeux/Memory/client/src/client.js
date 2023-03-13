@@ -52,10 +52,19 @@ sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
 })
 
 sock.on("RetourMessage", (message, pseudo) =>{
+    var unDiv = document.createElement("div");
+    var unPseudo = document.createElement("h5");
+    unPseudo.innerText = pseudo;
     var unMessage = document.createElement("p");
-    unMessage.innerText = pseudo + " a dit " + message;
+    unMessage.innerText = message;
+    unDiv.appendChild(unPseudo);
+    unDiv.appendChild(document.createElement("br"));
+    unDiv.appendChild(unMessage);
+    if(pseudo == pseudoJoueur){
+        unDiv.classList.add(['unMessage', 'messageJoueur']);
+    }
     var zoneAffichage = document.getElementById("messageAffichage");
-    zoneAffichage.appendChild(unMessage);
+    zoneAffichage.appendChild(unDiv);
 })
 
 function envoiMessage(){

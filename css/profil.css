@@ -1,27 +1,3 @@
-header {
-    padding: 2vh;
-    text-align: end;
-}
-
-header > h1 {
-    text-align: left;
-}
-
-#grille-jeux {
-    display: grid;
-    grid-template-columns: repeat(4, 25%);
-    grid-template-rows: 25% auto;
-}
-
-
-section > article {
-    text-align: center;
-}
-
-a > img {
-    width: 250px;
-    height: 200px;
-}
 header{               
     background-color: #ccc;  
 }
@@ -63,18 +39,4 @@ header{
   background-color: blue;
   color: white;
   border-color: blueviolet;
-}
-main {
-    height: 60vh;
-}
-
-@media screen and (max-width: 960px)  {
-    header {
-        text-align: center;
-        display: inline-block;
-    }
-
-    header > h1 {
-        text-align: center;
-    }
 }

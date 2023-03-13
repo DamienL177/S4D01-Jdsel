@@ -147,7 +147,9 @@ sock.on("OuvertureConversation", (nomRoom, messages, pseudoAmi) => {
         unMessage.innerText = messages[i][0];
         unDiv.appendChild(unPseudo);
         unDiv.appendChild(unMessage);
-        unDiv.classList.add('unMessage');
+        if(messages[i][1] == pseudoJoueur){
+            unDiv.classList.add(['unMessage', 'messageJoueur']);
+        }
         premierArticle.appendChild(unDiv);
     }
     var unForm = document.createElement("form");
@@ -186,7 +188,9 @@ sock.on("RetourMessage", (message, pseudo) => {
     unDiv.appendChild(unPseudo);
     unDiv.appendChild(document.createElement("br"));
     unDiv.appendChild(contenu);
-    unDiv.classList.add('unMessage');
+    if(pseudo == pseudoJoueur){
+        unDiv.classList.add(['unMessage', 'messageJoueur']);
+    }
     articleMessage.appendChild(unDiv);
 })
 
