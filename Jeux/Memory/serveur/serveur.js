@@ -22,7 +22,7 @@ let listeRoom = {};
 
 io.on('connection', (sock) => {
     
-    sock.on("Jconnecte", (room, pseudoJoueur) => {
+    sock.on("Jconnecte", async (room, pseudoJoueur) => {
         if(!(room in listeRoom)){
             let nomRoom = room;
             let joueursDansRoom = [pseudoJoueur];
@@ -57,6 +57,19 @@ io.on('connection', (sock) => {
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
                 listeRoom[room]["scoresJoueurs"][0] = 0;
                 listeRoom[room]["scoresJoueurs"][1] = 0;
+                var idJ1;
+                var idJ2;
+                idJ1 = await getIdFromPseudo(listeRoom[room]["listeJoueurs"][0]);
+                idJ2 = await getIdFromPseudo(listeRoom[room]["listeJoueurs"][1]);
+                await new Promise(resolve => {
+                    var idInterval = setInterval(() => {
+                        if(typeof(idJ1) != "undefined" && typeof(idJ2) != "undefined"){
+                            resolve();
+                            clearInterval(idInterval);
+                        }
+                    }, 250)
+                })
+                listeRoom[room]["idJoueurs"] = [idJ1, idJ2];
 
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 
@@ -154,8 +167,21 @@ io.on('connection', (sock) => {
 
     })
 
-    sock.on("EnvoiMessage", (room, message) => {
-        io.to(room).emit("RetourMessage", (message));
+    sock.on("EnvoiMessage", (room, message, pseudo) => {
+        //console.log(pseudo);
+        let contenu = message;
+        io.to(room).emit("RetourMessage", contenu, pseudo);
+        var index;
+        if(listeRoom[room]["listeJoueurs"][0] == pseudo){
+            index = 0;
+        }
+        else{
+            index = 1;
+        }
+        var indice = (0 + 1) % 2;
+        var idJEnvoi = listeRoom[room]["idJoueurs"][index];
+        var idJRetour = listeRoom[room]["idJoueurs"][indice];
+        messageDansBD(message, idJEnvoi, idJRetour, room);
     })
 
 })
@@ -349,6 +375,97 @@ function finPartieBD(room){
     });
 
     let requete = "UPDATE Partie SET estFini = TRUE WHERE identifiant = '" + room + "';";
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
+}
+
+
+async function getIdFromPseudo(pseudo){
+    let identifiant;
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+
+    let requete = "SELECT identifiant FROM Joueur WHERE pseudonyme = '" + pseudo + "';";
+    //console.log(requete);
+    connection.query(requete, (error, results, fields) => {
+        if(error){
+            console.log(console.error(error.message));
+        }
+
+        identifiant = results[0].identifiant;
+        //console.log(identifiant);
+    })
+
+    
+    connection.end(function(err) {
+        if (err) {
+            return console.log('error:' + err.message);
+        }
+        //console.log('Close the database connection.');
+    });
+
+
+    await new Promise(resolve => {
+        var idInterval = setInterval(() => {
+            if(typeof(identifiant) != "undefined"){
+                resolve();
+                clearInterval(idInterval);
+            }
+        }, 250)
+    })
+
+    return identifiant;
+
+}
+
+function messageDansBD(contenu, idJEnvoi, idJRetour, idPartie){
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'Grp4',
+        password: 'u=5#5^xvcGEoKdq0>E',
+        database: 'Jdsel'
+    });
+
+    connection.connect(function(err) {
+        if (err) {
+          window.alert("Problème de connection à la Base de Données");
+          throw(err);
+        }
+      
+        return connection;
+    });
+    contenu = contenu.replace("'", "''");
+    let requete = "INSERT INTO Message VALUES(NULL, '" + contenu + "','" + dateTime + "', FALSE, '" + idJEnvoi + "','" + idJRetour + "','" + idPartie + "');";
+    //console.log(requete);
     connection.query(requete, (error, results, fields) => {
         if(error){
             console.log(console.error(error.message));

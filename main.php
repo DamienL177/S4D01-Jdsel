@@ -19,7 +19,7 @@
 <body>
     <header>
         <a href="#" class="nav-a"><button><h3>Jeux</h3></button></a>
-        <a href="#" class="nav-a" ><button><h3>Contact</h3></button></a>
+        <a href="./Communication/client/communication.php" class="nav-a" ><button><h3>Contact</h3></button></a>
         <a href="#" class="nav-a"><button><h3>Profil</h3></button></a>
         <a href="php/deconnexion.php"><button><h3>Se déconnecter</h3></button></a>
         <h1>Jeux disponibles</h1>
@@ -50,7 +50,7 @@
                     print " <a href='$jeu'><img src ='$minia'/></a>";
                     print "</article>";
             }
-                }
+             
                 mysqli_close($link);
             ?>
         </section>
