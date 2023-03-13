@@ -14,16 +14,16 @@
         <a href="https://jdsel.fr/php/deconnexion.php"><button><h3>Se déconnecter</h3></button></a>
     </header>
     <main>
-        <article>
+        <section id="partieGauche">
             <article id="recherche">
                 <label>Cherchez l'un de vos amis</label>
                 <input type="text" id="saisiePseudo">
                 <button type="button" id="boutonRecherche">Chercher</button>
             </article>
-        </article>
-        <article><button type="button" id="demandesAmi">Voir mes demandes</button></article>
-        <article id="mesAmis"></article>
-        <article id="partiePrincipale"></article>
+            <article id="articleDemandeAmis"><button type="button" id="demandesAmi">Voir mes demandes</button></article>
+            <article id="mesAmis"></article>
+        </section>
+        <section id="partiePrincipale"></section>
     </main>
     <script src='/socket.io/socket.io.js' defer></script>
     <script src='client.js' type="module" defer></script>

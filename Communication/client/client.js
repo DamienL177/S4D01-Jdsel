@@ -57,6 +57,7 @@ sock.on("listeAmis", (listeAmis) => {
             sock.emit("ChoixAmi", pseudoJoueur, lesAmis[indice][1]);
         });
         unDiv.appendChild(unBouton);
+        unDiv.classList.add('unAmi');
         affichage.appendChild(unDiv);
     }
 })
@@ -84,6 +85,7 @@ sock.on("rechercheJoueurs", (listeJoueurs)=>{
         unDiv.appendChild(unPseudo);
         unDiv.appendChild(document.createElement("br"));
         unDiv.appendChild(unBouton);
+        unDiv.classList.add('unJoueur')
         partiePrincipale.appendChild(unDiv)
     }
 })
@@ -121,6 +123,7 @@ sock.on("lesDemandes", (mesDemandes) => {
         unDiv.appendChild(document.createElement("br"));
         unDiv.appendChild(boutonAccepter);
         unDiv.appendChild(boutonRefuser);
+        unDiv.classList.add('uneDemande');
         partiePrincipale.appendChild(unDiv)
     }
 })
@@ -136,7 +139,7 @@ sock.on("OuvertureConversation", (nomRoom, messages, pseudoAmi) => {
     var unDiv;
     var unPseudo;
     var unMessage;
-    for(var i = 0; i < messages.length; i++){
+    for(var i = messages.length; i >= 0; i--){
         unDiv = document.createElement("div");
         unPseudo = document.createElement("h3");
         unPseudo.innerText = messages[i][1];
@@ -144,6 +147,7 @@ sock.on("OuvertureConversation", (nomRoom, messages, pseudoAmi) => {
         unMessage.innerText = messages[i][0];
         unDiv.appendChild(unPseudo);
         unDiv.appendChild(unMessage);
+        unDiv.classList.add('unMessage');
         premierArticle.appendChild(unDiv);
     }
     var unForm = document.createElement("form");
@@ -162,6 +166,7 @@ sock.on("OuvertureConversation", (nomRoom, messages, pseudoAmi) => {
     })    
     unForm.appendChild(unInput);
     unForm.appendChild(unBouton);
+    unForm.classList.add('formSaisieMessages');
     secondArticle.appendChild(unForm);    
     partiePrincipale.appendChild(premierArticle);
     partiePrincipale.appendChild(secondArticle);
@@ -181,6 +186,7 @@ sock.on("RetourMessage", (message, pseudo) => {
     unDiv.appendChild(unPseudo);
     unDiv.appendChild(document.createElement("br"));
     unDiv.appendChild(contenu);
+    unDiv.classList.add('unMessage');
     articleMessage.appendChild(unDiv);
 })
 
