@@ -1,0 +1,186 @@
+body {
+    background: no-repeat linear-gradient(0deg, rgba(143,30,144,1) 0%, rgba(60,69,215,1) 100%, rgba(255,255,255,1) 100%);
+    height: 100%;
+}
+
+header {
+    display: grid;
+    height: 10rem;
+    grid-template-columns: 10rem 10rem auto;
+    grid-template-rows: 100%;
+}
+
+header > h1 {
+    font-size: 64px;
+    padding-bottom: .8rem;
+    align-self: center;
+    color: black;
+    -webkit-text-stroke: 2px white;
+}
+
+h3 {
+    color: rgb(128,48,128);
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+header {
+    display: inline;
+    height: 50%;
+}
+
+form {
+    width: max-content;
+    display: grid;
+    grid-gap: 0.5rem 1rem;
+    margin: auto;
+    border: 3px solid white;
+    padding: 3rem;
+}
+
+
+form > select {
+    width: 91%;
+    height: 50%;
+    align-self: center;
+}
+
+form > h3 {
+    grid-column: 1;
+    color: whitesmoke;
+    padding: 1rem;
+    text-align: end;
+}
+
+form > input {
+    padding-right: 5rem;
+    align-self: center;
+    grid-column: 2;
+    width: 60%;
+}
+
+select {
+    width: 60%;
+}
+
+form > button {
+    grid-column: span 2;
+    margin: auto;
+    width: 50%;
+    height: 200%;
+}
+
+span {
+    text-align: center;
+}
+
+@media screen and (max-width: 720px)  {
+
+    form {
+        width: 80%;
+    }
+
+    form > * {
+        margin-bottom: 1rem;
+    }
+
+    form > button {
+        grid-column: span 2;
+        margin: auto;
+        height: 60px;
+        width: 80%;
+    }
+
+    header {
+        height: 20vh;
+        grid-template-rows: 4rem 6rem auto;
+        grid-template-columns: auto
+    }
+
+    #logo {
+        padding-bottom: 10%;
+        align-self: center;
+        justify-self: end;
+        grid-row: 1;
+        margin: auto;
+    }
+
+    h1 {
+        grid-row: 2;
+        padding-top: 30%;
+        width: 80%;
+        padding-left: 0.8rem;
+        text-align: center;
+
+    }
+
+    main > h2 {
+        width: fit-content;
+    }
+
+    main > form {
+        width: 80%;
+        grid-template-columns: max-content;
+        grid-template-rows: auto;
+    }
+
+    main > form > * {
+        margin: auto;
+    }
+
+    a {
+        background-color: transparent;
+        margin: auto;
+    }
+
+    input[name='pseudo'] {
+        grid-row: 2;
+    }
+
+    input[name='mail'] {
+        grid-row: 4;
+    }
+
+    select[name='anneeNaiss'] {
+        grid-row: 6;
+        height: 150%;
+    }
+
+    input[name='mdp'] {
+        grid-row: 8;
+    }
+
+    input[name='mdpVerif'] {
+        grid-row: 10;
+    }
+
+    form > button {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        width: 50%;
+    }
+
+    form > input {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    #ps {
+        grid-row: 1;
+    }
+
+    #em {
+        grid-row: 3;
+    }
+
+    #na {
+        grid-row: 5;
+    }
+
+}
