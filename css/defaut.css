@@ -6,7 +6,7 @@
 }
 
 html, body {
-    height: 100%;
+    /*height: 100%;*/
 }
 
 h1 {
@@ -33,8 +33,8 @@ input, button {
     font-family: 'Roboto';
 }
 
+@media screen and (max-width: 720px)  {
 
-@media screen and (max-width: 960px)  {
     h1 {
         font-size: 60px;
     }
