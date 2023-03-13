@@ -63,6 +63,9 @@ sock.on("RetourMessage", (message, pseudo) =>{
     if(pseudo == pseudoJoueur){
         unDiv.classList.add(['unMessage', 'messageJoueur']);
     }
+    else{
+        unDiv.classList.add('unMessage');
+    }
     var zoneAffichage = document.getElementById("messageAffichage");
     zoneAffichage.appendChild(unDiv);
 })
