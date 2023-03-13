@@ -79,6 +79,8 @@
                             $_POST['leMail'] = $mail;
                             $_POST['pseudo'] = $pseudonyme;
                             require("mailCreaCompte.php");
+                            session_start();
+                            $_SESSION['idPlayer'] = $identifiant;
                         }
                         // Sinon on marque qu'il y a eu un problème
                         else{

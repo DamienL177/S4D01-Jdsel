@@ -51,16 +51,16 @@ sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
     finPartie(strListeJoueurs, strListeCartes);
 })
 
-sock.on("RetourMessage", (message) =>{
+sock.on("RetourMessage", (message, pseudo) =>{
     var unMessage = document.createElement("p");
-    unMessage.innerText = message;
+    unMessage.innerText = pseudo + " a dit " + message;
     var zoneAffichage = document.getElementById("messageAffichage");
     zoneAffichage.appendChild(unMessage);
 })
 
 function envoiMessage(){
     var entree = document.getElementById("messageText").value;
-    sock.emit("EnvoiMessage", room, entree);
+    sock.emit("EnvoiMessage", room, entree, pseudoJoueur);
     document.getElementById('messageText').innerText = "";
 }
 

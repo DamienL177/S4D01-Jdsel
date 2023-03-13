@@ -33,8 +33,6 @@
             
             // Si on obtient le résultat souhaité
             if(password_verify($motDePasse, $row['mdp'])){
-                // On continue dans le site
-                header("Location: ../main.php");
 
                 $query = "SELECT identifiant AS Id FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
                 $result= mysqli_query($link, $query);
@@ -49,6 +47,9 @@
 
                 session_start();
                 $_SESSION['idPlayer'] = $id;
+
+                // On continue dans le site
+                header("Location: ../main.php");
             }
             // Sinon
             else{

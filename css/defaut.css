@@ -21,6 +21,10 @@ h3 {
     font-size: 24px;
 }
 
+h1, h2, h3, span, a{
+    color: whitesmoke;
+}
+
 input {
     height: 22px;
 }
