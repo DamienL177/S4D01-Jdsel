@@ -152,3 +152,41 @@ button {
     text-align: right;
 }
 
+@media screen and (max-width: 720px) {
+   
+    .partiePrincipale{
+        grid-template-rows: auto auto;
+        grid-template-columns: auto;
+        grid-auto-flow: row;
+    }
+    
+    #lesScores {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
+    
+    .partieSaisie {
+        margin-top: 2.5%;
+        margin-bottom: 5px;
+    }
+    
+    .elementSaisie {
+        margin: 5px;
+    }
+    
+    .Conversation {
+        margin-top: 10%;
+        margin-bottom: 10%; 
+        align-items: center;
+    }
+    
+    .messageAffichage {
+        margin-right: 10%;
+        margin-left: 10%;
+        height: 250px;
+        width: 80%;
+        border: 1px solid black;
+        overflow-y: scroll;
+    }
+    
+}
