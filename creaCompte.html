@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="css/defaut.css">
     <link rel="stylesheet" href="css/creaCompte.css">
     <title>Jdsel - Créer Compte</title>
+    <script type="text/javascript">
+        const valeursURL =  window.location.search;
+        const paramsURL = new URLSearchParams(valeursURL);
+        if(paramsURL.has('creation')){
+            alert("Un problème est apparu lors de la création dans la BD");
+        }
+        if(paramsURL.has('champVide')){
+            alert("Merci de remplir tous les champs");
+        }
+        if(paramsURL.has('pseudoUtilise')){
+            alert("Ce pseudonyme est déjà utilisé");
+        }
+        if(paramsURL.has('mdpDifferent')){
+            alert("Vous n'avez pas saisi deux fois le même mot de passe");
+        }
+
+    </script>
 </head>
 <body>
     <header>
