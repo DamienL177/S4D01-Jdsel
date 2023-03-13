@@ -1,0 +1,154 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    margin-top: 2.5%;
+    text-align: center;
+}
+
+button {
+    padding: 5px;
+}
+
+.partiePrincipale{
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-auto-flow: column;
+    align-items: center;
+}
+
+.partieJeu {
+    width: 304px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.laGrilleJeu {
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 304px;
+}
+
+.laGrilleJeu > div {
+    width: 304px;
+}
+
+.grilleJeu {
+    margin-top: 5px;
+    display: grid;
+    width : 300px;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px;
+    grid-template-rows: 75px 75px 75px 75px 75px 75px;
+    border: 2px solid black;
+}
+
+.unA {
+    grid-row: 1;
+}
+
+.unB {
+    grid-row: 2;
+}
+
+.unC {
+    grid-row: 3;
+}
+
+.unD {
+    grid-row: 4;
+}
+
+.unE {
+    grid-row: 5;
+}
+
+.unF {
+    grid-row: 6;
+}
+
+.deuxA {
+    grid-column: 1;
+}
+
+.deuxB {
+    grid-column: 2;
+}
+
+.deuxC {
+    grid-column: 3;
+}
+
+.deuxD {
+    grid-column: 4;
+}
+
+.deuxE {
+    grid-column: 5;
+}
+
+.deuxF {
+    grid-column: 6;
+}
+
+.carte {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    border: 1px solid black;
+}
+
+.tourne {
+    border: 2px solid blue;
+}
+
+.afficherCoups {
+    margin-right: 20%;
+}
+
+#lesScores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.partieSaisie {
+    margin-top: 2.5%;
+    margin-bottom: 5px;
+}
+
+.elementSaisie {
+    margin: 5px;
+}
+
+.Conversation {
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+
+.messageAffichage {
+    margin-right: 10%;
+    margin-left: 10%;
+    height: 500px;
+    width: 65%;
+    border: 1px solid black;
+    overflow-y: scroll;
+}
+
+.unMessage {
+    text-align: left;
+}
+
+.unMessage > br {
+    height: 1px;
+}
+
+.messageJoueur {
+    text-align: right;
+}
+
