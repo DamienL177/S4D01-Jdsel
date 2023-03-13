@@ -74,7 +74,7 @@
                         
                         // Si l'insertion est réussie on continue
                         if($result == true){
-                            header("Location: ../main.php");
+                            header("Refresh 0.1; url=../main.php");
                             // On lance l'envoi d'un mail
                             $_POST['leMail'] = $mail;
                             $_POST['pseudo'] = $pseudonyme;
@@ -84,12 +84,12 @@
                         }
                         // Sinon on marque qu'il y a eu un problème
                         else{
-                            header('Location: ../creaCompte.html');
+                            header('Refresh 0.1; url=../creaCompte.html');
                             echo "<h4>Probleme lors de la creation de compte.</h4>";
                         }
                     }
                     else{
-                        header('Location: ../creaCompte.html');
+                        header('Refresh 0.1; url=../creaCompte.html');
                         echo "<h4>Un compte utilise déjà ce pseudonyme</h4>";
                     }
                 
@@ -100,18 +100,18 @@
                 }
             }
             else {
-                header('Location: ../creaCompte.html');
+                header('Refresh 0.1; url=../creaCompte.html');
                 echo "<h4>Vous n'avez pas saisi deux fois le même mot de passe</h4>";
             }
         }
         else {
-            header('Location: ../creaCompte.html');
+            header('Refresh 0.1; url=../creaCompte.html');
             echo "<h4>Merci de remplir tous les champs</h4>";
         }
 
     }
     else {
-        header('Location: ../creaCompte.html');
+        header('Refresh 0.1; url=../creaCompte.html');
         echo "<h4>Merci de remplir tous les champs</h4>";
     }
 

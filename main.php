@@ -1,9 +1,9 @@
 <?php
-    session_start();
+    /*session_start();
     if(!isset($_SESSION['idPlayer'])){
         header('Location: ./index.html');
     }
-
+*/
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +18,26 @@
 </head>
 <body>
     <header>
-        <a href="#" class="nav-a"><button><h3>Jeux</h3></button></a>
-        <a href="./Communication/client/communication.php" class="nav-a" ><button><h3>Contact</h3></button></a>
-        <a href="#" class="nav-a"><button><h3>Profil</h3></button></a>
-        <a href="php/deconnexion.php"><button><h3>Se déconnecter</h3></button></a>
-        <h1>Jeux disponibles</h1>
+    <nav>
+            <ul class="menu">
+                <a href="main.php"   ><img src="Images/Logojdsel.png" class="image"/></a>  
+                <li>
+                    <a href="main.php" class="actif bouton">Jeux</a>    
+                </li>
+                <li>
+                    <a href="contact.php" class="bouton">Contact</a>
+                </li>
+                <li>
+                    <a href="profil.php" class="bouton">Profil</a>
+                </li>
+                <li>
+                    <a href="php/deconnexion.php" class="bouton">Se déconnecter</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <main>
+        <h1>Jeux disponibles</h1>
         <section id="grille-jeux">
             <?php
                 // On définit les variables nécessaires au lien avec la BD
@@ -49,8 +62,7 @@
                     print " <h3>$nom</h3>";
                     print " <a href='$jeu'><img src ='$minia'/></a>";
                     print "</article>";
-            }
-             
+                }
                 mysqli_close($link);
             ?>
         </section>

@@ -41,6 +41,7 @@ input, button {
 }
 
 @media screen and (max-width: 720px)  {
+
     h1 {
         font-size: 48px;
     }
