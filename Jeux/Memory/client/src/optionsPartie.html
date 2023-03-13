@@ -86,6 +86,12 @@
                 localStorage.setItem("PseudoJ2", input2.value);
 
             }
+
+            const valeursURL =  window.location.search;
+            const paramsURL = new URLSearchParams(valeursURL);
+            if(paramsURL.has('insertion')){
+                alert("Un problème est apparu lors de l'insertion dans la BD");
+            }
         </script>
     </head>
     <body>

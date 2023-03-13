@@ -54,8 +54,7 @@
             // Sinon
             else{
                 // On retourne au formulaire
-                header('Refresh 0.1; url=../index.html');
-                echo "<h4>Le pseudonyme/mot de passe ne correspond pas</h4>";
+                header('Location: ../index.html?error=correspond');
             }
             
             
@@ -66,8 +65,7 @@
     }
     // Sinon on le signale
     else {
-        header('Refresh 0.1; url=../index.html');
-        echo "<h4>Merci de remplir tous les champs</h4>";
+        header('Location: ../index.html?error=champVide');
     }
 
 

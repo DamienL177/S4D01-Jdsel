@@ -84,13 +84,11 @@
                         }
                         // Sinon on marque qu'il y a eu un problème
                         else{
-                            header('Refresh 0.1; url=../creaCompte.html');
-                            echo "<h4>Probleme lors de la creation de compte.</h4>";
+                            header('Location: ../creaCompte.html?error=creation');
                         }
                     }
                     else{
-                        header('Refresh 0.1; url=../creaCompte.html');
-                        echo "<h4>Un compte utilise déjà ce pseudonyme</h4>";
+                        header('Location: ../creaCompte.html?error=pseudoUtilise');
                     }
                 
                     
@@ -100,19 +98,16 @@
                 }
             }
             else {
-                header('Refresh 0.1; url=../creaCompte.html');
-                echo "<h4>Vous n'avez pas saisi deux fois le même mot de passe</h4>";
+                header('Location: ../creaCompte.html?error=mdpDifferent');
             }
         }
         else {
-            header('Refresh 0.1; url=../creaCompte.html');
-            echo "<h4>Merci de remplir tous les champs</h4>";
+            header('Location: ../creaCompte.html?error=champVide');
         }
 
     }
     else {
-        header('Refresh 0.1; url=../creaCompte.html');
-        echo "<h4>Merci de remplir tous les champs</h4>";
+        header('Location: ../creaCompte.html?error=champVide');
     }
 
 
