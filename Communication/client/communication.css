@@ -1,5 +1,4 @@
 html, body {
-    height: 100%;
     background: no-repeat linear-gradient(0deg, rgba(143,30,144,1) 0%, rgba(60,69,215,1) 100%, rgba(255,255,255,1) 100%);
 }
 
@@ -16,6 +15,7 @@ header {
     height: 12rem;
     margin: -20px;
     padding-left: 0.5rem;
+    padding-bottom: 1rem;
 }
 
 
@@ -71,7 +71,7 @@ main {
 
 #partieGauche {
     background-color: lightgrey;
-    width: 80%;
+    width: 64vh;
     margin-left: 10%;
     border: 5px solid black;
     padding-top: 10px;
@@ -110,7 +110,7 @@ main {
 
 #partiePrincipale {
     background-color: lightgrey;
-    width: 70%;
+    width: 56vh;
     margin-left: 15%;
     margin-right: 15%;
     border: 5px solid black;
