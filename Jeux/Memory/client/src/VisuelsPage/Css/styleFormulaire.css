@@ -6,18 +6,20 @@
 
 body {
     text-align: center;
-    margin-top: 45%;
-    height: 80vh;
-    background: linear-gradient(to bottom left, purple, blueviolet, black);
+    margin-top: 17.55%;
+    margin-bottom: 20%;
+    background: no-repeat linear-gradient(0deg, rgba(143,30,144,1) 0%, rgba(60,69,215,1) 100%, rgba(255,255,255,1) 100%);
     color: lightcyan;
+}
+
+h1 {
+    margin-bottom: 2.5%;
 }
 
 article {
     padding: 2.5%;
-}
-
-.bordure {
-    border: 2.5px solid lightcyan;
+    margin-left: 37.5%;
+    margin-right: 37.5%;
 }
 
 form {
@@ -37,43 +39,23 @@ button {
     padding: 5px;
     font-size: medium;
     color: lightcyan;
+    margin-top: 15px;
 }
 
-@media screen and (min-width: 768px)
-{
-    body {
-        margin-top: 15%;
-        height: 70vh;
+@media screen and (max-width: 720px) {
+    html, body {
+        height: 100%;
     }
 
-    article {
-        margin-left: 15%;
-        margin-right: 15%;
-    }
-
-    .bordure {
-        border: 5px solid lightcyan;
+    h1 {
+        padding-top: 30%;
+        padding-bottom: 25%;
     }
 
     form {
-        margin-left: 40%;
-        margin-right: 40%;
-    }
-
-    button {
-        border-radius: 12px;
-        font-size: medium;
-    }
-
-    form > button {
-        height : auto;
-    }
-
-    a > button {
-        width: 10%;
-    }
-
-    h4 {
-        margin-top: 5px;
+        margin-top: 0;   
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 25px;
     }
 }
