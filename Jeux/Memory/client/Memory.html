@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory</title>
+    <link rel="stylesheet" href="src/VisuelsPage/Css/Memory.css">
     <script type="text/javascript">
         function GetXmlHttpObject() {
 
@@ -59,7 +60,7 @@
                 //une boucle sur chaque element "donnee" trouvé
                 var liste = '<ul>';
                 for (i=0;i<items.length;i++) {
-                    unLien = '<a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + items.item(i).firstChild.data + '">Joindre cette partie</a>';
+                    unLien = '<a href="./src/Fichiers-php/joindrePartie.php?idpartie=' + items.item(i).firstChild.data + '"><button type="button" class="boutonLien">Joindre cette partie</button></a>';
                     liste += '<li>' + unLien + '</li>';
                 }
                 liste += '</ul>';
@@ -72,9 +73,20 @@
     </script>
 </head>
 <body>
-    <a href="./src/optionsPartie.html"><button>Créer une partie</button></a>
+    <main>
+        <h1>Memory</h1>
+        <section>
+            <article class="partieGauche">
+                <img src="../Memory.jpg" alt="L'image pour le jeu de Memory">
+                <a href="./src/optionsPartie.html"><button>Créer une partie</button></a>
+            </article>
+            <article class="partieDroite">
+                <h2>Les parties en cours</h2>
+                <article id="affichageParties"></article>
+            </article>
+        </section>
+    </main>
     <!--<a href="./src/Fichiers-php/joindrePartie.php">Joindre Partie</a>-->
-    <article id="affichageParties"></article>
     <script type="text/javascript">
         setInterval(ajax, 500);
     </script>
