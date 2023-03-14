@@ -59,6 +59,7 @@ main {
 
 .unJoueur {
     text-align: center;
+    display: inline;
 }
 
 .uneDemande {
@@ -75,6 +76,8 @@ main {
 
 #messages {
     height: 85%;
+    padding-left: 15%;
+    padding-right: 15%;
     overflow-y: scroll;
 }
 
