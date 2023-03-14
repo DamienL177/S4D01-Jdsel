@@ -52,8 +52,9 @@ main {
 .unAmi > button {
     margin: 0;
     padding: 0;
+    height: 100%;
     width: 100%;
-    border: none;
+    border-radius: 5%;
 }
 
 #partiePrincipale {
