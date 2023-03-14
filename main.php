@@ -3,7 +3,7 @@
     if(!isset($_SESSION['idPlayer'])){
         header('Location: ./index.html');
     }
-*/
+    */
 ?>
 
 <!DOCTYPE html>

@@ -36,7 +36,7 @@ header{
 }
 .bouton,
 .menu a:hover.actif{
-  background-color: blue;
+  background-color: salmon;
   color: white;
   border-color: blueviolet;
 }
