@@ -10,11 +10,14 @@
     <script type="text/javascript">
         const valeursURL =  window.location.search;
         const paramsURL = new URLSearchParams(valeursURL);
-        if(paramsURL.has('correspond')){
-            alert("Le pseudonyme/mot de passe ne correspondent pas");
-        }
-        if(paramsURL.has('champVide')){
-            alert("Merci de remplir tous les champs");
+        if(paramsURL.has('error')){
+            var erreur = paramsURL.get('error')
+            if(erreur == 'correspond'){
+                alert("Le pseudonyme/mot de passe ne correspondent pas");
+            }
+            if(erreur == 'champVide'){
+                alert("Merci de remplir tous les champs");
+            }
         }
     </script>
 </head>

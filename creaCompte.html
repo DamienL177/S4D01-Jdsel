@@ -10,17 +10,20 @@
     <script type="text/javascript">
         const valeursURL =  window.location.search;
         const paramsURL = new URLSearchParams(valeursURL);
-        if(paramsURL.has('creation')){
-            alert("Un problème est apparu lors de la création dans la BD");
-        }
-        if(paramsURL.has('champVide')){
-            alert("Merci de remplir tous les champs");
-        }
-        if(paramsURL.has('pseudoUtilise')){
-            alert("Ce pseudonyme est déjà utilisé");
-        }
-        if(paramsURL.has('mdpDifferent')){
-            alert("Vous n'avez pas saisi deux fois le même mot de passe");
+        if(paramsURL.has('error')){
+            var erreur = paramsURL.get('error')
+            if(erreur == 'creation'){
+                alert("Un problème est apparu lors de la création dans la BD");
+            }
+            if(erreur == 'champVide'){
+                alert("Merci de remplir tous les champs");
+            }
+            if(erreur == 'pseudoUtilise'){
+                alert("Ce pseudonyme est déjà utilisé");
+            }
+            if(erreur == 'mdpDifferent'){
+                alert("Vous n'avez pas saisi deux fois le même mot de passe");
+            }
         }
 
     </script>
