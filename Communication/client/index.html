@@ -10,19 +10,23 @@
 </head>
 <body>
     <header>
-        <a href="https://jdsel.fr/main.php" class="nav-a"><button><h3>Jeux</h3></button></a>
-        <a href="#" class="nav-a" ><button><h3>Contact</h3></button></a>
-        <a href="#" class="nav-a"><button><h3>Profil</h3></button></a>
-        <a href="https://jdsel.fr/php/deconnexion.php"><button><h3>Se déconnecter</h3></button></a>
-    </header>
+        <a href="main.php"><img id="logo" src="https://jdsel.fr/Images/Logojdsel.png"/></a>
+        <ul class="menu">       
+            <li><a href="https://jdsel.fr/main.php"><button>Jeux</button></a></li>
+            <li><a href="Communication/client/communication.php" class="actif"><button>Contact</button></a></li>
+            <li><a href="https://jdsel.fr/profil.php"><button>Profil</button></a></li>
+            <li><a href="https://jdsel.fr/php/deconnexion.php"><button>Se déconnecter</button></a></li>
+        </ul>
+        </header>
     <main>
         <section id="partieGauche">
             <article id="recherche">
                 <label>Cherchez l'un de vos amis</label>
                 <input type="text" id="saisiePseudo">
                 <button type="button" id="boutonRecherche">Chercher</button>
+                <button type="button" id="demandesAmi">Voir mes demandes</button>
             </article>
-            <article id="articleDemandeAmis"><button type="button" id="demandesAmi">Voir mes demandes</button></article>
+            <article id="articleDemandeAmis"></article>
             <article id="mesAmis" class="mesAmis"></article>
         </section>
         <section id="partiePrincipale"></section>
