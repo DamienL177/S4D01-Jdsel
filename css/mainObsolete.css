@@ -1,0 +1,80 @@
+header {
+    padding: 2vh;
+    text-align: end;
+}
+
+header > h1 {
+    text-align: left;
+}
+
+#grille-jeux {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: 25% auto;
+}
+
+
+section > article {
+    text-align: center;
+}
+
+a > img {
+    width: 250px;
+    height: 200px;
+}
+header{               
+    background-color: #ccc;  
+}
+.menu{
+    text-align: center;
+    display: inline;
+    display: flex;              
+    padding:0;                 
+    justify-content: start;
+    align-items: center;
+}
+.image{
+    height: 40%;
+    width: 40%;
+}
+.menu li {
+    list-style-type: none ; 
+}
+.bouton {
+    display:block;                
+    min-width: 150px; 
+
+    margin: 0.5rem;               
+    padding: 10px;           
+    text-align: center;              
+    background-color: blue; 
+    color: #fff;                  
+    text-decoration: none;       
+    border: 1px solid #fff;      
+    border-radius: 4px; 
+}
+.menu a.actif {    
+    background-color: violet ; 
+    color: white ;
+    border-color: blue ;
+}
+.bouton,
+.menu a:hover.actif{
+  background-color: blue;
+  color: white;
+  border-color: blueviolet;
+}
+main {
+    height: 60vh;
+}
+
+@media screen and (max-width: 960px)  {
+    header {
+        text-align: center;
+        display: inline-block;
+    }
+
+    header > h1 {
+        text-align: center;
+    }
+}
