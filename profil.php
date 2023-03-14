@@ -1,17 +1,9 @@
 <?php
-<<<<<<< HEAD
     /* session_start();
-=======
-    /*session_start();
->>>>>>> 4b4969416f5b0b77404bb39ff1d2eead17818257
     if(!isset($_SESSION['idPlayer'])){
         header('Location: ./index.html');
     }
 */
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b4969416f5b0b77404bb39ff1d2eead17818257
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,11 +24,7 @@
                     <a href="main.php" class="bouton">Jeux</a>    
                 </li>
                 <li>
-<<<<<<< HEAD
                     <a href="Communication/client/communication.php" class="bouton">Contact</a>
-=======
-                    <a href="contact.php" class="bouton">Contact</a>
->>>>>>> 4b4969416f5b0b77404bb39ff1d2eead17818257
                 </li>
                 <li>
                     <a href="profil.php" class="actif  bouton">Profil</a>
