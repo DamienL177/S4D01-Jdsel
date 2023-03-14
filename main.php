@@ -14,27 +14,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/defaut.css" />
     <link rel="stylesheet" href="css/main.css" />
-    <title>Jdesl - Accueil</title>
+    <title>Jdsel - Accueil</title>
 </head>
 <body>
     <header>
-    <nav>
-            <ul class="menu">
-                <a href="main.php"   ><img src="Images/Logojdsel.png" class="image"/></a>  
-                <li>
-                    <a href="main.php" class="actif bouton">Jeux</a>    
-                </li>
-                <li>
-                    <a href="contact.php" class="bouton">Contact</a>
-                </li>
-                <li>
-                    <a href="profil.php" class="bouton">Profil</a>
-                </li>
-                <li>
-                    <a href="php/deconnexion.php" class="bouton">Se déconnecter</a>
-                </li>
-            </ul>
-        </nav>
+    <a href="main.php"><img id="logo" src="Images/Logojdsel.png" class="image"/></a>
+    <ul class="menu">       
+        <li><a href="main.php" class="actif"><button>Jeux</button></a></li>
+        <li><a href="Communication/client/communication.php"><button>Contact</button></a></li>
+        <li><a href="profil.php"><button>Profil</button></a></li>
+        <li><a href="php/deconnexion.php"><button>Se déconnecter</button></a></li>
+    </ul>
     </header>
     <main>
         <h1>Jeux disponibles</h1>
