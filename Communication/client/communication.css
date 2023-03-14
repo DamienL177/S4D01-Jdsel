@@ -65,7 +65,7 @@ main {
     text-align: center;
     height: 80vh;
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: fit-content;
     grid-auto-flow: column;
 }
 
@@ -111,8 +111,8 @@ main {
 #partiePrincipale {
     background-color: lightgrey;
     width: 56vh;
-    margin-left: 15%;
-    margin-right: 15%;
+    /*margin-left: 15%;
+    margin-right: 15%;*/
     border: 5px solid black;
     overflow-y: scroll;
 }
