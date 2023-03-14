@@ -1,5 +1,8 @@
-body {
+html, body {
+    height: 100%;
     text-align: center;
+    background: no-repeat linear-gradient(0deg, rgba(143,30,144,1) 0%, rgba(60,69,215,1) 100%, rgba(255,255,255,1) 100%);
+    color: white;
 }
 
 main > h1 {
@@ -9,6 +12,7 @@ main > h1 {
 section {
     display: grid;
     grid-template-columns: 35% 65%;
+    grid-template-rows: 100%;
     grid-auto-flow: column;
 }
 
@@ -30,6 +34,15 @@ section {
 
 #affichageParties {
     overflow-y: scroll;
+    border: 3px solid white;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: 75%;
+    text-align: center;
+}
+
+#affichageParties a {
+    color: white;
 }
 
 @media screen and (max-width: 720px) {
