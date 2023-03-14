@@ -68,7 +68,6 @@ main {
 .unJoueur {
     height: fit-content;
     text-align: center;
-    display: inline;
     border: 2px solid black;
 }
 
