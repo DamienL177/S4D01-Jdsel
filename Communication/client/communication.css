@@ -30,7 +30,7 @@ main {
     grid-auto-flow: row;
 }
 
-#partieGauche button {
+#partieGauche > article > button {
     margin: 10px;
     padding: 10px;
 }
@@ -51,7 +51,6 @@ main {
 
 .unAmi > button {
     margin: 0;
-    margin-left: 0;
     padding: 0;
     height: 100%;
     width: 100%;
@@ -72,7 +71,8 @@ main {
 }
 
 .uneDemande {
-    text-align: left;
+    text-align: center;
+    display: inline;
 }
 
 .unMessage {
