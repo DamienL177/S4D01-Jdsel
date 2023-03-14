@@ -1,0 +1,133 @@
+html, body {
+    height: 100%;
+}
+
+header {
+    height: 15%;
+    padding: 2vh;
+    text-align: end;
+}
+
+header > h1 {
+    text-align: left;
+}
+
+main {
+    text-align: center;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-auto-flow: column;
+}
+
+#partieGauche {
+    width: 80%;
+    margin-left: 10%;
+    border: 5px solid black;
+    padding-top: 10px;
+    display: grid;
+    grid-template-rows: 15% 10% 75%;
+    grid-auto-flow: row;
+}
+
+#partieGauche > article > button {
+    margin: 10px;
+    padding: 10px;
+}
+
+.mesAmis {
+    height: 100%;
+    /*color: white;
+    background-color: darkmagenta;*/
+    overflow-y: scroll;
+}
+
+.unAmi {
+    height: 10%;
+    border: 1px solid black;
+    /*border: 1px solid white;*/
+    border-radius: 5%;
+}
+
+.unAmi > button {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 5%;
+}
+
+#partiePrincipale {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 5px solid black;
+    overflow-y: scroll;
+}
+
+.unJoueur {
+    height: fit-content;
+    text-align: center;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    border: 2px solid black;
+}
+
+.uneDemande {
+    text-align: center;
+    padding: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 2px solid black;
+}
+
+.unMessage {
+    text-align: left;
+}
+
+.messageJoueur {
+    text-align: right;
+}
+
+#messages {
+    height: 85%;
+    padding-left: 15%;
+    padding-right: 15%;
+    overflow-y: scroll;
+}
+
+#saisie {
+    height: 15%;
+}
+
+@media screen and (max-width: 720px) {
+
+    main {
+        height: 100%;
+        grid-template-rows: 75% 75%;
+        grid-template-columns: auto;
+        grid-auto-flow: row;
+    }
+    
+    #partieGauche {
+        margin-bottom: 15px;
+    }
+    
+    #partiePrincipale {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
+    .unJoueur {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+    .uneDemande {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+}
