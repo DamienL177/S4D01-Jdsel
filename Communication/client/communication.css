@@ -50,6 +50,7 @@ main {
 }
 
 .mesAmis > button {
+    margin: 0;
     width: 100%;
 }
 
