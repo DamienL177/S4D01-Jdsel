@@ -76,7 +76,10 @@ main {
 
 .uneDemande {
     text-align: center;
-    display: inline;
+    padding: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 2px solid black;
 }
 
 .unMessage {
@@ -96,4 +99,35 @@ main {
 
 #saisie {
     height: 15%;
+}
+
+@media screen and (max-width: 720px) {
+
+    main {
+        height: 100%;
+        grid-template-rows: 75% 75%;
+        grid-template-columns: auto;
+        grid-auto-flow: row;
+    }
+    
+    #partieGauche {
+        margin-bottom: 15px;
+    }
+    
+    #partiePrincipale {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
+    .unJoueur {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+    .uneDemande {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
 }
