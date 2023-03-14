@@ -189,7 +189,6 @@ sock.on("RetourMessage", (message, pseudo) => {
     contenu = document.createElement("p");
     contenu.innerText = message;
     unDiv.appendChild(unPseudo);
-    unDiv.appendChild(document.createElement("br"));
     unDiv.appendChild(contenu);
     if(pseudo == pseudoJoueur){
         unDiv.classList.add('unMessage', 'messageJoueur');

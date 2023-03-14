@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+}
+
+header {
+    height: 15%;
+    padding: 2vh;
+    text-align: end;
+}
+
+header > h1 {
+    text-align: left;
+}
+
+main {
+    text-align: center;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-auto-flow: column;
+}
+
+#partieGauche {
+    width: 80%;
+    margin-left: 10%;
+    border: 5px solid black;
+    padding-top: 10px;
+    display: grid;
+    grid-template-rows: 15% 10% 75%;
+    grid-auto-flow: row;
+}
+
+#partieGauche button {
+    margin: 10px;
+    padding: 10px;
+}
+
+.mesAmis {
+    height: 100%;
+    /*color: white;
+    background-color: darkmagenta;*/
+    overflow-y: scroll;
+}
+
+.unAmi {
+    height: 10%;
+    border: 1px solid black;
+    /*border: 1px solid white;*/
+    border-radius: 5%;
+}
+
+#partiePrincipale {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 5px solid black;
+    overflow-y: scroll;
+}
+
+.unJoueur {
+    text-align: center;
+}
+
+.uneDemande {
+    text-align: left;
+}
+
+.unMessage {
+    text-align: left;
+}
+
+.messageJoueur {
+    text-align: right;
+}
+
+#messages {
+    height: 85%;
+    overflow-y: scroll;
+}
+
+#saisie {
+    height: 15%;
+}

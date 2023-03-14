@@ -1,7 +1,7 @@
 <?php
     // On vérifie si toutes les variables demandées ont été saisies
     if(isset($_POST['pseudo']) && isset($_POST['mdp'])){
-        if($_POST['pseudo'] != "" && $_POST['mpdp'] != ""){
+        if($_POST['pseudo'] != "" && $_POST['mdp'] != ""){
             try{
                 // On définit les variables nécessaires au lien avec la BD
                 $bdd = "Jdsel";
