@@ -10,45 +10,10 @@
         $niveauMachine = $_POST['lvlMachine'];
 
         // On renvoit vers la page main.html
-        header("Refresh:0.1; url=../index.html");
+        header("Refresh:0.2; url=../indexLocal.html");
 
         // On place le niveau de la machine dans une variable locale javascript
         print "<script type='text/javascript'>localStorage.setItem('nivMachine', '$niveauMachine')</script>";
-        print "
-        <script type='module'>
-            if(localStorage.getItem('nivMachine') === null){
-                window.location.replace('formulaireDifficulteBot.html')
-            }
-            import {Memory} from './Classes/Memory.js';
-            import {JoueurHumain} from './Classes/typeJoueurs/joueurHumain.js';
-            import {MachineFacile} from './Classes/typeJoueurs/typeMachines/machineFacile.js';
-            import {MachineMoyen} from './Classes/typeJoueurs/typeMachines/machineMoyen.js';
-            import {MachineDifficile} from './Classes/typeJoueurs/typeMachines/machineDifficile.js';
-            let leMemory = new Memory();
-            let unJoueur = new JoueurHumain(localStorage.getItem('PseudoJ1'));
-            unJoueur.lierMonMemory(leMemory);
-            let typeJoueur = localStorage.getItem('nivMachine');
-            let deuxJoueur 
-            switch(typeJoueur){
-                case 'none':
-                    deuxJoueur = new JoueurHumain(localStorage.getItem('PseudoJ2'));
-                    break;
-                case 'Facile':
-                    deuxJoueur = new MachineFacile(localStorage.getItem('PseudoJ2'));
-                    deuxJoueur.lierMonMemory(leMemory);
-                    leMemory.jouerJeu();
-                    break;
-                case 'Moyen':
-                    deuxJoueur = new MachineMoyen(localStorage.getItem('PseudoJ2'));
-                    deuxJoueur.lierMonMemory(leMemory);
-                    leMemory.jouerJeu();
-                    break;
-                case 'Difficile':
-                    deuxJoueur = new MachineDifficile(localStorage.getItem('PseudoJ2'));
-                    deuxJoueur.lierMonMemory(leMemory);
-                    leMemory.jouerJeu();
-                    break;
-            }";
     }
     else{
 
@@ -130,8 +95,7 @@
         }
         // Sinon on marque qu'il y a eu un problème
         else{
-            header('Location: ../formulaireDifficulteBot.html');
-            echo "<h4>Probleme lors de l'insertion de la partie dans la base.'</h4>";
+            header('Location: ../optionsPartie.html?error=insertion');
         }
 
         

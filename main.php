@@ -1,9 +1,17 @@
 <?php
+<<<<<<< HEAD
     /* session_start();
     if(!isset($_SESSION['idPlayer'])){
         header('Location: ./index.html');
     }
     */
+=======
+    /*session_start();
+    if(!isset($_SESSION['idPlayer'])){
+        header('Location: ./index.html');
+    }
+*/
+>>>>>>> 4b4969416f5b0b77404bb39ff1d2eead17818257
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +33,11 @@
                     <a href="main.php" class="actif bouton">Jeux</a>    
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="Communication/client/communication.php" class="bouton">Contact</a>
+=======
+                    <a href="contact.php" class="bouton">Contact</a>
+>>>>>>> 4b4969416f5b0b77404bb39ff1d2eead17818257
                 </li>
                 <li>
                     <a href="profil.php" class="bouton">Profil</a>
@@ -35,9 +47,13 @@
                 </li>
             </ul>
         </nav>
+<<<<<<< HEAD
         <h1>Jeux disponibles</h1>
+=======
+>>>>>>> 4b4969416f5b0b77404bb39ff1d2eead17818257
     </header>
     <main>
+        <h1>Jeux disponibles</h1>
         <section id="grille-jeux">
             <?php
                 // On définit les variables nécessaires au lien avec la BD
@@ -62,8 +78,7 @@
                     print " <h3>$nom</h3>";
                     print " <a href='$jeu'><img src ='$minia'/></a>";
                     print "</article>";
-            }
-             
+                }
                 mysqli_close($link);
             ?>
         </section>

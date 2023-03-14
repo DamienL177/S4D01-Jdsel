@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="css/defaut.css">
     <link rel="stylesheet" href="css/creaCompte.css">
     <title>Jdsel - Créer Compte</title>
+    <script type="text/javascript">
+        const valeursURL =  window.location.search;
+        const paramsURL = new URLSearchParams(valeursURL);
+        if(paramsURL.has('error')){
+            var erreur = paramsURL.get('error')
+            if(erreur == 'creation'){
+                alert("Un problème est apparu lors de la création dans la BD");
+            }
+            if(erreur == 'champVide'){
+                alert("Merci de remplir tous les champs");
+            }
+            if(erreur == 'pseudoUtilise'){
+                alert("Ce pseudonyme est déjà utilisé");
+            }
+            if(erreur == 'mdpDifferent'){
+                alert("Vous n'avez pas saisi deux fois le même mot de passe");
+            }
+        }
+
+    </script>
 </head>
 <body>
     <header>
@@ -15,9 +35,9 @@
     </header>
     <main>
         <form action="php/insererJoueur.php" method="POST">
-            <h3>Pseudonyme</h3><input type="text" name="pseudo"><br>
-            <h3>E-mail</h3><input type="text" name="mail"><br>
-            <h3>Année de naissance</h3>
+            <h3 id="ps">Pseudonyme</h3><input type="text" name="pseudo"><br>
+            <h3 id="em">E-mail</h3><input type="text" name="mail"><br>
+            <h3 id="na">Année de naissance</h3>
             <select name="anneeNaiss" id="choixAnnee">
                 <script type="text/javascript">
                     let anneeChoix = document.getElementById("choixAnnee"); 
@@ -33,8 +53,8 @@
                     }
                 </script>
             </select><br>
-            <h3>Mot de passe</h3><input type="password" name="mdp"><br>
-            <h3>Confirmation</h3><input type="password" name="mdpVerif">
+            <h3 id="md">Mot de passe</h3><input type="password" name="mdp"><br>
+            <h3 id="co">Confirmation</h3><input type="password" name="mdpVerif">
             <button type="submit">Valider</button>
         </form>
     </main>

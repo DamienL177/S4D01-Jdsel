@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="css/defaut.css" />
     <link rel="stylesheet" href="css/index.css" />
     <title>Jdsel - Connexion</title>
+    <script type="text/javascript">
+        const valeursURL =  window.location.search;
+        const paramsURL = new URLSearchParams(valeursURL);
+        if(paramsURL.has('error')){
+            var erreur = paramsURL.get('error')
+            if(erreur == 'correspond'){
+                alert("Le pseudonyme/mot de passe ne correspondent pas");
+            }
+            if(erreur == 'champVide'){
+                alert("Merci de remplir tous les champs");
+            }
+        }
+    </script>
 </head>
 <body>
     <header>

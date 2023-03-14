@@ -44,18 +44,30 @@ export class MachineFacile extends JoueurMachine{
         if(localStorage.getItem("Coup1") == "empty"){
             // La position est placée dans Coup1
             localStorage.setItem("Coup1", position)
+
+            // On récupère l'index de la position dans le memory
+            index = this.getMonMemory().retournerIndexParPosition(position)
+            
+            // On retourne la carte
+            this.getMonMemory().getMesCartes()[index].retournerCarte()
         }
         // Sinon
         else{
-            // La position est placée dans Coup2
-            localStorage.setItem("Coup2", position)
-        }
+            if(position != localStorage.getItem("Coup1"))
+            {
+                // La position est placée dans Coup2
+                localStorage.setItem("Coup2", position)
 
-        // On récupère l'index de la position dans le memory
-        index = this.getMonMemory().retournerIndexParPosition(position)
-        
-        // On retourne la carte
-        this.getMonMemory().getMesCartes()[index].retournerCarte()
+                // On récupère l'index de la position dans le memory
+                index = this.getMonMemory().retournerIndexParPosition(position)
+                
+                // On retourne la carte
+                this.getMonMemory().getMesCartes()[index].retournerCarte()
+            }
+            else{
+                this.choixUneCarte();
+            }
+        }
         
         return Promise.resolve
     }

@@ -10,18 +10,18 @@ header{
     align-items: center;
 }
 .image{
-    height: 50%;
-    width: 50%;
+    height: 40%;
+    width: 40%;
 }
 .menu li {
     list-style-type: none ; 
 }
 .bouton {
     display:block;                
-    min-width: 120px; 
+    min-width: 150px; 
 
     margin: 0.5rem;               
-    padding: 0.4rem 0;           
+    padding: 10px;           
     text-align: center;              
     background-color: blue; 
     color: #fff;                  

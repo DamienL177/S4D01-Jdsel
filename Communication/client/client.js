@@ -139,15 +139,20 @@ sock.on("OuvertureConversation", (nomRoom, messages, pseudoAmi) => {
     var unDiv;
     var unPseudo;
     var unMessage;
-    for(var i = messages.length; i >= 0; i--){
+    for(var i = messages.length; i > 0; i--){
         unDiv = document.createElement("div");
         unPseudo = document.createElement("h3");
-        unPseudo.innerText = messages[i][1];
+        unPseudo.innerText = messages[i - 1][1];
         unMessage = document.createElement("p");
-        unMessage.innerText = messages[i][0];
+        unMessage.innerText = messages[i - 1][0];
         unDiv.appendChild(unPseudo);
         unDiv.appendChild(unMessage);
-        unDiv.classList.add('unMessage');
+        if(messages[i - 1][1] == pseudoJoueur){
+            unDiv.classList.add('unMessage', 'messageJoueur');
+        }
+        else{
+            unDiv.classList.add('unMessage');
+        }
         premierArticle.appendChild(unDiv);
     }
     var unForm = document.createElement("form");
@@ -186,7 +191,12 @@ sock.on("RetourMessage", (message, pseudo) => {
     unDiv.appendChild(unPseudo);
     unDiv.appendChild(document.createElement("br"));
     unDiv.appendChild(contenu);
-    unDiv.classList.add('unMessage');
+    if(pseudo == pseudoJoueur){
+        unDiv.classList.add('unMessage', 'messageJoueur');
+    }
+    else{
+        unDiv.classList.add('unMessage');
+    }
     articleMessage.appendChild(unDiv);
 })
 
