@@ -2,7 +2,8 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8"> 
-        <title>Choix de la Difficulté</title>
+        <title>Jouer contre une Machine</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0;">
         <link rel="stylesheet" href="VisuelsPage/css/styleFormulaire.css">
         <script type="text/javascript">
             function afficherFormulaire() {
@@ -48,15 +49,15 @@
                         // On créé le bouton de validation
                         bouton = document.createElement("button")
                         bouton.type = "submit"
-                        bouton.innerText= "Valider"
+                        bouton.innerText= "Jouer contre cette machine"
 
                         // On ajoute les éléments enfants à leurs parents
                         listeDeroulante.appendChild(libelle)
                         listeDeroulante.appendChild(nivFacile)
                         listeDeroulante.appendChild(nivMoyen)
                         listeDeroulante.appendChild(nivDifficile)
-                        formulaire.appendChild(bouton)
                         formulaire.appendChild(listeDeroulante)
+                        formulaire.appendChild(bouton)
                         articleForm.appendChild(titre)
                         articleForm.appendChild(formulaire)
                     }
@@ -69,7 +70,7 @@
 
                         // On créé le bouton de validation
                         bouton = document.createElement("button")
-                        bouton.innerText= "Continuer"
+                        bouton.innerText= "Jouer contre un Humain"
                         bouton.type = "button"
 
                         // On place le bouton dans le lien
@@ -77,14 +78,6 @@
                     }
                     
                 }
-            }
-
-            function ajouterPrenoms(){
-                let input1 = document.getElementById("Joueur1");
-                localStorage.setItem("PseudoJ1", input1.value);
-                let input2 = document.getElementById("Joueur2");
-                localStorage.setItem("PseudoJ2", input2.value);
-
             }
 
             const valeursURL =  window.location.search;
@@ -95,22 +88,13 @@
         </script>
     </head>
     <body>
-        <article class="bordure">
-            <article>
-                <h3>Joueur1 : </h3><input type="text" name="nomJoueur1" id="Joueur1" value="Joueur1">
-            </article>
-            <article>
-                <h3>Joueur2 : </h3><input type="text" name="nomJoueur2" id="Joueur2" value="Joueur2">
-                <br/>
-                <h4>Joueur2 Machine : <input type="checkbox" id="estMachine" class="checkBoxButton" name="estMachine"></h4>
-            </article>
-        </article>
+        <h1>Memory - Créer une partie</h1>
+        <h4>Joueur2 Machine : <input type="checkbox" id="estMachine" class="checkBoxButton" name="estMachine"></h4>
         <article id="formNiveau">
         </article>
         <a href="Fichiers-php/niveauMachine.php" id="lienMain"></a>
         <script type="text/javascript">
-            setInterval(afficherFormulaire, 1000)
-            setInterval(ajouterPrenoms, 1000)
+            setInterval(afficherFormulaire, 500)
         </script>
     </body>
 </html>
