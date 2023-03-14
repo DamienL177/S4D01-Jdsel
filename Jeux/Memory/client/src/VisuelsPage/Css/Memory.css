@@ -1,0 +1,41 @@
+body {
+    text-align: center;
+}
+
+main > h1 {
+    margin: 5%;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    grid-auto-flow: column;
+}
+
+.partieGauche > img{
+    width: 80%;
+    height: auto;
+}
+
+.partieGauche > a > button {
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.boutonLien {
+    width: 75%;
+    margin-bottom: 15px;
+}
+
+#affichageParties {
+    overflow-y: scroll;
+}
+
+@media screen and (max-width: 720px) {
+    section {
+        grid-template-rows: 80% 80%;
+        grid-template-columns: auto;
+        grid-auto-flow: row;
+    }
+}
