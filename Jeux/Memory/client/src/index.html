@@ -22,30 +22,39 @@
         </script>
     </head>
     <body>
-        
-        <a href="optionsPartie.html"><button type="button" class="retourEnArriere">Retour au formulaire</button></a>
-        <section class="partiePrincipale">
-            <section class="partieJeu">
-                <article id="lesScores">
+        <header>
+            <a href="../../../../main.php"><img id="logo" src="https://jdsel.fr/Images/Logojdsel.png" class="image"/></a>
+            <ul class="menu">       
+                <li><a href="main.php" class="actif"><button>Jeux</button></a></li>
+                <li><a href="Communication/client/communication.php"><button>Contact</button></a></li>
+                <li><a href="profil.php"><button>Profil</button></a></li>
+                <li><a href="php/deconnexion.php"><button>Se déconnecter</button></a></li>
+            </ul>
+        </header>
+        <main>
+            <a href="optionsPartie.html"><button type="button" class="retourEnArriere">Retour au formulaire</button></a>
+            <section class="partiePrincipale">
+                <section class="partieJeu">
+                    <article id="lesScores">
 
-                </article>
-                <article class="laGrilleJeu">
-                    <h4>Les cartes en Jeu</h4>
-                    <div>
-                        <article class="grilleJeu" id="laGrilleDeJeu">
+                    </article>
+                    <article class="laGrilleJeu">
+                        <h4>Les cartes en Jeu</h4>
+                        <div>
+                            <article class="grilleJeu" id="laGrilleDeJeu">
     
-                        </article>
-                    </div>
-                </article>
-                <article class="partieSaisie" id="interaction">
-                    <p class="elementSaisie">Saisissez les coordonnées (AA) de la carte que vous souhaitez jouer</p>
-                    <h4 id="affichage" class="elementSaisie"></h4>
-                    <input type="text" id="leCoup" class="elementSaisie">
-                    <br>
-                    <button type="button" id="leBoutonValider" disabled class="elementSaisie">Valider</button>
-                </article>
-            </section>
-            <section class="partieConversation">
+                            </article>
+                        </div>
+                    </article>
+                    <article class="partieSaisie" id="interaction">
+                        <p class="elementSaisie">Saisissez les coordonnées (AA) de la carte que vous souhaitez jouer</p>
+                        <h4 id="affichage" class="elementSaisie"></h4>
+                        <input type="text" id="leCoup" class="elementSaisie">
+                        <br>
+                        <button type="button" id="leBoutonValider" disabled class="elementSaisie">Valider</button>
+                    </article>
+                </section>
+                <section class="partieConversation">
                 <div class="Conversation">
                     <div class="messageAffichage" id="messageAffichage">
     
@@ -56,17 +65,18 @@
                         <button type="button" id="messageButton">Envoyer</button>
                     </form>
                 </div>
+                </section>
             </section>
-        </section>
         
-        <script src='/socket.io/socket.io.js'></script>
-        <script type="text/javascript">
-            var elementScript = document.createElement("script");
-            elementScript.setAttribute("idpartie", idPartie);
-            elementScript.setAttribute("pseudojoueur", pseudoJoueur);
-            elementScript.setAttribute("type", "module");
-            elementScript.setAttribute("src", './client.js');
-            document.body.appendChild(elementScript);
-        </script>
+            <script src='/socket.io/socket.io.js'></script>
+            <script type="text/javascript">
+                var elementScript = document.createElement("script");
+                elementScript.setAttribute("idpartie", idPartie);
+                elementScript.setAttribute("pseudojoueur", pseudoJoueur);
+                elementScript.setAttribute("type", "module");
+                elementScript.setAttribute("src", './client.js');
+                document.body.appendChild(elementScript);
+            </script>
+        </main>
     </body>
 </html>
