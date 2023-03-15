@@ -88,13 +88,24 @@
         </script>
     </head>
     <body>
-        <h1>Memory - Créer une partie</h1>
-        <h4>Joueur2 Machine : <input type="checkbox" id="estMachine" class="checkBoxButton" name="estMachine"></h4>
-        <article id="formNiveau">
-        </article>
-        <a href="Fichiers-php/niveauMachine.php" id="lienMain"></a>
-        <script type="text/javascript">
-            setInterval(afficherFormulaire, 500)
-        </script>
+        <header>
+            <a href="../../../../main.php"><img id="logo" src="https://jdsel.fr/Images/Logojdsel.png" class="image"/></a>
+            <ul class="menu">       
+                <li><a href="main.php" class="actif"><button>Jeux</button></a></li>
+                <li><a href="Communication/client/communication.php"><button>Contact</button></a></li>
+                <li><a href="profil.php"><button>Profil</button></a></li>
+                <li><a href="php/deconnexion.php"><button>Se déconnecter</button></a></li>
+            </ul>
+        </header>
+        <main>
+            <h1>Memory - Créer une partie</h1>
+            <h4>Joueur2 Machine : <input type="checkbox" id="estMachine" class="checkBoxButton" name="estMachine"></h4>
+            <article id="formNiveau">
+            </article>
+            <a href="Fichiers-php/niveauMachine.php" id="lienMain"></a>
+            <script type="text/javascript">
+                setInterval(afficherFormulaire, 500)
+            </script>
+        </main>
     </body>
 </html>

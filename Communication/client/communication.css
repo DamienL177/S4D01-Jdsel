@@ -1,33 +1,84 @@
 html, body {
-    height: 100%;
+    background: no-repeat linear-gradient(0deg, rgba(143,30,144,1) 0%, rgba(60,69,215,1) 100%, rgba(255,255,255,1) 100%);
 }
 
 header {
-    height: 15%;
-    padding: 2vh;
-    text-align: end;
+    display: grid;
+    height: 8rem;
+    grid-template-columns: 10rem 10rem auto;
+    grid-template-rows: 100%;
+	border-bottom: 3px solid black;
 }
 
-header > h1 {
-    text-align: left;
+#logo {
+    grid-column: 1;
+    height: 10rem;
+    margin: -20px;
+    padding-left: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+
+ul {
+    grid-column: 3;
+    display: inline-flex;
+    align-self: center;
+    justify-content: end;
+    padding-bottom: 1rem;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+}
+
+button {
+    display:block;                
+    min-width: 150px; 
+    margin: 0.5rem;               
+    padding: 10px;           
+    text-align: center;               
+    color: black;                  
+    text-decoration: none;       
+    border: 1px solid black;
+    background-color: whitesmoke;   
+    border-radius: 4px; 
+}
+
+button:hover {
+    background-color: rgba(143,30,144);
+    color: whitesmoke;
+}
+
+.actif > button {
+    background-color: gray;
+    color: white;
+}
+
+.actif > button:hover {
+    background-color: rgba(143,30,144);
+    color: whitesmoke;
 }
 
 main {
+    padding-top: 3rem;
     text-align: center;
-    height: 80%;
+    height: 80vh;
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: fit-content;
     grid-auto-flow: column;
 }
 
 #partieGauche {
-    width: 80%;
+    background-color: lightgrey;
+    width: 48vh;
     margin-left: 10%;
     border: 5px solid black;
     padding-top: 10px;
     display: grid;
     grid-template-rows: 15% 10% 75%;
     grid-auto-flow: row;
+    font-weight: bolder;
 }
 
 #partieGauche > article > button {
@@ -58,7 +109,8 @@ main {
 }
 
 #partiePrincipale {
-    width: 70%;
+    background-color: lightgrey;
+    width: 64vh;
     margin-left: 15%;
     margin-right: 15%;
     border: 5px solid black;
@@ -84,6 +136,10 @@ main {
 
 .unMessage {
     text-align: left;
+}
+
+#articleDemandeAmis {
+    padding-bottom: 1rem;
 }
 
 .messageJoueur {
@@ -130,4 +186,32 @@ main {
         margin-right: 10%;
     }
 
+    header {
+        grid-template-rows: 100%;
+        grid-template-columns: auto;
+    }
+
+    header > a {
+        grid-column: span 2;
+        margin: auto;
+    }
+
+    ul {
+        padding-top: 1.3rem;
+        display: grid;
+        grid-column: span 2;
+        align-content: center;
+        grid-template-rows: 1fr 1fr auto;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        margin: auto;
+    }
+
+    li {
+        display: ruby;
+    }
+
+    button, input {
+        font-size: 18px;
+    }
 }
