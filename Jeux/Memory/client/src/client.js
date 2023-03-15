@@ -45,10 +45,22 @@ sock.on("connect", () => {
     sock.emit("Jconnecte", room, pseudoJoueur);
     var boutonMessage = document.getElementById("messageButton");
     boutonMessage.addEventListener("click", () => envoiMessage());
+    var inputMessage = document.getElementById("messageTexte");
+    inputMessage.addEventListener("keypress", function(event) {
+        if(event.Key == "Enter"){
+            event.preventDefault();
+        }
+    });
+    var inputCoup = document.getElementById('leCoup');
+    inputCoup.addEventListener("keypress", function(event) {
+        if(event.Key == "Enter"){
+            event.preventDefault();
+        }
+    });
 })
 
-sock.on("finPartie", (strListeJoueurs, strListeCartes) => {
-    finPartie(strListeJoueurs, strListeCartes);
+sock.on("finPartie", async (strListeJoueurs, strListeCartes) => {
+    await finPartie(strListeJoueurs, strListeCartes);
 })
 
 sock.on("RetourMessage", (message, pseudo) =>{
@@ -76,18 +88,22 @@ function envoiMessage(){
     document.getElementById('messageText').innerText = "";
 }
 
-function finPartie(strListeJoueurs, strListeCartes){
+async function finPartie(strListeJoueurs, strListeCartes){
     leMemory.setMesJoueurs([]);
     let arrayJoueurs = JSON.parse(strListeJoueurs);
     let leJoueur;
     let arrayUnJoueur;
     let i;
+    let estOk = false;
 
     for(i = 0 ; i < arrayJoueurs.length ; i++){
         arrayUnJoueur = JSON.parse(arrayJoueurs[i]);
         leJoueur = new JoueurHumain(arrayUnJoueur[0]);
         leJoueur.setScore(arrayUnJoueur[1]);
         leMemory.ajouterJoueur(leJoueur);
+        if(i == arrayJoueurs.length - 1){
+            estOk = true;
+        }
     }
 
     leMemory.setMesCartes([]);
@@ -101,6 +117,15 @@ function finPartie(strListeJoueurs, strListeCartes){
         laCarte.setEstRetournee(arrayUneCarte[2]);
         leMemory.ajouterCarte(laCarte);
     }
+
+    await new Promise(resolve => {
+        var idInterval = setInterval(() => {
+            if(estOk){
+                resolve();
+                clearInterval(idInterval);
+            }
+        }, 100)
+    })
 
     leMemory.finirJeu();
 }

@@ -96,6 +96,8 @@ io.on('connection', (sock) => {
                 //console.log("OK");
                 listeRoom[room]["cartes"][i].retournerCarte();
                 let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
+                lesJoueurs[0].setScore(listeRoom[room]["scoresJoueurs"][0])
+                lesJoueurs[1].setScore(listeRoom[room]["scoresJoueurs"][1])
                 io.to(room).emit("afficher", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
                 listeRoom[room]["coupsTour"].push(coup);
                 break;
@@ -134,10 +136,12 @@ io.on('connection', (sock) => {
 
         }
 
+        
+        let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
+        lesJoueurs[0].setScore(listeRoom[room]["scoresJoueurs"][0])
+        lesJoueurs[1].setScore(listeRoom[room]["scoresJoueurs"][1])
+
         if(listeRoom[room]["cartes"].length > 0){
-            let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
-            lesJoueurs[0].setScore(listeRoom[room]["scoresJoueurs"][0])
-            lesJoueurs[1].setScore(listeRoom[room]["scoresJoueurs"][1])
             io.to(room).emit("finTour", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             
             joueurJouant = listeRoom[room]["listeJoueurs"][listeRoom[room]["indice"]];
@@ -160,7 +164,6 @@ io.on('connection', (sock) => {
             }  
         }
         else{
-            let lesJoueurs = Array(new JHumain(listeRoom[room]["listeJoueurs"][0]), new JHumain(listeRoom[room]["listeJoueurs"][1]));
             io.to(room).emit("finPartie", listeJoueursEnString(lesJoueurs), listeCartesEnString(listeRoom[room]["cartes"]))
             finPartieBD(room)
         }   
