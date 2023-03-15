@@ -275,16 +275,19 @@ export class Memory{
         let egalite = false // Un bouléen indiquant s'il y a eu égalité ou non au niveau du plus grand score
         let pseudo          // Le pseudonyme de la personne ayant le score le plus grand
         let score = 0       // Le score le plus grand 
+        let lesJoueurs = this.getMesJoueurs();
+        let unJoueur;
 
         // On fait un parcours complet avec traitement conditionnel
-        for(let i = 0; i < this.#mesJoueurs.length; i++){
+        for(let i = 0; i < lesJoueurs.length; i++){
+            unJoueur = lesJoueurs[i];
             // Pour chaque joueur si le score est égal au plus grand score
-            if(this.#mesJoueurs[i].getScore() == score){
+            if(unJoueur.getScore() == score){
                 // L'égalité est vraie
                 egalite = true
             }
             // Si le score est supérieur au plus grand score
-            else if(this.#mesJoueurs[i].getScore() > score){
+            else if(unJoueur.getScore() > score){
                 // L'égalité est fausse
                 egalite = false
                 // On récupère le pseudonyme du joueur dont le score est le plus grand
