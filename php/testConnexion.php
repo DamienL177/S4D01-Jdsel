@@ -15,16 +15,22 @@
                 $motDePasse = $_POST['mdp'];
         
                 // On fait le lien avec la BD
-                $link = mysqli_connect($host,$user,$pass,$bdd);
+                $link = new mysqli($host,$user,$pass,$bdd);
         
-                if (mysqli_connect_errno()){
+                if ($link->connect_errno){
                     echo "<p>Problème de connect : " , mysqli_connect_error() ,"</p>";
                     throw new Exception();
                 }
         
                 // On créé et on exécute la commande
+                $requete = $link->prepare("SELECT mdp FROM $nomtable WHERE pseudonyme = ?;");
+                $requete->bind_param("s", $pseudonyme);
+                $requete->execute();
+                $result = $requete->get_result();
+                /*
                 $query = "SELECT mdp FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
                 $result= mysqli_query($link, $query);
+                */
                 $row = mysqli_fetch_array($result);
         
                 if (mysqli_connect_errno()){
