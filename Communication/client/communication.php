@@ -27,7 +27,14 @@
 
         $link->close();
 
-        $pseudoJoueur= mysqli_fetch_array($result)[0];
+        $row = mysqli_fetch_array($result);
+
+        if ($link->connect_errno){
+            echo "<p>Problème de query : " , $link->connect_error ,"</p>";
+            throw new Exception();
+        }
+
+        $pseudoJoueur= $row['pseudonyme'];
 
 
         $url = "http://153.92.211.90:8888/?pseudojoueur=" . $pseudoJoueur;
