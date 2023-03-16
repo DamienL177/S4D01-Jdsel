@@ -26,16 +26,18 @@
                         $idOK = false;      // La variable nous permettant de rester dans la boucle while
                 
                         // On fait le lien avec la BD
-                        $link = mysqli_connect($host,$user,$pass,$bdd);
+                        $link = new mysqli($host,$user,$pass,$bdd);
                 
-                        if (mysqli_connect_errno()){
-                            echo "<p>Problème de connect : " , mysqli_connect_error() ,"</p>";
+                        if ($link->connect_errno){
+                            echo "<p>Problème de connect : " , $link->connect_error ,"</p>";
                             throw new Exception();
                         }
                 
                         // On compte le nombre de pseudonymes similaires
-                        $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
-                        $result = mysqli_query($link, $query);
+                        $requete = $link->prepare("SELECT COUNT(*) as nbId FROM $nomtable WHERE pseudonyme = ?;");
+                        $requete->bind_param("s", $pseudonyme);
+                        $requete->execute();
+                        $result = $requete->get_result();
                         $row = mysqli_fetch_array($result);
     
                         if($row['nbId'] == 0){
@@ -50,8 +52,10 @@
                                     $identifiant .= $tabCharsId[$index];
                                 }
                                 // On compte le nombre d'identifiants similaires
-                                $query = "SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = '$identifiant'";
-                                $result = mysqli_query($link, $query);
+                                $requete = $link->prepare("SELECT COUNT(*) as nbId FROM $nomtable WHERE identifiant = ?;");
+                                $requete->bind_param("s", $identifiant);
+                                $requete->execute();
+                                $result = $requete->get_result();
                                 $row = mysqli_fetch_array($result);
     
                                 // S'il n'y en a pas on sort de la boucle
@@ -61,16 +65,17 @@
                             }
     
                             // On créé la requête et on lance l'insertion d'un Joueur dans la base
-                            $query = "INSERT INTO $nomtable VALUES('$identifiant', '$pseudonyme', $anneeNaiss, '$mail', '$motDePasse', NULL)";
-                            $result = mysqli_query($link, $query);
+                            $requete = $link->prepare("INSERT INTO $nomtable VALUES(?,?, ?, ?, ?, NULL);");
+                            $requete->bind_param("sssss", $identifiant, $pseudonyme, $anneeNaiss, $mail, $motDePasse);
+                            $requete->execute();
                     
-                            if (mysqli_connect_errno()){
-                                echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
+                            if ($link->connect_errno){
+                                echo "<p>Problème de query : " , $link->connect_error ,"</p>";
                                 throw new Exception();
                             }
                     
                             // On ferme le lien avec la BD
-                            mysqli_close($link);
+                            $link->close();
                             
                             // Si l'insertion est réussie on continue
                             if($result == true){

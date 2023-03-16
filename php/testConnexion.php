@@ -18,7 +18,7 @@
                 $link = new mysqli($host,$user,$pass,$bdd);
         
                 if ($link->connect_errno){
-                    echo "<p>Problème de connect : " , mysqli_connect_error() ,"</p>";
+                    echo "<p>Problème de connect : " , $link->connect_error ,"</p>";
                     throw new Exception();
                 }
         
@@ -27,22 +27,19 @@
                 $requete->bind_param("s", $pseudonyme);
                 $requete->execute();
                 $result = $requete->get_result();
-                /*
-                $query = "SELECT mdp FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
-                $result= mysqli_query($link, $query);
-                */
                 $row = mysqli_fetch_array($result);
         
-                if (mysqli_connect_errno()){
-                    echo "<p>Problème de query : " , mysqli_connect_error() ,"</p>";
+                if ($link->connect_errno){
+                    echo "<p>Problème de query : " , $link->connect_error ,"</p>";
                     throw new Exception();
                 }
                 
                 // Si on obtient le résultat souhaité
                 if(password_verify($motDePasse, $row['mdp'])){
-    
-                    $query = "SELECT identifiant AS Id FROM $nomtable WHERE pseudonyme = '$pseudonyme'";
-                    $result= mysqli_query($link, $query);
+                    $requete = $link->prepare("SELECT identifiant AS Id FROM $nomtable WHERE pseudonyme = ?");
+                    $requete->bind_param("s", $pseudonyme);
+                    $requete->execute();
+                    $result = $requete->get_result();
                     $row = mysqli_fetch_array($result);
     
                     if (mysqli_connect_errno()){
@@ -50,6 +47,8 @@
                         throw new Exception();
                     }
     
+                    $link->close();
+
                     $id = $row['Id'];
     
                     session_start();

@@ -9,18 +9,20 @@
     $nomtable = "Partie";
 
     // On fait le lien avec la BD
-    $link = mysqli_connect($host,$user,$pass,$bdd);
+    $link = new mysqli($host,$user,$pass,$bdd);
 
-    if (mysqli_connect_errno()){
-        echo "<p>Problème de connect : " , mysqli_connect_error() ,"</p>";
+    if ($link->connect_errno){
+        echo "<p>Problème de connect : " , $link->connect_error ,"</p>";
         throw new Exception();
     }
 
     //on lance la requete
-    $query = "SELECT identifiant FROM $nomtable WHERE estCommencee IS FALSE AND estFini IS FALSE";
-    $result = mysqli_query($link,$query);
+    $requete = $link->prepare("SELECT identifiant FROM ? WHERE estCommencee IS FALSE AND estFini IS FALSE");
+    $requete->bind_param("s", $nomtable);
+    $requete->execute();
+    $result = $requete->get_result();
 
-    mysqli_close($link);
+    $link->close();
     
 
 
