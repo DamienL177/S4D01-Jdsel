@@ -21,7 +21,7 @@
 
         //on lance la requete
         $requete = $link->prepare("SELECT pseudonyme FROM $nomtable WHERE identifiant = ?;");
-        $requete->bind_param("s", $identifiant);
+        $requete->bind_param("s", $idJoueur);
         $requete->execute();
         $result = $requete->get_result();
 
