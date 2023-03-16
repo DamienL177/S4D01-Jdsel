@@ -17,8 +17,7 @@
     }
 
     //on lance la requete
-    $requete = $link->prepare("SELECT identifiant FROM ? WHERE estCommencee IS FALSE AND estFini IS FALSE");
-    $requete->bind_param("s", $nomtable);
+    $requete = $link->prepare("SELECT identifiant FROM $nomtable WHERE estCommencee IS FALSE AND estFini IS FALSE");
     $requete->execute();
     $result = $requete->get_result();
 
